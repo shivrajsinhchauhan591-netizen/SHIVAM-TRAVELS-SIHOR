@@ -4,48 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Best Taxi Service in Sihor | Shivam Travels</title>
-
-<meta name="description" content="Taxi Service in Sihor. Book Cab Now. Call 9898222313">
+<title>Shivam Travels | Taxi Service</title>
 
 <style>
 body {
 font-family: Arial;
 margin:0;
-background: linear-gradient(45deg,#000000,#ffc107);
-color:#000;
+background: linear-gradient(45deg,#000,#ffc107);
 }
 
 /* HEADER */
 header {
-background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
+background:#111;
 color:white;
-padding:80px 20px;
 text-align:center;
-}
-
-.btn {
-background:#28a745;
-color:white;
-padding:10px;
-border:none;
-border-radius:5px;
-margin:5px;
-cursor:pointer;
+padding:50px 20px;
 }
 
 /* BOX */
 .box {
-background: rgba(255,255,255,0.9);
-padding:20px;
+background: rgba(255,255,255,0.92);
 margin:15px;
+padding:20px;
 border-radius:15px;
 box-shadow:0 8px 20px rgba(0,0,0,0.3);
-transition:0.3s;
-}
-
-.box:hover {
-transform: scale(1.02);
 }
 
 input, select {
@@ -54,11 +36,15 @@ padding:10px;
 margin:5px 0;
 }
 
-footer {
-background:#111;
+/* BUTTON */
+.btn {
+background:#28a745;
 color:white;
-text-align:center;
-padding:15px;
+padding:10px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+margin-top:5px;
 }
 
 /* FLOAT BUTTONS */
@@ -82,12 +68,25 @@ padding:12px;
 border-radius:50%;
 }
 
-/* TIME */
-.timebox{
-margin-top:10px;
-font-size:18px;
-font-weight:bold;
-color:#fff;
+/* POPUP */
+#popup {
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+}
+
+.popup-box {
+background:white;
+width:80%;
+max-width:350px;
+margin:150px auto;
+padding:20px;
+border-radius:15px;
+text-align:center;
 }
 </style>
 
@@ -96,54 +95,60 @@ function calculateFare(){
 var km = document.getElementById('km').value;
 var car = document.getElementById('car').value;
 
-var rate = 0;
-if(car=="Dzire" || car=="Aura") rate = 10;
+var rate = 10;
 if(car=="Ertiga") rate = 13;
 if(car=="Innova") rate = 19;
 
-var total = km * rate;
-document.getElementById('result').innerHTML = "Total Price: ₹" + total;
+document.getElementById('result').innerHTML =
+"Total Price: ₹" + (km * rate);
 }
 
 function sendWhatsApp(){
+
 var name = document.getElementById('name').value;
 var pickup = document.getElementById('pickup').value;
 var drop = document.getElementById('drop').value;
 var date = document.getElementById('date').value;
+var time = document.getElementById('time').value;
 var phone = document.getElementById('phone').value;
 
-var message = "🚕 Taxi Booking%0A"
+var message =
+"🚕 Taxi Booking%0A"
 + "Name: " + name + "%0A"
 + "Pickup: " + pickup + "%0A"
 + "Drop: " + drop + "%0A"
 + "Date: " + date + "%0A"
++ "Time: " + time + "%0A"
 + "Phone: " + phone;
 
 window.open("https://wa.me/919898222313?text=" + message);
+
+/* POPUP */
+document.getElementById("popupText").innerHTML =
+"<b>Name:</b> " + name + "<br>"
++ "<b>Pickup:</b> " + pickup + "<br>"
++ "<b>Drop:</b> " + drop + "<br>"
++ "<b>Date:</b> " + date + "<br>"
++ "<b>Time:</b> " + time;
+
+document.getElementById("popup").style.display = "block";
 }
 
-/* LIVE TIME */
-function updateTime(){
-var now = new Date();
-document.getElementById("time").innerHTML = "⏰ " + now.toLocaleTimeString();
+function closePopup(){
+document.getElementById("popup").style.display = "none";
 }
-setInterval(updateTime,1000);
 </script>
 
 </head>
 
-<body onload="updateTime()">
+<body>
 
 <header>
-<h1>Shivam Travels Sihor</h1>
+<h1>Shivam Travels</h1>
 <p>Best Taxi Service in Sihor</p>
-
-<div id="time"></div>
-
-<a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
-<a href="https://wa.me/919898222313"><button class="btn">💬 WhatsApp</button></a>
 </header>
 
+<!-- SERVICES -->
 <div class="box">
 <h2>🚕 Our Services</h2>
 <p>✔ Local Taxi</p>
@@ -151,6 +156,7 @@ setInterval(updateTime,1000);
 <p>✔ Airport Pickup</p>
 </div>
 
+<!-- FARE -->
 <div class="box">
 <h2>📊 Fare Calculator</h2>
 <input type="number" id="km" placeholder="Enter KM">
@@ -164,16 +170,23 @@ setInterval(updateTime,1000);
 <p id="result"></p>
 </div>
 
+<!-- BOOKING -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
+
 <input id="name" placeholder="Name">
 <input id="pickup" placeholder="Pickup">
 <input id="drop" placeholder="Drop">
+
 <input type="date" id="date">
+<input type="time" id="time">
+
 <input id="phone" placeholder="Phone">
+
 <button class="btn" onclick="sendWhatsApp()">Book Now</button>
 </div>
 
+<!-- PAYMENT -->
 <div class="box">
 <h2>💰 Pay Online</h2>
 <p><b>UPI ID:</b> chauhanshivam2535-1@okicici</p>
@@ -182,17 +195,29 @@ setInterval(updateTime,1000);
 </a>
 </div>
 
+<!-- LOCATION -->
 <div class="box">
 <h2>📍 Location</h2>
-<iframe src="https://www.google.com/maps?q=Sihor,Gujarat&output=embed" width="100%" height="250"></iframe>
+<iframe src="https://www.google.com/maps?q=Sihor,Gujarat&output=embed"
+width="100%" height="250"></iframe>
 </div>
 
-<footer>
-<p>© Shivam Travels</p>
+<footer style="background:#111;color:white;text-align:center;padding:15px;">
+© Shivam Travels
 </footer>
 
+<!-- FLOAT BUTTONS -->
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
 <a href="tel:9898222313" class="callbtn">📞</a>
+
+<!-- POPUP -->
+<div id="popup">
+<div class="popup-box">
+<h2>🚕 Booking Confirmed</h2>
+<p id="popupText"></p>
+<button class="btn" onclick="closePopup()">OK</button>
+</div>
+</div>
 
 </body>
 </html>
