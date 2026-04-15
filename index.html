@@ -4,46 +4,78 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Best Taxi Service in Sihor | Shivam Travels</title>
-
-<meta name="description" content="Book Taxi in Sihor. Shivam Travels offers cab, outstation taxi, airport pickup. Call 9898222313">
+<title>Shivam Travels Sihor</title>
 
 <style>
-body {font-family: Arial; margin:0; background:#f9f9f9;}
-
-header {
-background:linear-gradient(45deg,#000,#ffc107);
-color:white;
-padding:40px 20px;
-text-align:center;
+body {
+font-family: Arial;
+margin:0;
+background: linear-gradient(45deg,#000,#ffc107);
 }
 
+/* HEADER */
+header {
+text-align:center;
+color:white;
+padding:20px;
+background:#000;
+}
+
+header img {width:200px;}
+
+/* SLIDER */
+.slider {
+position: relative;
+height: 250px;
+overflow: hidden;
+}
+
+.slide {
+position:absolute;
+width:100%;
+height:250px;
+object-fit:cover;
+opacity:0;
+transition:1s;
+}
+
+.slide.active {opacity:1;}
+
+/* BUTTON */
 .btn {
 background:#28a745;
 color:white;
-padding:12px;
+padding:10px;
 border:none;
-border-radius:8px;
+border-radius:5px;
 margin:5px;
 cursor:pointer;
 }
 
-.section {padding:20px;}
-
+/* BOX */
 .box {
-background:white;
-padding:20px;
+background:rgba(255,255,255,0.9);
 margin:15px;
+padding:20px;
 border-radius:15px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
+opacity:0;
+transform:translateY(50px);
+transition:0.5s;
 }
 
+.box.show {
+opacity:1;
+transform:translateY(0);
+}
+
+/* INPUT */
 input, select {
 width:100%;
 padding:10px;
 margin:5px 0;
 }
 
+/* FOOTER */
 footer {
 background:#111;
 color:white;
@@ -51,7 +83,7 @@ text-align:center;
 padding:15px;
 }
 
-/* Floating Buttons */
+/* FLOAT BUTTONS */
 .whatsapp {
 position:fixed;
 bottom:20px;
@@ -60,7 +92,6 @@ background:#25d366;
 color:white;
 padding:15px;
 border-radius:50%;
-text-decoration:none;
 }
 
 .callbtn {
@@ -71,47 +102,34 @@ background:red;
 color:white;
 padding:12px;
 border-radius:50%;
-text-decoration:none;
+}
+
+/* POPUP */
+.popup {
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+}
+
+.popup-content {
+background:white;
+padding:20px;
+margin:100px auto;
+width:80%;
+border-radius:10px;
+text-align:center;
 }
 </style>
-
-<script>
-function calculateFare(){
-  var km = document.getElementById('km').value;
-  var car = document.getElementById('car').value;
-
-  var rate = 0;
-  if(car=="Dzire" || car=="Aura") rate = 10;
-  if(car=="Ertiga") rate = 13;
-  if(car=="Innova") rate = 19;
-
-  var total = km * rate;
-  document.getElementById('result').innerHTML = "Total Price: ₹" + total;
-}
-
-function sendWhatsApp(){
-  var name = document.getElementById('name').value;
-  var pickup = document.getElementById('pickup').value;
-  var drop = document.getElementById('drop').value;
-  var date = document.getElementById('date').value;
-  var phone = document.getElementById('phone').value;
-
-  var message = "Taxi Booking%0A"
-  + "Name: " + name + "%0A"
-  + "Pickup: " + pickup + "%0A"
-  + "Drop: " + drop + "%0A"
-  + "Date: " + date + "%0A"
-  + "Phone: " + phone;
-
-  window.open("https://wa.me/919898222313?text=" + message);
-}
-</script>
-
 </head>
 
 <body>
 
 <header>
+<img src="logo.png">
 <h1>Shivam Travels Sihor</h1>
 <p>Best Taxi Service in Sihor</p>
 
@@ -119,91 +137,133 @@ function sendWhatsApp(){
 <a href="https://wa.me/919898222313"><button class="btn">💬 WhatsApp</button></a>
 </header>
 
-<div class="section">
-
-<div class="box">
-<h2>🚕 Our Services</h2>
-<p>✔ Local Taxi Service</p>
-<p>✔ Outstation Travel</p>
-<p>✔ Airport Pickup & Drop</p>
+<!-- SLIDER -->
+<div class="slider">
+<img src="car1.jpg" class="slide active">
+<img src="car2.jpg" class="slide">
+<img src="car3.jpg" class="slide">
 </div>
 
 <div class="box">
-<h2>💡 Why Choose Us?</h2>
-<p>✔ 24x7 Service</p>
-<p>✔ Safe & Reliable</p>
-<p>✔ Affordable Price</p>
-<p>✔ Experienced Drivers</p>
+<h2>🚕 Our Services</h2>
+<p>✔ Local Taxi</p>
+<p>✔ Outstation</p>
+<p>✔ Airport Pickup</p>
 </div>
 
 <div class="box">
 <h2>📊 Fare Calculator</h2>
 <input type="number" id="km" placeholder="Enter KM">
-
 <select id="car">
 <option>Dzire</option>
 <option>Aura</option>
 <option>Ertiga</option>
 <option>Innova</option>
 </select>
-
 <button class="btn" onclick="calculateFare()">Calculate</button>
 <p id="result"></p>
 </div>
 
 <div class="box">
-<h2>📋 Book Your Taxi</h2>
-
-<input type="text" id="name" placeholder="Your Name">
-<input type="text" id="pickup" placeholder="Pickup Location">
-<input type="text" id="drop" placeholder="Drop Location">
+<h2>📋 Book Taxi</h2>
+<input id="name" placeholder="Name">
+<input id="pickup" placeholder="Pickup">
+<input id="drop" placeholder="Drop">
 <input type="date" id="date">
-<input type="number" id="phone" placeholder="Mobile Number">
-
-<button class="btn" onclick="sendWhatsApp()">Book on WhatsApp</button>
+<input id="phone" placeholder="Phone">
+<button class="btn" onclick="sendWhatsApp()">Book Now</button>
 </div>
 
 <div class="box">
 <h2>💰 Pay Online</h2>
-
 <a href="upi://pay?pa=9898222313@upi&pn=Shivam%20Travels&am=500">
-<button class="btn">Pay ₹500 Advance</button>
+<button class="btn">Pay ₹500</button>
 </a>
-
 </div>
 
 <div class="box">
-<h2>📍 Our Location</h2>
+<h2>📍 Location</h2>
 <iframe src="https://www.google.com/maps?q=Sihor,Gujarat&output=embed" width="100%" height="250"></iframe>
 </div>
 
-<div class="box">
-<h2>📸 Our Cars</h2>
-<img src="car1.jpg" width="100%">
-<img src="car2.jpg" width="100%">
-<img src="car3.jpg" width="100%">
-</div>
-
-<div class="box">
-<h2>⭐ Customer Reviews</h2>
-<p>⭐⭐⭐⭐⭐ Excellent service - Rajesh</p>
-<p>⭐⭐⭐⭐⭐ Best taxi in Sihor - Amit</p>
-</div>
-
-<div class="box">
-<h2>📞 Contact</h2>
-<p>Phone: 9898222313 / 9574249281</p>
-<p>Location: Sihor</p>
-</div>
-
-</div>
-
 <footer>
-<p>© 2026 Shivam Travels Sihor</p>
+<p>© Shivam Travels</p>
 </footer>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+<div class="popup-content">
+<h2>Book Taxi 🚕</h2>
+<input id="pname" placeholder="Name">
+<input id="pphone" placeholder="Phone">
+<button onclick="sendPopup()">Book</button>
+<button onclick="closePopup()">Close</button>
+</div>
+</div>
 
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
 <a href="tel:9898222313" class="callbtn">📞</a>
+
+<script>
+// SLIDER
+let index = 0;
+const slides = document.querySelectorAll(".slide");
+
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
+},3000);
+
+// ANIMATION
+const boxes = document.querySelectorAll(".box");
+window.addEventListener("scroll", ()=>{
+boxes.forEach(box=>{
+if(box.getBoundingClientRect().top < window.innerHeight-50){
+box.classList.add("show");
+}
+});
+});
+
+// FARE
+function calculateFare(){
+var km=document.getElementById('km').value;
+var car=document.getElementById('car').value;
+var rate=0;
+if(car=="Dzire"||car=="Aura") rate=10;
+if(car=="Ertiga") rate=13;
+if(car=="Innova") rate=19;
+document.getElementById('result').innerHTML="₹"+(km*rate);
+}
+
+// WHATSAPP
+function sendWhatsApp(){
+var name=document.getElementById('name').value;
+var pickup=document.getElementById('pickup').value;
+var drop=document.getElementById('drop').value;
+var date=document.getElementById('date').value;
+var phone=document.getElementById('phone').value;
+
+var msg="Taxi Booking%0AName:"+name+"%0APickup:"+pickup+"%0ADrop:"+drop+"%0ADate:"+date+"%0APhone:"+phone;
+window.open("https://wa.me/919898222313?text="+msg);
+}
+
+// POPUP
+setTimeout(()=>{
+document.getElementById("popup").style.display="block";
+},3000);
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+function sendPopup(){
+var name=document.getElementById("pname").value;
+var phone=document.getElementById("pphone").value;
+var msg="Booking%0AName:"+name+"%0APhone:"+phone;
+window.open("https://wa.me/919898222313?text="+msg);
+}
+</script>
 
 </body>
 </html>
