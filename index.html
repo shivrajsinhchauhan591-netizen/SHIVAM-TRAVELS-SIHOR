@@ -7,84 +7,117 @@
 <title>Shivam Travels Sihor</title>
 
 <style>
-body {
-font-family: Arial;
+body{
 margin:0;
-background: linear-gradient(45deg,#000,#ffc107);
+font-family:Arial;
+background:#f4f4f4;
 }
 
-/* HEADER */
-header {
-text-align:center;
-color:white;
-padding:20px;
+header{
 background:#000;
+color:white;
+text-align:center;
+padding:25px;
 }
 
-header img {width:200px;}
-
-/* SLIDER */
-.slider {
-position: relative;
-height: 250px;
-overflow: hidden;
-}
-
-.slide {
-position:absolute;
-width:100%;
-height:250px;
-object-fit:cover;
-opacity:0;
-transition:1s;
-}
-
-.slide.active {opacity:1;}
-
-/* BUTTON */
-.btn {
+.btn{
 background:#28a745;
 color:white;
 padding:10px;
 border:none;
-border-radius:5px;
+border-radius:6px;
 margin:5px;
 cursor:pointer;
 }
 
-/* BOX */
-.box {
-background:rgba(255,255,255,0.9);
+section{padding:15px;}
+
+.box{
+background:white;
+padding:15px;
 margin:15px;
-padding:20px;
-border-radius:15px;
-opacity:0;
-transform:translateY(50px);
-transition:0.5s;
+border-radius:12px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.box.show {
-opacity:1;
-transform:translateY(0);
-}
-
-/* INPUT */
-input, select {
+/* INPUTS */
+input{
 width:100%;
 padding:10px;
 margin:5px 0;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
-/* FOOTER */
-footer {
-background:#111;
-color:white;
+/* ================= CAR 3D SLIDER ================= */
+.slider{
+position:relative;
+width:100%;
+height:300px;
+perspective:1200px;
+overflow:hidden;
+border-radius:15px;
+background:#000;
+}
+
+.slider::before{
+content:"";
+position:absolute;
+width:100%;
+height:100%;
+background:#000;
+filter:blur(25px);
+opacity:0.4;
+z-index:0;
+}
+
+.slide{
+position:absolute;
+width:80%;
+left:10%;
+top:20px;
 text-align:center;
-padding:15px;
+opacity:0;
+transform:scale(0.6) translateY(40px) rotateY(40deg);
+transition:all 1s ease;
+z-index:1;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(10px);
+border-radius:15px;
+box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+.slide img{
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:12px;
+}
+
+.slide h4{
+margin:10px 0;
+color:white;
+}
+
+.active{
+opacity:1;
+transform:scale(1) translateY(0) rotateY(0deg);
+z-index:5;
+box-shadow:0 20px 50px rgba(0,255,150,0.3);
+}
+
+.left{
+opacity:0.4;
+transform:translateX(-140px) scale(0.7) rotateY(45deg);
+}
+
+.right{
+opacity:0.4;
+transform:translateX(140px) scale(0.7) rotateY(-45deg);
 }
 
 /* FLOAT BUTTONS */
-.whatsapp {
+.whatsapp{
 position:fixed;
 bottom:20px;
 right:20px;
@@ -92,9 +125,10 @@ background:#25d366;
 color:white;
 padding:15px;
 border-radius:50%;
+text-decoration:none;
 }
 
-.callbtn {
+.callbtn{
 position:fixed;
 bottom:80px;
 right:20px;
@@ -102,168 +136,125 @@ background:red;
 color:white;
 padding:12px;
 border-radius:50%;
-}
-
-/* POPUP */
-.popup {
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.7);
-}
-
-.popup-content {
-background:white;
-padding:20px;
-margin:100px auto;
-width:80%;
-border-radius:10px;
-text-align:center;
+text-decoration:none;
 }
 </style>
+
 </head>
 
 <body>
 
 <header>
-<img src="logo.png">
-<h1>Shivam Travels Sihor</h1>
-<p>Best Taxi Service in Sihor</p>
+<h1>🚖 Shivam Travels Sihor</h1>
+<p>Best Taxi Service in Gujarat</p>
 
 <a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
 <a href="https://wa.me/919898222313"><button class="btn">💬 WhatsApp</button></a>
 </header>
 
-<!-- SLIDER -->
+<!-- SERVICES -->
+<section class="box">
+<h2>🚕 Services</h2>
+<p>✔ Local Taxi Service</p>
+<p>✔ Outstation Travel</p>
+<p>✔ Airport Pickup & Drop</p>
+</section>
+
+<!-- CAR SLIDER -->
+<section class="box">
+<h2>🚗 Our Premium Cars</h2>
+
 <div class="slider">
-<img src="car1.jpg" class="slide active">
-<img src="car2.jpg" class="slide">
-<img src="car3.jpg" class="slide">
+
+<div class="slide">
+<img src="car1.jpg">
+<h4>Dzire / Aura</h4>
 </div>
 
-<div class="box">
-<h2>🚕 Our Services</h2>
-<p>✔ Local Taxi</p>
-<p>✔ Outstation</p>
-<p>✔ Airport Pickup</p>
+<div class="slide">
+<img src="car2.jpg">
+<h4>Ertiga</h4>
 </div>
 
-<div class="box">
-<h2>📊 Fare Calculator</h2>
-<input type="number" id="km" placeholder="Enter KM">
-<select id="car">
-<option>Dzire</option>
-<option>Aura</option>
-<option>Ertiga</option>
-<option>Innova</option>
-</select>
-<button class="btn" onclick="calculateFare()">Calculate</button>
-<p id="result"></p>
+<div class="slide">
+<img src="car3.jpg">
+<h4>Innova</h4>
 </div>
 
-<div class="box">
+<div class="slide">
+<img src="car4.jpg">
+<h4>Luxury Car</h4>
+</div>
+
+</div>
+</section>
+
+<!-- BOOKING -->
+<section class="box">
 <h2>📋 Book Taxi</h2>
-<input id="name" placeholder="Name">
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+
+<input type="text" id="name" placeholder="Name">
+<input type="text" id="pickup" placeholder="Pickup Location">
+<input type="text" id="drop" placeholder="Drop Location">
 <input type="date" id="date">
-<input id="phone" placeholder="Phone">
+<input type="time" id="time">
+<input type="number" id="phone" placeholder="Phone">
+
 <button class="btn" onclick="sendWhatsApp()">Book Now</button>
-</div>
+</section>
 
-<div class="box">
-<h2>💰 Pay Online</h2>
-<a href="upi://pay?pa=9898222313@upi&pn=Shivam%20Travels&am=500">
-<button class="btn">Pay ₹500</button>
-</a>
-</div>
-
-<div class="box">
-<h2>📍 Location</h2>
-<iframe src="https://www.google.com/maps?q=Sihor,Gujarat&output=embed" width="100%" height="250"></iframe>
-</div>
-
-<footer>
-<p>© Shivam Travels</p>
+<footer class="box" style="text-align:center;background:#222;color:white;">
+<p>© 2026 Shivam Travels</p>
 </footer>
-
-<!-- POPUP -->
-<div id="popup" class="popup">
-<div class="popup-content">
-<h2>Book Taxi 🚕</h2>
-<input id="pname" placeholder="Name">
-<input id="pphone" placeholder="Phone">
-<button onclick="sendPopup()">Book</button>
-<button onclick="closePopup()">Close</button>
-</div>
-</div>
 
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 <script>
-// SLIDER
+let slides = document.querySelectorAll(".slide");
 let index = 0;
-const slides = document.querySelectorAll(".slide");
 
-setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
+function showSlider(){
+
+slides.forEach(s=>{
+s.classList.remove("active","left","right");
+});
+
 slides[index].classList.add("active");
-},3000);
 
-// ANIMATION
-const boxes = document.querySelectorAll(".box");
-window.addEventListener("scroll", ()=>{
-boxes.forEach(box=>{
-if(box.getBoundingClientRect().top < window.innerHeight-50){
-box.classList.add("show");
-}
-});
-});
-
-// FARE
-function calculateFare(){
-var km=document.getElementById('km').value;
-var car=document.getElementById('car').value;
-var rate=0;
-if(car=="Dzire"||car=="Aura") rate=10;
-if(car=="Ertiga") rate=13;
-if(car=="Innova") rate=19;
-document.getElementById('result').innerHTML="₹"+(km*rate);
+if(index-1 >= 0){
+slides[index-1].classList.add("left");
 }
 
-// WHATSAPP
+if(index+1 < slides.length){
+slides[index+1].classList.add("right");
+}
+
+index++;
+if(index >= slides.length){
+index = 0;
+}
+
+setTimeout(showSlider,3000);
+}
+
+showSlider();
+
 function sendWhatsApp(){
-var name=document.getElementById('name').value;
-var pickup=document.getElementById('pickup').value;
-var drop=document.getElementById('drop').value;
-var date=document.getElementById('date').value;
-var phone=document.getElementById('phone').value;
+let name=document.getElementById("name").value;
+let pickup=document.getElementById("pickup").value;
+let drop=document.getElementById("drop").value;
+let date=document.getElementById("date").value;
+let time=document.getElementById("time").value;
+let phone=document.getElementById("phone").value;
 
-var msg="Taxi Booking%0AName:"+name+"%0APickup:"+pickup+"%0ADrop:"+drop+"%0ADate:"+date+"%0APhone:"+phone;
-window.open("https://wa.me/919898222313?text="+msg);
-}
+let msg=
+`Taxi Booking%0AName: ${name}%0APickup: ${pickup}%0ADrop: ${drop}%0ADate: ${date}%0ATime: ${time}%0APhone: ${phone}`;
 
-// POPUP
-setTimeout(()=>{
-document.getElementById("popup").style.display="block";
-},3000);
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-function sendPopup(){
-var name=document.getElementById("pname").value;
-var phone=document.getElementById("pphone").value;
-var msg="Booking%0AName:"+name+"%0APhone:"+phone;
 window.open("https://wa.me/919898222313?text="+msg);
 }
 </script>
 
 </body>
 </html>
+
