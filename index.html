@@ -13,20 +13,15 @@ body {
 font-family: Arial;
 margin:0;
 background: linear-gradient(45deg,#000000,#ffc107);
+color:#000;
 }
 
-/* HEADER WITH CAR IMAGE */
+/* HEADER */
 header {
-background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('car-bg.jpg');
-background-size: cover;
-background-position: center;
+background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7));
 color:white;
 padding:80px 20px;
 text-align:center;
-}
-
-header img {
-width:200px;
 }
 
 .btn {
@@ -39,7 +34,7 @@ margin:5px;
 cursor:pointer;
 }
 
-/* GLASS EFFECT */
+/* BOX */
 .box {
 background: rgba(255,255,255,0.9);
 padding:20px;
@@ -86,6 +81,14 @@ color:white;
 padding:12px;
 border-radius:50%;
 }
+
+/* TIME */
+.timebox{
+margin-top:10px;
+font-size:18px;
+font-weight:bold;
+color:#fff;
+}
 </style>
 
 <script>
@@ -109,7 +112,7 @@ var drop = document.getElementById('drop').value;
 var date = document.getElementById('date').value;
 var phone = document.getElementById('phone').value;
 
-var message = "Taxi Booking%0A"
+var message = "🚕 Taxi Booking%0A"
 + "Name: " + name + "%0A"
 + "Pickup: " + pickup + "%0A"
 + "Drop: " + drop + "%0A"
@@ -118,17 +121,24 @@ var message = "Taxi Booking%0A"
 
 window.open("https://wa.me/919898222313?text=" + message);
 }
+
+/* LIVE TIME */
+function updateTime(){
+var now = new Date();
+document.getElementById("time").innerHTML = "⏰ " + now.toLocaleTimeString();
+}
+setInterval(updateTime,1000);
 </script>
 
 </head>
 
-<body>
+<body onload="updateTime()">
 
 <header>
-<img src="logo.png">
-
 <h1>Shivam Travels Sihor</h1>
 <p>Best Taxi Service in Sihor</p>
+
+<div id="time"></div>
 
 <a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
 <a href="https://wa.me/919898222313"><button class="btn">💬 WhatsApp</button></a>
@@ -166,8 +176,9 @@ window.open("https://wa.me/919898222313?text=" + message);
 
 <div class="box">
 <h2>💰 Pay Online</h2>
-<a href="upi://pay?pa=9898222313@upi&pn=Shivam%20Travels&am=500">
-<button class="btn">Pay ₹500</button>
+<p><b>UPI ID:</b> chauhanshivam2535-1@okicici</p>
+<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels&cu=INR">
+<button class="btn">Pay Now</button>
 </a>
 </div>
 
