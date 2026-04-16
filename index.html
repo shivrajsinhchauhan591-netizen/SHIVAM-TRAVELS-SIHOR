@@ -4,72 +4,141 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels</title>
+<title>Shivam Travels | Premium Taxi</title>
 
 <style>
-body{font-family:Arial;margin:0;background:linear-gradient(45deg,#000,#ffc107);}
-header{background:#111;color:#fff;text-align:center;padding:40px;}
-.box{background:#fff;margin:15px;padding:20px;border-radius:15px;}
-input,select,textarea{width:100%;padding:10px;margin:5px 0;}
-.btn{background:#28a745;color:#fff;padding:10px;border:none;border-radius:5px;}
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:15px;border-radius:50%;color:#fff;}
-.callbtn{position:fixed;bottom:80px;right:20px;background:red;padding:12px;border-radius:50%;color:#fff;}
-#popup,#reviewPopup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);}
-.popup-box{background:#fff;width:80%;max-width:350px;margin:120px auto;padding:20px;border-radius:15px;text-align:center;}
+body{
+margin:0;
+font-family:Arial;
+background:#000;
+color:#fff;
+}
+
+/* HEADER */
+header{
+background:linear-gradient(90deg,#000,#222,#ffc107);
+padding:40px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+color:#ffc107;
+}
+
+/* BOX */
+.box{
+background:#111;
+margin:15px;
+padding:20px;
+border-radius:15px;
+border:1px solid #ffc107;
+}
+
+/* INPUT */
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:5px 0;
+border-radius:5px;
+border:none;
+}
+
+/* BUTTON */
+.btn{
+background:#ffc107;
+color:#000;
+padding:10px;
+border:none;
+border-radius:5px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* FLOAT */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+padding:15px;
+border-radius:50%;
+}
+
+.callbtn{
+position:fixed;
+bottom:80px;
+right:20px;
+background:red;
+padding:12px;
+border-radius:50%;
+}
+
+/* POPUP */
+#popup,#reviewPopup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+}
+
+.popup-box{
+background:#111;
+border:1px solid #ffc107;
+width:80%;
+max-width:350px;
+margin:120px auto;
+padding:20px;
+border-radius:15px;
+text-align:center;
+}
 </style>
 
 <script>
 
-/* ================= TRIP INFO ================= */
+/* TRIP */
 function showTripInfo(){
 var trip=document.getElementById("trip").value;
 
 if(trip=="Round Trip"){
 document.getElementById("tripInfo").innerHTML=
-"✔ One Day 300KM Range + Driver D.A + Toll Tax + Parking + Border Tax + ETC";
+"✔ 300KM/Day + Driver D.A + Toll + Parking Extra";
+
+document.getElementById("fareBox").style.display="block";
+document.getElementById("days").style.display="block";
+
 }else{
 document.getElementById("tripInfo").innerHTML="";
+document.getElementById("fareBox").style.display="none";
+document.getElementById("days").style.display="none";
 }
 }
 
-/* ================= FARE CALCULATOR ================= */
+/* FARE */
 function calculateFare(){
 
 var km=parseInt(document.getElementById("km").value)||0;
 var days=parseInt(document.getElementById("days").value)||1;
 var car=document.getElementById("car").value;
-var trip=document.getElementById("tripCalc").value;
 
-var rate=0;
-
-if(car=="Dzire"||car=="Aura") rate=10;
+var rate=10;
 if(car=="Ertiga") rate=13;
 if(car=="Innova") rate=18;
 if(car=="Innova Crysta") rate=19;
 
-var total=0;
-
-if(trip=="Round Trip"){
-
 var minKM=300*days;
-if(km<minKM){ km=minKM; }
+if(km<minKM) km=minKM;
 
-var driverDA=300*days;
+var driver=300*days;
+var total=(km*rate)+driver;
 
-total=(km*rate)+driverDA;
-
-document.getElementById("extraInfo").innerHTML=
-"✔ "+days+" Day Package ("+minKM+" KM Min) + Driver D.A + Toll + Parking + Border Tax EXTRA";
-
-}else{
-total=km*rate;
-document.getElementById("extraInfo").innerHTML="";
+document.getElementById("result").innerHTML="💰 ₹ "+total;
 }
 
-document.getElementById("result").innerHTML="💰 Total Fare: ₹ "+total;
-}
-
-/* ================= BOOKING ================= */
+/* BOOKING */
 function sendWhatsApp(){
 
 var name=document.getElementById("name").value;
@@ -77,46 +146,35 @@ var trip=document.getElementById("trip").value;
 var car=document.getElementById("carType").value;
 var pickup=document.getElementById("pickup").value;
 var drop=document.getElementById("drop").value;
-var date=document.getElementById("date").value;
-var time=document.getElementById("time").value;
-var phone=document.getElementById("phone").value;
 
 var msg="🚕 Taxi Booking%0A"
 +"Name:"+name+"%0A"
 +"Trip:"+trip+"%0A"
 +"Car:"+car+"%0A"
 +"Pickup:"+pickup+"%0A"
-+"Drop:"+drop+"%0A"
-+"Date:"+date+"%0A"
-+"Time:"+time+"%0A"
-+"Phone:"+phone;
++"Drop:"+drop;
 
 window.open("https://wa.me/919898222313?text="+msg);
 
 document.getElementById("popupText").innerHTML=
-name+"<br>"+trip+"<br>"+car+"<br>"+pickup+" ➜ "+drop;
+name+"<br>"+pickup+" ➜ "+drop;
 
 document.getElementById("popup").style.display="block";
 }
 
-/* ================= REVIEWS ================= */
+/* REVIEW */
 function addReview(){
-
 var name=document.getElementById("custName").value;
 var rating=document.getElementById("rating").value;
 var text=document.getElementById("reviewText").value;
 
-var stars="⭐".repeat(rating);
-
-var html="<div style='background:#eee;padding:10px;margin:5px;border-radius:10px'>"
-+"<b>"+name+"</b><br>"+stars+"<br>"+text+"</div>";
-
+var html="<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
 document.getElementById("reviewList").innerHTML+=html;
 
 closeReviewPopup();
 }
 
-/* ================= POPUPS ================= */
+/* POPUP */
 function closePopup(){document.getElementById("popup").style.display="none";}
 function openReviewPopup(){document.getElementById("reviewPopup").style.display="block";}
 function closeReviewPopup(){document.getElementById("reviewPopup").style.display="none";}
@@ -133,12 +191,12 @@ setTimeout(openReviewPopup,4000);
 
 <header>
 <h1>🚕 Shivam Travels</h1>
-<p>Best Taxi Service</p>
+<p>⭐ Premium Taxi Service</p>
 </header>
 
-<!-- BOOK TAXI -->
+<!-- BOOK -->
 <div class="box">
-<h2>📋 Book Taxi</h2>
+<h2>Book Taxi</h2>
 
 <input id="name" placeholder="Name">
 
@@ -147,7 +205,7 @@ setTimeout(openReviewPopup,4000);
 <option>Round Trip</option>
 </select>
 
-<p id="tripInfo" style="color:green;font-weight:bold;"></p>
+<p id="tripInfo" style="color:#ffc107;"></p>
 
 <select id="carType">
 <option>Dzire</option>
@@ -157,28 +215,25 @@ setTimeout(openReviewPopup,4000);
 <option>Innova Crysta</option>
 </select>
 
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+<input list="city" id="pickup" placeholder="Pickup City">
+<input list="city" id="drop" placeholder="Drop City">
 
-<input type="date" id="date">
-<input type="time" id="time">
-
-<input id="phone" placeholder="Phone">
+<datalist id="city">
+<option>Sihor</option>
+<option>Bhavnagar</option>
+<option>Surat</option>
+<option>Ahmedabad</option>
+</datalist>
 
 <button class="btn" onclick="sendWhatsApp()">Book Now</button>
 </div>
 
-<!-- FARE CALCULATOR -->
-<div class="box">
-<h2>📊 Fare Calculator</h2>
+<!-- FARE -->
+<div class="box" id="fareBox" style="display:none;">
+<h2>Fare Calculator (Round Trip)</h2>
 
-<select id="tripCalc" onchange="calculateFare()">
-<option>One Way</option>
-<option>Round Trip</option>
-</select>
-
-<input type="number" id="km" placeholder="Enter KM">
-<input type="number" id="days" placeholder="Enter Days (Round Trip)">
+<input id="km" placeholder="Enter KM">
+<input id="days" placeholder="Days" style="display:none;">
 
 <select id="car" onchange="calculateFare()">
 <option>Dzire</option>
@@ -191,10 +246,23 @@ setTimeout(openReviewPopup,4000);
 <button class="btn" onclick="calculateFare()">Calculate</button>
 
 <p id="result"></p>
-<p id="extraInfo" style="color:green;font-weight:bold;"></p>
 </div>
 
-<!-- REVIEWS -->
+<!-- PAYMENT -->
+<div class="box">
+<h2>💰 Pay Online</h2>
+
+<p style="color:#ffc107;font-weight:bold;">
+UPI ID: chauhanshivam2535-1@okicici
+</p>
+
+<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels&cu=INR">
+<button class="btn">Pay Now</button>
+</a>
+
+</div>
+
+<!-- REVIEW -->
 <div class="box">
 <h2>⭐ Customer Reviews</h2>
 
@@ -207,48 +275,33 @@ setTimeout(openReviewPopup,4000);
 <option value="1">⭐</option>
 </select>
 
-<textarea id="reviewText" placeholder="Review"></textarea>
+<textarea id="reviewText"></textarea>
 
 <button class="btn" onclick="addReview()">Submit</button>
 
 <div id="reviewList"></div>
 </div>
 
-<footer style="background:#111;color:#fff;text-align:center;padding:10px;">
+<footer style="text-align:center;padding:10px;">
 © Shivam Travels
 </footer>
 
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
 <a href="tel:9898222313" class="callbtn">📞</a>
 
-<!-- BOOKING POPUP -->
+<!-- POPUP -->
 <div id="popup">
 <div class="popup-box">
-<h3>Booking Confirmed ✅</h3>
+<h3>Booking Confirmed</h3>
 <p id="popupText"></p>
 <button class="btn" onclick="closePopup()">OK</button>
 </div>
 </div>
 
-<!-- REVIEW POPUP -->
 <div id="reviewPopup">
 <div class="popup-box">
-<h3>⭐ Give Review</h3>
-
-<input id="custName" placeholder="Name">
-<select id="rating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
-
-<textarea id="reviewText" placeholder="Review"></textarea>
-
-<button class="btn" onclick="addReview()">Submit</button>
+<h3>Give Review</h3>
 <button class="btn" onclick="closeReviewPopup()">Close</button>
-
 </div>
 </div>
 
