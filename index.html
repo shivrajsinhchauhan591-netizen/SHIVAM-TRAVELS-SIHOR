@@ -4,37 +4,11 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- SEO META -->
-<title>Shivam Travels Sihor | Taxi Service in Sihor</title>
-<meta name="description" content="Shivam Travels Sihor - Best Taxi Service for Local & Outstation. Book cab in Sihor. Call Now.">
-<meta name="keywords" content="Taxi in Sihor, Cab Service Sihor, Shivam Travels, Gujarat Taxi, Airport Taxi">
-<meta name="author" content="Shivam Travels">
-
-<!-- GOOGLE SCHEMA -->
-<script type="application/ld+json">
-{
-"@context":"https://schema.org",
-"@type":"LocalBusiness",
-"name":"Shivam Travels",
-"telephone":"+919898222313",
-"address":{
-"@type":"PostalAddress",
-"addressLocality":"Sihor",
-"addressRegion":"Gujarat",
-"addressCountry":"India"
-},
-"aggregateRating":{
-"@type":"AggregateRating",
-"ratingValue":"4.8",
-"reviewCount":"25"
-}
-}
-</script>
+<title>Shivam Travels</title>
 
 <style>
 body{font-family:Arial;margin:0;background:linear-gradient(45deg,#000,#ffc107);}
-header{background:#111;color:#fff;text-align:center;padding:50px;}
+header{background:#111;color:#fff;text-align:center;padding:40px;}
 .box{background:#fff;margin:15px;padding:20px;border-radius:15px;}
 input,select,textarea{width:100%;padding:10px;margin:5px 0;}
 .btn{background:#28a745;color:#fff;padding:10px;border:none;border-radius:5px;}
@@ -46,77 +20,108 @@ input,select,textarea{width:100%;padding:10px;margin:5px 0;}
 
 <script>
 
-/* BOOKINGS SAVE */
-var bookings=JSON.parse(localStorage.getItem("bookings"))||[];
+/* ================= TRIP INFO ================= */
+function showTripInfo(){
+var trip=document.getElementById("trip").value;
 
-function sendWhatsApp(){
-var name=document.getElementById('name').value;
-var pickup=document.getElementById('pickup').value;
-var drop=document.getElementById('drop').value;
-var date=document.getElementById('date').value;
-var time=document.getElementById('time').value;
-var phone=document.getElementById('phone').value;
-
-if(name==""||pickup==""||drop==""){
-alert("Fill all details"); return;
+if(trip=="Round Trip"){
+document.getElementById("tripInfo").innerHTML=
+"✔ One Day 300KM Range + Driver D.A + Toll Tax + Parking + Border Tax + ETC";
+}else{
+document.getElementById("tripInfo").innerHTML="";
+}
 }
 
-bookings.push({name,pickup,drop,date,time,phone});
-localStorage.setItem("bookings",JSON.stringify(bookings));
+/* ================= FARE CALCULATOR ================= */
+function calculateFare(){
 
-var msg="🚕 Booking%0AName:"+name+"%0APickup:"+pickup+"%0ADrop:"+drop;
+var km=parseInt(document.getElementById("km").value)||0;
+var days=parseInt(document.getElementById("days").value)||1;
+var car=document.getElementById("car").value;
+var trip=document.getElementById("tripCalc").value;
+
+var rate=0;
+
+if(car=="Dzire"||car=="Aura") rate=10;
+if(car=="Ertiga") rate=13;
+if(car=="Innova") rate=18;
+if(car=="Innova Crysta") rate=19;
+
+var total=0;
+
+if(trip=="Round Trip"){
+
+var minKM=300*days;
+if(km<minKM){ km=minKM; }
+
+var driverDA=300*days;
+
+total=(km*rate)+driverDA;
+
+document.getElementById("extraInfo").innerHTML=
+"✔ "+days+" Day Package ("+minKM+" KM Min) + Driver D.A + Toll + Parking + Border Tax EXTRA";
+
+}else{
+total=km*rate;
+document.getElementById("extraInfo").innerHTML="";
+}
+
+document.getElementById("result").innerHTML="💰 Total Fare: ₹ "+total;
+}
+
+/* ================= BOOKING ================= */
+function sendWhatsApp(){
+
+var name=document.getElementById("name").value;
+var trip=document.getElementById("trip").value;
+var car=document.getElementById("carType").value;
+var pickup=document.getElementById("pickup").value;
+var drop=document.getElementById("drop").value;
+var date=document.getElementById("date").value;
+var time=document.getElementById("time").value;
+var phone=document.getElementById("phone").value;
+
+var msg="🚕 Taxi Booking%0A"
++"Name:"+name+"%0A"
++"Trip:"+trip+"%0A"
++"Car:"+car+"%0A"
++"Pickup:"+pickup+"%0A"
++"Drop:"+drop+"%0A"
++"Date:"+date+"%0A"
++"Time:"+time+"%0A"
++"Phone:"+phone;
+
 window.open("https://wa.me/919898222313?text="+msg);
 
-document.getElementById("popupText").innerHTML=name+"<br>"+pickup+" ➜ "+drop;
+document.getElementById("popupText").innerHTML=
+name+"<br>"+trip+"<br>"+car+"<br>"+pickup+" ➜ "+drop;
+
 document.getElementById("popup").style.display="block";
 }
 
-/* FARE */
-function calculateFare(){
-var km=document.getElementById("km").value;
-var car=document.getElementById("car").value;
-var rate=10;
-if(car=="Ertiga")rate=13;
-if(car=="Innova")rate=19;
-document.getElementById("result").innerHTML="₹ "+(km*rate);
-}
-
-/* REVIEWS */
-var reviews=JSON.parse(localStorage.getItem("reviews"))||[];
-
-function loadReviews(){
-var html=""; var total=0;
-reviews.forEach(r=>{
-html+="<div style='background:#eee;padding:10px;margin:5px;border-radius:10px'>"
-+"<b>"+r.name+"</b><br>"+ "⭐".repeat(r.rating)+"<br>"+r.text+"</div>";
-total+=r.rating;
-});
-document.getElementById("reviewList").innerHTML=html;
-if(reviews.length>0){
-document.getElementById("avg").innerHTML=(total/reviews.length).toFixed(1);
-}
-}
-
+/* ================= REVIEWS ================= */
 function addReview(){
+
 var name=document.getElementById("custName").value;
-var rating=parseInt(document.getElementById("rating").value);
+var rating=document.getElementById("rating").value;
 var text=document.getElementById("reviewText").value;
 
-reviews.push({name,rating,text});
-localStorage.setItem("reviews",JSON.stringify(reviews));
+var stars="⭐".repeat(rating);
 
-loadReviews();
+var html="<div style='background:#eee;padding:10px;margin:5px;border-radius:10px'>"
++"<b>"+name+"</b><br>"+stars+"<br>"+text+"</div>";
+
+document.getElementById("reviewList").innerHTML+=html;
+
 closeReviewPopup();
 }
 
-/* POPUPS */
+/* ================= POPUPS ================= */
 function closePopup(){document.getElementById("popup").style.display="none";}
 function openReviewPopup(){document.getElementById("reviewPopup").style.display="block";}
 function closeReviewPopup(){document.getElementById("reviewPopup").style.display="none";}
 
-/* AUTO */
 window.onload=function(){
-loadReviews();
 setTimeout(openReviewPopup,4000);
 }
 
@@ -127,50 +132,73 @@ setTimeout(openReviewPopup,4000);
 <body>
 
 <header>
-<h1>🚕 Shivam Travels Sihor</h1>
-<p>Best Taxi Service in Gujarat</p>
+<h1>🚕 Shivam Travels</h1>
+<p>Best Taxi Service</p>
 </header>
 
+<!-- BOOK TAXI -->
 <div class="box">
-<h2>🚕 Taxi Services</h2>
-<p>Local | Outstation | Airport Pickup</p>
-</div>
+<h2>📋 Book Taxi</h2>
 
-<div class="box">
-<h2>📊 Fare Calculator</h2>
-<input type="number" id="km" placeholder="Enter KM">
-<select id="car">
+<input id="name" placeholder="Name">
+
+<select id="trip" onchange="showTripInfo()">
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
+
+<p id="tripInfo" style="color:green;font-weight:bold;"></p>
+
+<select id="carType">
 <option>Dzire</option>
 <option>Aura</option>
 <option>Ertiga</option>
 <option>Innova</option>
+<option>Innova Crysta</option>
 </select>
-<button class="btn" onclick="calculateFare()">Check Fare</button>
-<p id="result"></p>
-</div>
 
-<div class="box">
-<h2>📋 Book Taxi</h2>
-<input id="name" placeholder="Name">
-<input id="pickup" placeholder="Pickup Location">
-<input id="drop" placeholder="Drop Location">
+<input id="pickup" placeholder="Pickup">
+<input id="drop" placeholder="Drop">
+
 <input type="date" id="date">
 <input type="time" id="time">
-<input id="phone" placeholder="Phone Number">
+
+<input id="phone" placeholder="Phone">
+
 <button class="btn" onclick="sendWhatsApp()">Book Now</button>
 </div>
 
+<!-- FARE CALCULATOR -->
 <div class="box">
-<h2>📍 Live Location</h2>
-<iframe src="https://www.google.com/maps?q=Sihor,Gujarat&output=embed"
-width="100%" height="250"></iframe>
+<h2>📊 Fare Calculator</h2>
+
+<select id="tripCalc" onchange="calculateFare()">
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
+
+<input type="number" id="km" placeholder="Enter KM">
+<input type="number" id="days" placeholder="Enter Days (Round Trip)">
+
+<select id="car" onchange="calculateFare()">
+<option>Dzire</option>
+<option>Aura</option>
+<option>Ertiga</option>
+<option>Innova</option>
+<option>Innova Crysta</option>
+</select>
+
+<button class="btn" onclick="calculateFare()">Calculate</button>
+
+<p id="result"></p>
+<p id="extraInfo" style="color:green;font-weight:bold;"></p>
 </div>
 
+<!-- REVIEWS -->
 <div class="box">
 <h2>⭐ Customer Reviews</h2>
-<h3>Average Rating: <span id="avg">0</span> ⭐</h3>
 
-<input id="custName" placeholder="Your Name">
+<input id="custName" placeholder="Name">
 <select id="rating">
 <option value="5">⭐⭐⭐⭐⭐</option>
 <option value="4">⭐⭐⭐⭐</option>
@@ -179,19 +207,11 @@ width="100%" height="250"></iframe>
 <option value="1">⭐</option>
 </select>
 
-<textarea id="reviewText" placeholder="Write your review"></textarea>
+<textarea id="reviewText" placeholder="Review"></textarea>
 
-<button class="btn" onclick="addReview()">Submit Review</button>
+<button class="btn" onclick="addReview()">Submit</button>
 
 <div id="reviewList"></div>
-</div>
-
-<div class="box">
-<h2>💰 Pay Online</h2>
-<p><b>UPI:</b> chauhanshivam2535-1@okicici</p>
-<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
-<button class="btn">Pay Now</button>
-</a>
 </div>
 
 <footer style="background:#111;color:#fff;text-align:center;padding:10px;">
@@ -210,10 +230,11 @@ width="100%" height="250"></iframe>
 </div>
 </div>
 
-<!-- AUTO REVIEW POPUP -->
+<!-- REVIEW POPUP -->
 <div id="reviewPopup">
 <div class="popup-box">
 <h3>⭐ Give Review</h3>
+
 <input id="custName" placeholder="Name">
 <select id="rating">
 <option value="5">⭐⭐⭐⭐⭐</option>
@@ -222,9 +243,12 @@ width="100%" height="250"></iframe>
 <option value="2">⭐⭐</option>
 <option value="1">⭐</option>
 </select>
+
 <textarea id="reviewText" placeholder="Review"></textarea>
+
 <button class="btn" onclick="addReview()">Submit</button>
 <button class="btn" onclick="closeReviewPopup()">Close</button>
+
 </div>
 </div>
 
