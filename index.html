@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Pro Admin</title>
+<title>Shivam Travels | Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#000;color:#fff;}
@@ -34,6 +34,17 @@ bookings.push(data);
 localStorage.setItem("bookings",JSON.stringify(bookings));
 }
 
+/* TRIP INFO */
+function showTripInfo(){
+var trip=document.getElementById("trip").value;
+
+if(trip=="Round Trip"){
+document.getElementById("tripInfo").innerHTML="✔ 300KM/Day | Driver Allowance Extra";
+}else{
+document.getElementById("tripInfo").innerHTML="";
+}
+}
+
 /* BOOK */
 function sendWhatsApp(){
 
@@ -41,6 +52,7 @@ var id = generateID();
 
 var name=document.getElementById("name").value;
 var phone=document.getElementById("phone").value;
+var trip=document.getElementById("trip").value;
 var pickup=document.getElementById("pickup").value;
 var drop=document.getElementById("drop").value;
 var car=document.getElementById("carType").value;
@@ -58,14 +70,15 @@ alert("Fill all details");
 return;
 }
 
-/* SAVE DATA */
-saveBooking({id,name,phone,pickup,drop,car,date,time});
+/* SAVE */
+saveBooking({id,name,phone,trip,pickup,drop,car,date,time});
 
-/* WHATSAPP MESSAGE */
+/* WHATSAPP */
 var msg="🚕 *Shivam Travels Booking* %0A"
 +"🆔 ID: "+id+"%0A"
 +"👤 Name: "+name+"%0A"
 +"📞 Phone: "+phone+"%0A"
++"🛣️ Trip: "+trip+"%0A"
 +"🚗 Car: "+car+"%0A"
 +"📍 Pickup: "+pickup+"%0A"
 +"🏁 Drop: "+drop+"%0A"
@@ -76,7 +89,7 @@ window.open("https://wa.me/919898222313?text="+msg);
 
 /* POPUP */
 document.getElementById("popupText").innerHTML=
-"ID: "+id+"<br>"+pickup+" ➜ "+drop;
+"ID: "+id+"<br>"+trip+"<br>"+pickup+" ➜ "+drop;
 
 document.getElementById("popup").style.display="block";
 }
@@ -98,6 +111,7 @@ bookings.forEach((b,i)=>{
 html+=`<div style="border-bottom:1px solid #555;padding:10px">
 <b>${b.id}</b><br>
 ${b.name} (${b.phone})<br>
+${b.trip}<br>
 ${b.pickup} ➜ ${b.drop}<br>
 ${b.date} | ${b.time}
 <br><button onclick="deleteBooking(${i})">Delete</button>
@@ -122,12 +136,8 @@ document.getElementById("reviewList").innerHTML +=
 "<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
 }
 
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-function closeAdmin(){
-document.getElementById("adminPanel").style.display="none";
-}
+function closePopup(){document.getElementById("popup").style.display="none";}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 
 </script>
 
@@ -147,6 +157,13 @@ document.getElementById("adminPanel").style.display="none";
 
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone Number">
+
+<select id="trip" onchange="showTripInfo()">
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
+
+<p id="tripInfo" style="color:#ffc107;"></p>
 
 <select id="carType">
 <option>Dzire</option>
@@ -190,7 +207,7 @@ document.getElementById("adminPanel").style.display="none";
 <div id="reviewList"></div>
 </div>
 
-<!-- ADMIN PANEL -->
+<!-- ADMIN -->
 <div id="adminPanel">
 <div class="popup-box">
 <h2>📊 Booking History</h2>
