@@ -14,21 +14,15 @@ input,select,textarea{width:100%;padding:10px;margin:5px 0;border:none;border-ra
 .btn{background:#ffc107;color:#000;padding:10px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;margin-top:5px;}
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:15px;border-radius:50%;}
 .callbtn{position:fixed;bottom:80px;right:20px;background:red;padding:12px;border-radius:50%;}
-#popup,#adminPanel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);}
+#popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);}
 .popup-box{background:#111;border:1px solid #ffc107;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:15px;text-align:center;}
 </style>
 
 <script>
 
-var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 var selectedFare = 0;
 
-/* BOOKING ID */
-function generateID(){
-return "ST" + Math.floor(Math.random()*100000);
-}
-
-/* TRIP SWITCH */
+/* TRIP */
 function showTripInfo(){
 var trip=document.getElementById("trip").value;
 
@@ -36,7 +30,7 @@ if(trip=="Round Trip"){
 document.getElementById("tripInfo").innerHTML="✔ 300KM/Day + Driver + Toll Extra";
 document.getElementById("fareBox").style.display="block";
 }else{
-document.getElementById("tripInfo").innerHTML="✔ Direct One Way Fare";
+document.getElementById("tripInfo").innerHTML="✔ One Way Direct Booking";
 document.getElementById("fareBox").style.display="none";
 selectedFare = 0;
 }
@@ -61,18 +55,24 @@ var total=(km*rate)+driver;
 
 selectedFare = total;
 document.getElementById("result").innerHTML="💰 ₹ "+total;
+document.getElementById("amount").value = total;
 }
 
-/* SAVE */
-function saveBooking(data){
-bookings.push(data);
-localStorage.setItem("bookings",JSON.stringify(bookings));
+/* PAYMENT */
+function payNow(){
+var amount = document.getElementById("amount").value;
+
+if(amount=="" || amount==0){
+alert("Enter amount");
+return;
+}
+
+var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels&am="+amount+"&cu=INR";
+window.location.href = upi;
 }
 
 /* BOOK */
 function sendWhatsApp(){
-
-var id = generateID();
 
 var name=document.getElementById("name").value;
 var phone=document.getElementById("phone").value;
@@ -99,12 +99,8 @@ alert("Please fill all details");
 return;
 }
 
-/* SAVE */
-saveBooking({id,name,phone,pickup,drop,car,date,time,trip,fare:selectedFare});
-
 /* WHATSAPP */
 var msg="🚕 Shivam Travels Booking%0A"
-+"Booking ID: "+id+"%0A"
 +"Trip: "+trip+"%0A"
 +"Name: "+name+"%0A"
 +"Phone: "+phone+"%0A"
@@ -112,17 +108,15 @@ var msg="🚕 Shivam Travels Booking%0A"
 +"Pickup: "+pickup+"%0A"
 +"Drop: "+drop+"%0A"
 +"Date: "+date+"%0A"
-+"Time: "+time;
-
-if(trip=="Round Trip"){
-msg += "%0AFare: ₹"+selectedFare;
-}
++"Time: "+time+"%0A"
++"Fare: ₹"+selectedFare+"%0A"
++"Payment: Done";
 
 window.open("https://wa.me/919898222313?text="+msg);
 
 /* POPUP */
 document.getElementById("popupText").innerHTML=
-id+"<br>"+pickup+" ➜ "+drop+"<br>"+trip;
+pickup+" ➜ "+drop+"<br>"+trip+"<br>₹"+selectedFare;
 
 document.getElementById("popup").style.display="block";
 }
@@ -148,9 +142,10 @@ function closePopup(){document.getElementById("popup").style.display="none";}
 
 <header>
 <h1>🚕 Shivam Travels</h1>
-<p>Taxi Booking System</p>
+<p>Premium Taxi Booking</p>
 </header>
 
+<!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
@@ -198,9 +193,17 @@ function closePopup(){document.getElementById("popup").style.display="none";}
 <p id="result"></p>
 </div>
 
+<!-- PAYMENT -->
+<div class="box">
+<h2>💰 Pay Online</h2>
+<p style="color:#ffc107;">UPI: chauhanshivam2535-1@okicici</p>
+<input id="amount" placeholder="Enter Amount">
+<button class="btn" onclick="payNow()">Pay Now</button>
+</div>
+
 <!-- REVIEW -->
 <div class="box">
-<h2>⭐ Reviews</h2>
+<h2>⭐ Customer Reviews</h2>
 <input id="custName" placeholder="Name">
 <select id="rating">
 <option value="5">⭐⭐⭐⭐⭐</option>
