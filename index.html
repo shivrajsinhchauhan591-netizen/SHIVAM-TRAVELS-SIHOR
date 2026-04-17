@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Ultra Pro</title>
+<title>Shivam Travels | Final Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#000;color:#fff;}
@@ -15,31 +15,20 @@ input,select,textarea{width:100%;padding:10px;margin:5px 0;border:none;border-ra
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:15px;border-radius:50%;}
 .callbtn{position:fixed;bottom:80px;right:20px;background:red;padding:12px;border-radius:50%;}
 #popup,#adminPanel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);}
-.popup-box{background:#111;border:1px solid #ffc107;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:15px;text-align:center;overflow:auto;max-height:80%;}
+.popup-box{background:#111;border:1px solid #ffc107;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:15px;text-align:center;}
 </style>
 
 <script>
 
-/* STORAGE */
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+var selectedFare = 0;
 
 /* BOOKING ID */
 function generateID(){
 return "ST" + Math.floor(Math.random()*100000);
 }
 
-/* ROUTE AUTO */
-var selectedFare = 0;
-
-function selectRoute(pickup, drop, car, price){
-document.getElementById("pickup").value = pickup;
-document.getElementById("drop").value = drop;
-document.getElementById("carType").value = car;
-selectedFare = price;
-document.getElementById("routeFare").innerHTML="💰 ₹ "+price;
-}
-
-/* TRIP */
+/* TRIP SWITCH */
 function showTripInfo(){
 var trip=document.getElementById("trip").value;
 
@@ -47,8 +36,9 @@ if(trip=="Round Trip"){
 document.getElementById("tripInfo").innerHTML="✔ 300KM/Day + Driver + Toll Extra";
 document.getElementById("fareBox").style.display="block";
 }else{
-document.getElementById("tripInfo").innerHTML="";
+document.getElementById("tripInfo").innerHTML="✔ Direct One Way Fare";
 document.getElementById("fareBox").style.display="none";
+selectedFare = 0;
 }
 }
 
@@ -69,8 +59,8 @@ if(km<minKM) km=minKM;
 var driver=300*days;
 var total=(km*rate)+driver;
 
-document.getElementById("result").innerHTML="💰 ₹ "+total;
 selectedFare = total;
+document.getElementById("result").innerHTML="💰 ₹ "+total;
 }
 
 /* SAVE */
@@ -91,59 +81,50 @@ var drop=document.getElementById("drop").value;
 var car=document.getElementById("carType").value;
 var date=document.getElementById("date").value;
 var time=document.getElementById("time").value;
-var screenshot=document.getElementById("paymentProof").value;
+var trip=document.getElementById("trip").value;
+
+/* VALIDATION */
+if(trip=="Round Trip" && selectedFare==0){
+alert("Please calculate fare");
+return;
+}
+
+if(phone.length!=10){
+alert("Enter valid 10 digit number");
+return;
+}
 
 if(name=="" || phone=="" || pickup=="" || drop==""){
-alert("Please fill all details"); return;
+alert("Please fill all details");
+return;
 }
 
-if(screenshot==""){
-alert("Upload payment screenshot"); return;
-}
+/* SAVE */
+saveBooking({id,name,phone,pickup,drop,car,date,time,trip,fare:selectedFare});
 
-saveBooking({id,name,phone,pickup,drop,car,date,time,fare:selectedFare});
-
+/* WHATSAPP */
 var msg="🚕 Shivam Travels Booking%0A"
 +"Booking ID: "+id+"%0A"
++"Trip: "+trip+"%0A"
 +"Name: "+name+"%0A"
 +"Phone: "+phone+"%0A"
 +"Car: "+car+"%0A"
 +"Pickup: "+pickup+"%0A"
 +"Drop: "+drop+"%0A"
 +"Date: "+date+"%0A"
-+"Time: "+time+"%0A"
-+"Fare: ₹"+selectedFare+"%0A"
-+"📍 Please send Live Location";
++"Time: "+time;
+
+if(trip=="Round Trip"){
+msg += "%0AFare: ₹"+selectedFare;
+}
 
 window.open("https://wa.me/919898222313?text="+msg);
 
-document.getElementById("popupText").innerHTML=id+"<br>"+pickup+" ➜ "+drop+"<br>₹"+selectedFare;
+/* POPUP */
+document.getElementById("popupText").innerHTML=
+id+"<br>"+pickup+" ➜ "+drop+"<br>"+trip;
+
 document.getElementById("popup").style.display="block";
-}
-
-/* ADMIN */
-function openAdmin(){
-var pass = prompt("Enter Password");
-if(pass=="1234"){
-loadBookings();
-document.getElementById("adminPanel").style.display="block";
-}else{alert("Wrong Password");}
-}
-
-function loadBookings(){
-var html="";
-bookings.forEach((b,i)=>{
-html+=`<div style="border-bottom:1px solid #555;padding:10px">
-<b>${b.id}</b><br>${b.name} (${b.phone})<br>${b.pickup} ➜ ${b.drop}<br>₹${b.fare}
-<br><button onclick="deleteBooking(${i})">Delete</button></div>`;
-});
-document.getElementById("adminData").innerHTML=html;
-}
-
-function deleteBooking(i){
-bookings.splice(i,1);
-localStorage.setItem("bookings",JSON.stringify(bookings));
-loadBookings();
 }
 
 /* REVIEW */
@@ -158,7 +139,6 @@ document.getElementById("reviewList").innerHTML +=
 
 /* CLOSE */
 function closePopup(){document.getElementById("popup").style.display="none";}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 
 </script>
 
@@ -168,19 +148,9 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 
 <header>
 <h1>🚕 Shivam Travels</h1>
-<p>Ultra Pro Taxi Booking</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
+<p>Taxi Booking System</p>
 </header>
 
-<!-- ROUTES -->
-<div class="box">
-<h2>🔥 Quick Routes</h2>
-<button class="btn" onclick="selectRoute('Bhavnagar','Ahmedabad','Dzire',1800)">Bhavnagar ➜ Ahmedabad ₹1800</button>
-<button class="btn" onclick="selectRoute('Sihor','Ahmedabad','Ertiga',2800)">Sihor ➜ Ahmedabad ₹2800</button>
-<p id="routeFare"></p>
-</div>
-
-<!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
@@ -208,13 +178,7 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <input type="date" id="date">
 <input type="time" id="time">
 
-<input type="file" id="paymentProof">
-
 <button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
-
-<a href="https://wa.me/919898222313">
-<button class="btn">📍 Send Live Location</button>
-</a>
 
 </div>
 
@@ -234,15 +198,6 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <p id="result"></p>
 </div>
 
-<!-- PAYMENT -->
-<div class="box">
-<h2>💰 Pay Online</h2>
-<p style="color:#ffc107;">UPI: chauhanshivam2535-1@okicici</p>
-<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
-<button class="btn">Pay Now</button>
-</a>
-</div>
-
 <!-- REVIEW -->
 <div class="box">
 <h2>⭐ Reviews</h2>
@@ -257,15 +212,6 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <textarea id="reviewText"></textarea>
 <button class="btn" onclick="addReview()">Submit</button>
 <div id="reviewList"></div>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel">
-<div class="popup-box">
-<h2>📊 Booking History</h2>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
 </div>
 
 <!-- POPUP -->
@@ -284,60 +230,3 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 
 </body>
 </html>
-function sendWhatsApp(){
-
-var id = generateID();
-
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
-var car=document.getElementById("carType").value;
-var date=document.getElementById("date").value;
-var time=document.getElementById("time").value;
-var screenshot=document.getElementById("paymentProof").value;
-
-/* NEW ADD (VERY IMPORTANT) */
-if(selectedFare==0){
-alert("Please calculate fare or select route");
-return;
-}
-
-if(phone.length!=10){
-alert("Enter valid 10 digit number");
-return;
-}
-
-/* OLD VALIDATION */
-if(name=="" || phone=="" || pickup=="" || drop==""){
-alert("Please fill all details"); return;
-}
-
-if(screenshot==""){
-alert("Upload payment screenshot"); return;
-}
-
-/* SAVE */
-saveBooking({id,name,phone,pickup,drop,car,date,time,fare:selectedFare});
-
-/* WHATSAPP */
-var msg="🚕 Shivam Travels Booking%0A"
-+"Booking ID: "+id+"%0A"
-+"Name: "+name+"%0A"
-+"Phone: "+phone+"%0A"
-+"Car: "+car+"%0A"
-+"Pickup: "+pickup+"%0A"
-+"Drop: "+drop+"%0A"
-+"Date: "+date+"%0A"
-+"Time: "+time+"%0A"
-+"Fare: ₹"+selectedFare+"%0A"
-+"📍 Please send Live Location";
-
-window.open("https://wa.me/919898222313?text="+msg);
-
-/* POPUP */
-document.getElementById("popupText").innerHTML=id+"<br>"+pickup+" ➜ "+drop+"<br>₹"+selectedFare;
-document.getElementById("popup").style.display="block";
-}
-
-
