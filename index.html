@@ -19,25 +19,19 @@ input,select,textarea{width:100%;padding:10px;margin:5px 0;border:none;border-ra
 </style>
 
 <script>
-
-/* STORAGE */
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-/* BOOKING ID */
 function generateID(){
 return "ST" + Math.floor(Math.random()*100000);
 }
 
-/* SAVE */
 function saveBooking(data){
 bookings.push(data);
 localStorage.setItem("bookings",JSON.stringify(bookings));
 }
 
-/* TRIP INFO */
 function showTripInfo(){
 var trip=document.getElementById("trip").value;
-
 if(trip=="Round Trip"){
 document.getElementById("tripInfo").innerHTML="✔ 300KM/Day | Driver Allowance Extra";
 }else{
@@ -45,7 +39,6 @@ document.getElementById("tripInfo").innerHTML="";
 }
 }
 
-/* BOOK */
 function sendWhatsApp(){
 
 var id = generateID();
@@ -59,21 +52,11 @@ var car=document.getElementById("carType").value;
 var date=document.getElementById("date").value;
 var time=document.getElementById("time").value;
 
-/* VALIDATION */
-if(phone.length!=10){
-alert("Enter valid 10 digit number");
-return;
-}
+if(phone.length!=10){alert("Enter valid number");return;}
+if(name==""||pickup==""||drop==""){alert("Fill all details");return;}
 
-if(name=="" || pickup=="" || drop==""){
-alert("Fill all details");
-return;
-}
-
-/* SAVE */
 saveBooking({id,name,phone,trip,pickup,drop,car,date,time});
 
-/* WHATSAPP */
 var msg="🚕 *Shivam Travels Booking* %0A"
 +"🆔 ID: "+id+"%0A"
 +"👤 Name: "+name+"%0A"
@@ -87,22 +70,18 @@ var msg="🚕 *Shivam Travels Booking* %0A"
 
 window.open("https://wa.me/919898222313?text="+msg);
 
-/* POPUP */
 document.getElementById("popupText").innerHTML=
-"ID: "+id+"<br>"+trip+"<br>"+pickup+" ➜ "+drop;
+"Booking ID: "+id+"<br>"+trip+"<br>"+pickup+" ➜ "+drop;
 
 document.getElementById("popup").style.display="block";
 }
 
-/* ADMIN */
 function openAdmin(){
-var pass = prompt("Enter Admin Password");
+var pass=prompt("Enter Admin Password");
 if(pass=="1234"){
 loadBookings();
 document.getElementById("adminPanel").style.display="block";
-}else{
-alert("Wrong Password");
-}
+}else{alert("Wrong Password");}
 }
 
 function loadBookings(){
@@ -126,19 +105,17 @@ localStorage.setItem("bookings",JSON.stringify(bookings));
 loadBookings();
 }
 
-/* REVIEW */
 function addReview(){
 var name=document.getElementById("custName").value;
 var rating=document.getElementById("rating").value;
 var text=document.getElementById("reviewText").value;
 
-document.getElementById("reviewList").innerHTML +=
+document.getElementById("reviewList").innerHTML+=
 "<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
 }
 
 function closePopup(){document.getElementById("popup").style.display="none";}
 function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
-
 </script>
 
 </head>
@@ -147,9 +124,20 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 
 <header>
 <h1>🚕 Shivam Travels</h1>
-<p>Smart Taxi Booking System</p>
+<p>Safe, Reliable & Budget-Friendly Travels in Gujarat</p>
 <button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
+
+<!-- TAGLINE -->
+<div class="box" style="text-align:center;">
+<p>SAFE, RELIABLE & BUDGET-FRIENDLY TRAVELS IN GUJARAT FOR 10 YEARS.</p>
+<p>Professional rides at best price.</p>
+<h3 style="color:#ffc107;">📞 CALL: 9898222313 / 9574249281</h3>
+
+<a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
+<a href="https://wa.me/919898222313" target="_blank">
+<button class="btn">💬 Book on WhatsApp</button></a>
+</div>
 
 <!-- BOOK -->
 <div class="box">
@@ -182,13 +170,23 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
 </div>
 
+<!-- ROUTES -->
+<div class="box">
+<h2>📍 Popular Routes</h2>
+<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Ahmedabad</p>
+<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Gandhinagar</p>
+<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Vadodara</p>
+<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Surat</p>
+<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Rajkot</p>
+<p style="color:#ffc107;">One Way | Pickup & Drop | Round Trip Available</p>
+</div>
+
 <!-- PAYMENT -->
 <div class="box">
 <h2>💰 Online Payment</h2>
-<p style="color:#ffc107;">UPI: chauhanshivam2535-1@okicici</p>
+<p>UPI: chauhanshivam2535-1@okicici</p>
 <a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
-<button class="btn">Pay Now</button>
-</a>
+<button class="btn">Pay Now</button></a>
 </div>
 
 <!-- REVIEW -->
@@ -199,8 +197,6 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <option value="5">⭐⭐⭐⭐⭐</option>
 <option value="4">⭐⭐⭐⭐</option>
 <option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
 </select>
 <textarea id="reviewText"></textarea>
 <button class="btn" onclick="addReview()">Submit</button>
@@ -229,8 +225,12 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 © Shivam Travels
 </footer>
 
+<!-- FLOAT BUTTONS -->
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
+</html>
+
+  
 </html>
