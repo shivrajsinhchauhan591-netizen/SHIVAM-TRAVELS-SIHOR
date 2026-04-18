@@ -6,17 +6,43 @@
 <title>Shivam Travels</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#000;color:#fff;text-align:center;}
+body{
+margin:0;
+font-family:Arial;
+background:#000;
+color:#fff;
+text-align:center;
+}
 
-section{padding:40px 20px;}
+section{
+padding:40px 20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+background:#111;
+padding:20px;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,255,204,0.3);
+}
 
 input,select{
-width:90%;padding:10px;margin:8px 0;border-radius:6px;border:none;
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+border:none;
+font-size:15px;
 }
 
 button{
-padding:12px 20px;border:none;border-radius:8px;margin:10px;
-cursor:pointer;font-size:16px;
+padding:12px 20px;
+border:none;
+border-radius:8px;
+margin:10px;
+cursor:pointer;
+font-size:16px;
 }
 
 .call{background:#28a745;color:#fff;}
@@ -25,8 +51,13 @@ cursor:pointer;font-size:16px;
 .payment{background:#ffcc00;color:#000;}
 
 .review-box{
-background:#111;padding:15px;margin:10px;border-radius:8px;
+background:#111;
+padding:15px;
+margin:10px;
+border-radius:8px;
 }
+
+h2{color:#00ffcc;}
 </style>
 </head>
 
@@ -42,8 +73,9 @@ background:#111;padding:15px;margin:10px;border-radius:8px;
 <button class="whatsapp">💬 WhatsApp</button></a>
 </section>
 
-<!-- BOOKING FORM -->
+<!-- BOOKING -->
 <section>
+<div class="container">
 <h2>📋 Book Taxi</h2>
 
 <form onsubmit="sendWhatsApp();return false;">
@@ -52,7 +84,7 @@ background:#111;padding:15px;margin:10px;border-radius:8px;
 <input type="tel" id="phone" placeholder="Phone Number" required>
 
 <select id="trip" required>
-<option value="">One Way / Round Trip</option>
+<option value="">Trip Type</option>
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
@@ -76,11 +108,11 @@ background:#111;padding:15px;margin:10px;border-radius:8px;
 
 </form>
 
-<!-- PAYMENT -->
 <h3>💳 Online Payment</h3>
 <a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
 <button class="payment">Pay via UPI</button></a>
 
+</div>
 </section>
 
 <!-- POPUP -->
@@ -96,6 +128,7 @@ background:#111;padding:15px;margin:10px;border-radius:8px;
 <section>
 <h2>⭐ Customer Reviews</h2>
 
+<div class="container">
 <input type="text" id="rname" placeholder="Your Name">
 <select id="rating">
 <option>⭐⭐⭐⭐⭐</option>
@@ -106,7 +139,7 @@ background:#111;padding:15px;margin:10px;border-radius:8px;
 <button onclick="addReview()">Submit</button>
 
 <div id="reviews"></div>
-
+</div>
 </section>
 
 <script>
@@ -122,19 +155,23 @@ let drop=document.getElementById("drop").value;
 let date=document.getElementById("date").value;
 let time=document.getElementById("time").value;
 
-let msg=`🚖 Shivam Travels Booking %0A
-Name: ${name} %0A
-Phone: ${phone} %0A
-Trip: ${trip} %0A
-Car: ${car} %0A
-Pickup: ${pickup} %0A
-Drop: ${drop} %0A
-Date: ${date} %0A
-Time: ${time}`;
+let msg=`🚖 *Shivam Travels Booking*%0A
+👤 Name: ${name}%0A
+📞 Phone: ${phone}%0A
+🔁 Trip: ${trip}%0A
+🚗 Car: ${car}%0A
+📍 Pickup: ${pickup}%0A
+📍 Drop: ${drop}%0A
+📅 Date: ${date}%0A
+⏰ Time: ${time}`;
 
-window.open("https://wa.me/919898222313?text="+msg);
+window.open("https://wa.me/919898222313?text="+msg,"_blank");
 
+// popup
 document.getElementById("popup").style.display="flex";
+
+// clear form
+document.querySelector("form").reset();
 }
 
 function closePopup(){
@@ -146,11 +183,19 @@ function addReview(){
 let name=document.getElementById("rname").value;
 let rating=document.getElementById("rating").value;
 
+if(name===""){
+alert("Please enter name");
+return;
+}
+
 let reviewBox=document.createElement("div");
 reviewBox.className="review-box";
 reviewBox.innerHTML=`<h4>${name}</h4><p>${rating}</p>`;
 
 document.getElementById("reviews").appendChild(reviewBox);
+
+// clear
+document.getElementById("rname").value="";
 }
 
 </script>
