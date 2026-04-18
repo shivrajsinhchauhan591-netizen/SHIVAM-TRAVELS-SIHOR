@@ -1,96 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels</title>
+<title>Shivam Travels | Pro</title>
 
 <style>
-body{
-margin:0;
-font-family:Arial;
-background:#000;
-color:#fff;
-text-align:center;
-}
-
-section{
-padding:40px 20px;
-}
-
-.container{
-max-width:500px;
-margin:auto;
-background:#111;
-padding:20px;
-border-radius:12px;
-box-shadow:0 0 15px rgba(0,255,204,0.3);
-}
-
-input,select{
-width:100%;
-padding:12px;
-margin:10px 0;
-border-radius:8px;
-border:none;
-font-size:15px;
-}
-
-button{
-padding:12px 20px;
-border:none;
-border-radius:8px;
-margin:10px;
-cursor:pointer;
-font-size:16px;
-}
-
-.call{background:#28a745;color:#fff;}
-.whatsapp{background:#25D366;color:#fff;}
-.book{background:#00ffcc;color:#000;}
-.payment{background:#ffcc00;color:#000;}
-
-.review-box{
-background:#111;
-padding:15px;
-margin:10px;
-border-radius:8px;
-}
-
-h2{color:#00ffcc;}
+body{margin:0;font-family:Arial;background:#000;color:#fff;}
+header{background:linear-gradient(90deg,#000,#222,#ffc107);padding:40px;text-align:center;}
+.box{background:#111;margin:15px;padding:20px;border-radius:15px;border:1px solid #ffc107;}
+input,select,textarea{width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;}
+.btn{background:#ffc107;color:#000;padding:10px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:15px;border-radius:50%;}
+.callbtn{position:fixed;bottom:80px;right:20px;background:red;padding:12px;border-radius:50%;}
+#popup,#adminPanel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);}
+.popup-box{background:#111;border:1px solid #ffc107;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:15px;text-align:center;}
 </style>
+
+<script>
+
+/* STORAGE */
+var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+/* BOOKING ID */
+function generateID(){
+return "ST" + Math.floor(Math.random()*100000);
+}
+
+/* SAVE */
+function saveBooking(data){
+bookings.push(data);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+}
+
+/* TRIP INFO */
+function showTripInfo(){
+var trip=document.getElementById("trip").value;
+
+if(trip=="Round Trip"){
+document.getElementById("tripInfo").innerHTML="✔ 300KM/Day | Driver Allowance Extra";
+}else{
+document.getElementById("tripInfo").innerHTML="";
+}
+}
+
+/* BOOK */
+function sendWhatsApp(){
+
+var id = generateID();
+
+var name=document.getElementById("name").value;
+var phone=document.getElementById("phone").value;
+var trip=document.getElementById("trip").value;
+var pickup=document.getElementById("pickup").value;
+var drop=document.getElementById("drop").value;
+var car=document.getElementById("carType").value;
+var date=document.getElementById("date").value;
+var time=document.getElementById("time").value;
+
+/* VALIDATION */
+if(phone.length!=10){
+alert("Enter valid 10 digit number");
+return;
+}
+
+if(name=="" || pickup=="" || drop==""){
+alert("Fill all details");
+return;
+}
+
+/* SAVE */
+saveBooking({id,name,phone,trip,pickup,drop,car,date,time});
+
+/* WHATSAPP */
+var msg="🚕 *Shivam Travels Booking* %0A"
++"🆔 ID: "+id+"%0A"
++"👤 Name: "+name+"%0A"
++"📞 Phone: "+phone+"%0A"
++"🛣️ Trip: "+trip+"%0A"
++"🚗 Car: "+car+"%0A"
++"📍 Pickup: "+pickup+"%0A"
++"🏁 Drop: "+drop+"%0A"
++"📅 Date: "+date+"%0A"
++"⏰ Time: "+time;
+
+window.open("https://wa.me/919898222313?text="+msg);
+
+/* POPUP */
+document.getElementById("popupText").innerHTML=
+"ID: "+id+"<br>"+trip+"<br>"+pickup+" ➜ "+drop;
+
+document.getElementById("popup").style.display="block";
+}
+
+/* ADMIN */
+function openAdmin(){
+var pass = prompt("Enter Admin Password");
+if(pass=="1234"){
+loadBookings();
+document.getElementById("adminPanel").style.display="block";
+}else{
+alert("Wrong Password");
+}
+}
+
+function loadBookings(){
+var html="";
+bookings.forEach((b,i)=>{
+html+=`<div style="border-bottom:1px solid #555;padding:10px">
+<b>${b.id}</b><br>
+${b.name} (${b.phone})<br>
+${b.trip}<br>
+${b.pickup} ➜ ${b.drop}<br>
+${b.date} | ${b.time}
+<br><button onclick="deleteBooking(${i})">Delete</button>
+</div>`;
+});
+document.getElementById("adminData").innerHTML=html;
+}
+
+function deleteBooking(i){
+bookings.splice(i,1);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+loadBookings();
+}
+
+/* REVIEW */
+function addReview(){
+var name=document.getElementById("custName").value;
+var rating=document.getElementById("rating").value;
+var text=document.getElementById("reviewText").value;
+
+document.getElementById("reviewList").innerHTML +=
+"<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
+}
+
+function closePopup(){document.getElementById("popup").style.display="none";}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
+
+</script>
+
 </head>
 
 <body>
 
-<!-- CONTACT -->
-<section>
-<h2>📞 Contact</h2>
-<p>9898222313 / 9574249281</p>
+<header>
+<h1>🚕 Shivam Travels</h1>
+<p>Smart Taxi Booking System</p>
+<button class="btn" onclick="openAdmin()">Admin Panel</button>
+</header>
 
-<a href="tel:9898222313"><button class="call">📞 Call Now</button></a>
-<a href="https://wa.me/919898222313" target="_blank">
-<button class="whatsapp">💬 WhatsApp</button></a>
-</section>
-
-<!-- BOOKING -->
-<section>
-<div class="container">
+<!-- BOOK -->
+<div class="box">
 <h2>📋 Book Taxi</h2>
 
-<form onsubmit="sendWhatsApp();return false;">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone Number">
 
-<input type="text" id="name" placeholder="Name" required>
-<input type="tel" id="phone" placeholder="Phone Number" required>
-
-<select id="trip" required>
-<option value="">Trip Type</option>
+<select id="trip" onchange="showTripInfo()">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
 
-<select id="car" required>
-<option value="">Select Car</option>
+<p id="tripInfo" style="color:#ffc107;"></p>
+
+<select id="carType">
 <option>Dzire</option>
 <option>Aura</option>
 <option>Ertiga</option>
@@ -98,107 +173,64 @@ h2{color:#00ffcc;}
 <option>Innova Crysta</option>
 </select>
 
-<input type="text" id="pickup" placeholder="Pickup City" required>
-<input type="text" id="drop" placeholder="Drop City" required>
+<input id="pickup" placeholder="Pickup City">
+<input id="drop" placeholder="Drop City">
 
-<input type="date" id="date" required>
-<input type="time" id="time" required>
+<input type="date" id="date">
+<input type="time" id="time">
 
-<button type="submit" class="book">🚀 Confirm Booking</button>
-
-</form>
-
-<h3>💳 Online Payment</h3>
-<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
-<button class="payment">Pay via UPI</button></a>
-
+<button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
 </div>
-</section>
+
+<!-- PAYMENT -->
+<div class="box">
+<h2>💰 Online Payment</h2>
+<p style="color:#ffc107;">UPI: chauhanshivam2535-1@okicici</p>
+<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
+<button class="btn">Pay Now</button>
+</a>
+</div>
+
+<!-- REVIEW -->
+<div class="box">
+<h2>⭐ Customer Reviews</h2>
+<input id="custName" placeholder="Name">
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
+</select>
+<textarea id="reviewText"></textarea>
+<button class="btn" onclick="addReview()">Submit</button>
+<div id="reviewList"></div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPanel">
+<div class="popup-box">
+<h2>📊 Booking History</h2>
+<div id="adminData"></div>
+<button class="btn" onclick="closeAdmin()">Close</button>
+</div>
+</div>
 
 <!-- POPUP -->
-<div id="popup" style="display:none; position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);justify-content:center;align-items:center;">
-<div style="background:#fff;color:#000;padding:30px;border-radius:10px;">
-<h2>✅ Booking Confirmed</h2>
-<p>Thank You for choosing Shivam Travels 🚖</p>
-<button onclick="closePopup()">OK</button>
+<div id="popup">
+<div class="popup-box">
+<h3>Booking Confirmed</h3>
+<p id="popupText"></p>
+<button class="btn" onclick="closePopup()">OK</button>
 </div>
 </div>
 
-<!-- REVIEWS -->
-<section>
-<h2>⭐ Customer Reviews</h2>
+<footer style="text-align:center;padding:10px;">
+© Shivam Travels
+</footer>
 
-<div class="container">
-<input type="text" id="rname" placeholder="Your Name">
-<select id="rating">
-<option>⭐⭐⭐⭐⭐</option>
-<option>⭐⭐⭐⭐</option>
-<option>⭐⭐⭐</option>
-</select>
-
-<button onclick="addReview()">Submit</button>
-
-<div id="reviews"></div>
-</div>
-</section>
-
-<script>
-
-function sendWhatsApp(){
-
-let name=document.getElementById("name").value;
-let phone=document.getElementById("phone").value;
-let trip=document.getElementById("trip").value;
-let car=document.getElementById("car").value;
-let pickup=document.getElementById("pickup").value;
-let drop=document.getElementById("drop").value;
-let date=document.getElementById("date").value;
-let time=document.getElementById("time").value;
-
-let msg=`🚖 *Shivam Travels Booking*%0A
-👤 Name: ${name}%0A
-📞 Phone: ${phone}%0A
-🔁 Trip: ${trip}%0A
-🚗 Car: ${car}%0A
-📍 Pickup: ${pickup}%0A
-📍 Drop: ${drop}%0A
-📅 Date: ${date}%0A
-⏰ Time: ${time}`;
-
-window.open("https://wa.me/919898222313?text="+msg,"_blank");
-
-// popup
-document.getElementById("popup").style.display="flex";
-
-// clear form
-document.querySelector("form").reset();
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-// REVIEW SYSTEM
-function addReview(){
-let name=document.getElementById("rname").value;
-let rating=document.getElementById("rating").value;
-
-if(name===""){
-alert("Please enter name");
-return;
-}
-
-let reviewBox=document.createElement("div");
-reviewBox.className="review-box";
-reviewBox.innerHTML=`<h4>${name}</h4><p>${rating}</p>`;
-
-document.getElementById("reviews").appendChild(reviewBox);
-
-// clear
-document.getElementById("rname").value="";
-}
-
-</script>
+<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
+<a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
 </html>
