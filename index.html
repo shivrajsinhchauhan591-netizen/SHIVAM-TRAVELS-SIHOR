@@ -13,7 +13,6 @@ background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
 
-/* BIG LOGO */
 .logo{width:180px;}
 
 .box{
@@ -24,9 +23,13 @@ border-radius:15px;
 border:1px solid #3b82f6;
 }
 
+input,select,textarea{
+width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
+}
+
 .btn{
-background:#3b82f6;color:#fff;padding:8px;border:none;
-border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;
+background:#3b82f6;color:#fff;padding:10px;border:none;
+border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%;
 }
 .btn:hover{background:#2563eb;}
 
@@ -64,27 +67,57 @@ object-fit:cover;
 
 .price{font-size:13px;color:#ccc;}
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
-.callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
-
 .review-box{
 background:#0d1638;
 padding:10px;
 border-radius:8px;
 margin-top:10px;
 }
+
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
+.callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 </style>
 
 <script>
-// ROUTE BOOKING
+
+// ROUTE QUICK BOOK
 function bookRoute(pickup, drop){
-var msg="🚕 Shivam Travels Booking%0A"
-+"Pickup: "+pickup+"%0A"
-+"Drop: "+drop;
+document.getElementById("pickup").value = pickup;
+document.getElementById("drop").value = drop;
+window.scrollTo(0, document.body.scrollHeight);
+}
+
+// FULL BOOKING
+function sendBooking(){
+var name=document.getElementById("name").value;
+var phone=document.getElementById("phone").value;
+var pickup=document.getElementById("pickup").value;
+var drop=document.getElementById("drop").value;
+
+if(name==""||phone==""||pickup==""||drop==""){
+alert("Please fill all details");
+return;
+}
+
+var msg="🚕 Booking%0AName:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop;
+
 window.open("https://wa.me/919898222313?text="+msg);
 }
 
-// PERMANENT REVIEWS
+// UPI PAYMENT
+function payNow(){
+var amt=document.getElementById("amount").value;
+
+if(amt==""||amt<=0){
+alert("Enter valid amount");
+return;
+}
+
+var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
+window.location.href=upi;
+}
+
+// REVIEWS SAVE
 var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
 function saveReviews(){
@@ -106,10 +139,7 @@ var name=document.getElementById("rname").value;
 var rating=document.getElementById("rating").value;
 var text=document.getElementById("rtext").value;
 
-if(name=="" || text==""){
-alert("Fill all fields");
-return;
-}
+if(name==""||text==""){alert("Fill all");return;}
 
 reviews.push({name,rating,text});
 saveReviews();
@@ -119,7 +149,8 @@ document.getElementById("rname").value="";
 document.getElementById("rtext").value="";
 }
 
-window.onload = displayReviews;
+window.onload=displayReviews;
+
 </script>
 
 </head>
@@ -132,86 +163,39 @@ window.onload = displayReviews;
 <p>Safe & Reliable Taxi Service</p>
 </header>
 
-<!-- WHY -->
-<div class="box">
-<h2>⭐ Why Choose Us</h2>
-<p>✔ 24/7 Service</p>
-<p>✔ Safe Drivers</p>
-<p>✔ Best Price</p>
-<p>✔ Clean Cars</p>
-</div>
-
 <!-- ROUTES -->
 <div class="box">
 <h2>🚖 Popular Routes</h2>
 
 <div class="routes">
-
 <div class="route">Palitana → Ahmedabad<br><button class="btn" onclick="bookRoute('Palitana','Ahmedabad')">Book Now</button></div>
 <div class="route">Songadh → Ahmedabad<br><button class="btn" onclick="bookRoute('Songadh','Ahmedabad')">Book Now</button></div>
 <div class="route">Sihor → Ahmedabad<br><button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
 <div class="route">Bhavnagar → Ahmedabad<br><button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
-
-<div class="route">Palitana → Gandhinagar<br><button class="btn" onclick="bookRoute('Palitana','Gandhinagar')">Book Now</button></div>
-<div class="route">Songadh → Gandhinagar<br><button class="btn" onclick="bookRoute('Songadh','Gandhinagar')">Book Now</button></div>
-<div class="route">Sihor → Gandhinagar<br><button class="btn" onclick="bookRoute('Sihor','Gandhinagar')">Book Now</button></div>
-<div class="route">Bhavnagar → Gandhinagar<br><button class="btn" onclick="bookRoute('Bhavnagar','Gandhinagar')">Book Now</button></div>
-
-<div class="route">Palitana → Vadodara<br><button class="btn" onclick="bookRoute('Palitana','Vadodara')">Book Now</button></div>
-<div class="route">Songadh → Vadodara<br><button class="btn" onclick="bookRoute('Songadh','Vadodara')">Book Now</button></div>
-<div class="route">Sihor → Vadodara<br><button class="btn" onclick="bookRoute('Sihor','Vadodara')">Book Now</button></div>
-<div class="route">Bhavnagar → Vadodara<br><button class="btn" onclick="bookRoute('Bhavnagar','Vadodara')">Book Now</button></div>
-
-<div class="route">Palitana → Surat<br><button class="btn" onclick="bookRoute('Palitana','Surat')">Book Now</button></div>
-<div class="route">Songadh → Surat<br><button class="btn" onclick="bookRoute('Songadh','Surat')">Book Now</button></div>
-<div class="route">Sihor → Surat<br><button class="btn" onclick="bookRoute('Sihor','Surat')">Book Now</button></div>
-<div class="route">Bhavnagar → Surat<br><button class="btn" onclick="bookRoute('Bhavnagar','Surat')">Book Now</button></div>
-
-<div class="route">Palitana → Rajkot<br><button class="btn" onclick="bookRoute('Palitana','Rajkot')">Book Now</button></div>
-<div class="route">Songadh → Rajkot<br><button class="btn" onclick="bookRoute('Songadh','Rajkot')">Book Now</button></div>
-<div class="route">Sihor → Rajkot<br><button class="btn" onclick="bookRoute('Sihor','Rajkot')">Book Now</button></div>
-<div class="route">Bhavnagar → Rajkot<br><button class="btn" onclick="bookRoute('Bhavnagar','Rajkot')">Book Now</button></div>
-
+</div>
 </div>
 
-<p style="margin-top:15px;">
-Palitana, Songadh, Sihor & Bhavnagar → Gujarat All Cities Taxi Available 🚗
-</p>
-
-</div>
-
-<!-- CARS -->
+<!-- BOOK TAXI -->
 <div class="box">
-<h2>🚘 Our Cars</h2>
+<h2>📋 Book Taxi</h2>
 
-<div class="cars">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<input id="pickup" placeholder="Pickup">
+<input id="drop" placeholder="Drop">
 
-<div class="car">
-<img src="swift.jpg">
-<p><b>Dzire</b></p>
-<p class="price">₹10/km<br>Toll + Parking Extra<br>4+1 Seater<br>Driver ₹300<br>300KM/Day</p>
+<button class="btn" onclick="sendBooking()">Confirm Booking</button>
 </div>
 
-<div class="car">
-<img src="aura.jpg">
-<p><b>Aura</b></p>
-<p class="price">₹10/km<br>Toll + Parking Extra<br>4+1 Seater<br>Driver ₹300<br>300KM/Day</p>
-</div>
+<!-- PAYMENT -->
+<div class="box">
+<h2>💰 Online Payment (UPI)</h2>
 
-<div class="car">
-<img src="ertiga.jpg">
-<p><b>Ertiga</b></p>
-<p class="price">₹13/km<br>Toll + Parking Extra<br>6+1 Seater<br>Driver ₹300<br>300KM/Day</p>
-</div>
+<p>UPI ID: chauhanshivam2535-1@okicici</p>
 
-<div class="car">
-<img src="innova.jpg">
-<p><b>Innova Crysta</b></p>
-<p class="price">₹18/km<br>Toll + Parking Extra<br>6+1 Seater<br>Driver ₹300<br>300KM/Day</p>
-</div>
+<input id="amount" placeholder="Enter Amount ₹">
 
-</div>
-
+<button class="btn" onclick="payNow()">Pay Now</button>
 </div>
 
 <!-- REVIEWS -->
@@ -228,7 +212,7 @@ Palitana, Songadh, Sihor & Bhavnagar → Gujarat All Cities Taxi Available 🚗
 <option value="1">⭐</option>
 </select>
 
-<textarea id="rtext" placeholder="Write your review"></textarea>
+<textarea id="rtext" placeholder="Write review"></textarea>
 
 <button class="btn" onclick="addReview()">Submit Review</button>
 
@@ -251,4 +235,6 @@ Palitana, Songadh, Sihor & Bhavnagar → Gujarat All Cities Taxi Available 🚗
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
+</html>
+
 </html>
