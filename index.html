@@ -8,25 +8,17 @@
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
-
-/* HEADER */
-header{
-background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
-padding:40px;text-align:center;
-}
+header{background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);padding:40px;text-align:center;}
 h1,h2,h3{font-weight:bold;}
 
-/* BOX */
 .box{
 background:#111c44;
 margin:15px;
 padding:20px;
 border-radius:15px;
 border:1px solid #3b82f6;
-box-shadow:0 0 10px rgba(0,0,0,0.5);
 }
 
-/* INPUT */
 input,select,textarea{
 width:100%;
 padding:10px;
@@ -35,7 +27,6 @@ border:none;
 border-radius:5px;
 }
 
-/* BUTTON */
 .btn{
 background:#3b82f6;
 color:#fff;
@@ -45,11 +36,10 @@ border-radius:8px;
 font-weight:bold;
 cursor:pointer;
 width:100%;
-margin-top:5px;
 }
+
 .btn:hover{background:#2563eb;}
 
-/* FLOAT */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -57,7 +47,6 @@ right:20px;
 background:#25d366;
 padding:18px;
 border-radius:50%;
-font-size:20px;
 }
 
 .callbtn{
@@ -69,7 +58,6 @@ padding:15px;
 border-radius:50%;
 }
 
-/* BIG BUTTON */
 .booknow{
 position:fixed;
 bottom:20px;
@@ -80,7 +68,6 @@ border-radius:30px;
 font-weight:bold;
 }
 
-/* POPUP */
 #popup,#adminPanel{
 display:none;
 position:fixed;
@@ -88,6 +75,7 @@ top:0;left:0;
 width:100%;height:100%;
 background:rgba(0,0,0,0.8);
 }
+
 .popup-box{
 background:#111c44;
 border:1px solid #3b82f6;
@@ -114,11 +102,8 @@ localStorage.setItem("bookings",JSON.stringify(bookings));
 
 function showTripInfo(){
 var trip=document.getElementById("trip").value;
-if(trip=="Round Trip"){
-document.getElementById("tripInfo").innerHTML="✔ 300KM/Day | Driver Allowance Extra";
-}else{
-document.getElementById("tripInfo").innerHTML="";
-}
+document.getElementById("tripInfo").innerHTML =
+trip=="Round Trip" ? "✔ 300KM/Day | Driver Allowance Extra" : "";
 }
 
 function sendWhatsApp(){
@@ -148,14 +133,27 @@ var msg="🚕 *Shivam Travels Booking* %0A"
 +"📍 Pickup: "+pickup+"%0A"
 +"🏁 Drop: "+drop+"%0A"
 +"📅 Date: "+date+"%0A"
-+"⏰ Time: "+time;
++"⏰ Time: "+time+"%0A"
++"💰 Payment: Pending";
 
 window.open("https://wa.me/919898222313?text="+msg);
 
 document.getElementById("popupText").innerHTML=
-"Booking ID: "+id+"<br>"+trip+"<br>"+pickup+" ➜ "+drop;
+"Booking ID: "+id+"<br>"+pickup+" ➜ "+drop;
 
 document.getElementById("popup").style.display="block";
+}
+
+function payUPI(){
+var amount = document.getElementById("amount").value;
+
+if(amount=="" || amount<=0){
+alert("Enter valid amount");
+return;
+}
+
+var upi = "upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels&am="+amount+"&cu=INR";
+window.location.href = upi;
 }
 
 function openAdmin(){
@@ -229,12 +227,15 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
+
 <input id="name" placeholder="Name">
 <input id="phone" placeholder="Phone">
+
 <select id="trip" onchange="showTripInfo()">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
+
 <p id="tripInfo"></p>
 
 <select id="carType">
@@ -247,6 +248,7 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 
 <input id="pickup" placeholder="Pickup">
 <input id="drop" placeholder="Drop">
+
 <input type="date" id="date">
 <input type="time" id="time">
 
@@ -256,7 +258,12 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <!-- PAYMENT -->
 <div class="box">
 <h2>💰 UPI Payment</h2>
-<p>chauhanshivam2535-1@okicici</p>
+
+<p>UPI ID: chauhanshivam2535-1@okicici</p>
+
+<input id="amount" placeholder="Enter Amount ₹">
+
+<button class="btn" onclick="payUPI()">Pay Now</button>
 </div>
 
 <!-- REVIEW -->
@@ -301,8 +308,8 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <a href="https://wa.me/919898222313" class="booknow">🚕 Book Now</a>
 
 </body>
+
+
+
+  
 </html>
-
-
-
-
