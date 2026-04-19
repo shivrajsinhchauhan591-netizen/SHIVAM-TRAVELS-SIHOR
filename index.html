@@ -7,15 +7,101 @@
 <title>Shivam Travels | Final</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#000;color:#fff;}
-header{background:linear-gradient(90deg,#000,#222,#ffc107);padding:40px;text-align:center;}
-.box{background:#111;margin:15px;padding:20px;border-radius:15px;border:1px solid #ffc107;}
-input,select,textarea{width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;}
-.btn{background:#ffc107;color:#000;padding:10px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;}
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:15px;border-radius:50%;}
-.callbtn{position:fixed;bottom:80px;right:20px;background:red;padding:12px;border-radius:50%;}
-#popup,#adminPanel{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);}
-.popup-box{background:#111;border:1px solid #ffc107;width:90%;max-width:400px;margin:100px auto;padding:20px;border-radius:15px;text-align:center;}
+body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
+
+/* HEADER */
+header{
+background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
+padding:40px;text-align:center;
+}
+h1,h2,h3{font-weight:bold;}
+
+/* BOX */
+.box{
+background:#111c44;
+margin:15px;
+padding:20px;
+border-radius:15px;
+border:1px solid #3b82f6;
+box-shadow:0 0 10px rgba(0,0,0,0.5);
+}
+
+/* INPUT */
+input,select,textarea{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:5px;
+}
+
+/* BUTTON */
+.btn{
+background:#3b82f6;
+color:#fff;
+padding:12px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+width:100%;
+margin-top:5px;
+}
+.btn:hover{background:#2563eb;}
+
+/* FLOAT BUTTONS */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+padding:18px;
+border-radius:50%;
+font-size:20px;
+box-shadow:0 0 10px #000;
+}
+
+.callbtn{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#ef4444;
+padding:15px;
+border-radius:50%;
+font-size:18px;
+}
+
+/* BOOK NOW FLOAT BIG */
+.booknow{
+position:fixed;
+bottom:20px;
+left:20px;
+background:#3b82f6;
+color:#fff;
+padding:15px 20px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 0 10px #000;
+}
+
+/* POPUP */
+#popup,#adminPanel{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+}
+.popup-box{
+background:#111c44;
+border:1px solid #3b82f6;
+width:90%;
+max-width:400px;
+margin:100px auto;
+padding:20px;
+border-radius:15px;
+text-align:center;
+}
 </style>
 
 <script>
@@ -76,46 +162,7 @@ document.getElementById("popupText").innerHTML=
 document.getElementById("popup").style.display="block";
 }
 
-function openAdmin(){
-var pass=prompt("Enter Admin Password");
-if(pass=="1234"){
-loadBookings();
-document.getElementById("adminPanel").style.display="block";
-}else{alert("Wrong Password");}
-}
-
-function loadBookings(){
-var html="";
-bookings.forEach((b,i)=>{
-html+=`<div style="border-bottom:1px solid #555;padding:10px">
-<b>${b.id}</b><br>
-${b.name} (${b.phone})<br>
-${b.trip}<br>
-${b.pickup} ➜ ${b.drop}<br>
-${b.date} | ${b.time}
-<br><button onclick="deleteBooking(${i})">Delete</button>
-</div>`;
-});
-document.getElementById("adminData").innerHTML=html;
-}
-
-function deleteBooking(i){
-bookings.splice(i,1);
-localStorage.setItem("bookings",JSON.stringify(bookings));
-loadBookings();
-}
-
-function addReview(){
-var name=document.getElementById("custName").value;
-var rating=document.getElementById("rating").value;
-var text=document.getElementById("reviewText").value;
-
-document.getElementById("reviewList").innerHTML+=
-"<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
-}
-
 function closePopup(){document.getElementById("popup").style.display="none";}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 </script>
 
 </head>
@@ -125,13 +172,22 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <header>
 <h1>🚕 Shivam Travels</h1>
 <p>Safe, Reliable & Budget-Friendly Travels in Gujarat</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
+
+<!-- WHY CHOOSE US -->
+<div class="box">
+<h2>⭐ Why Choose Us</h2>
+
+<p>✔ 24/7 Service Available</p>
+<p>✔ Safe & Secure Travel</p>
+<p>✔ On Time Pickup Guarantee</p>
+<p>✔ Affordable Price</p>
+
+</div>
 
 <!-- CONTACT -->
 <div class="box" style="text-align:center;">
-<p>SAFE, RELIABLE & BUDGET-FRIENDLY TRAVELS IN GUJARAT FOR 10 YEARS.</p>
-<h3 style="color:#ffc107;">📞 CALL: 9898222313</h3>
+<h3>📞 CALL: 9898222313</h3>
 
 <a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
 <a href="https://wa.me/919898222313" target="_blank">
@@ -150,7 +206,7 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <option>Round Trip</option>
 </select>
 
-<p id="tripInfo" style="color:#ffc107;"></p>
+<p id="tripInfo" style="color:#3b82f6;"></p>
 
 <select id="carType">
 <option>Dzire</option>
@@ -169,56 +225,14 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
 </div>
 
-<!-- ROUTES -->
-<div class="box">
-<h2>📍 Popular Routes & Cars</h2>
+<!-- FLOAT BUTTONS -->
+<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
+<a href="tel:9898222313" class="callbtn">📞</a>
 
-<h3 style="color:#ffc107;">🚗 Premium Cars</h3>
-<p>Innova Crysta | Toyota Innova</p>
-
-<h3 style="color:#ffc107;">🚘 Sedan Cars</h3>
-<p>Dzire | Hyundai Aura</p>
-
-<h3 style="color:#ffc107;">🚙 SUV Cars</h3>
-<p>Ertiga</p>
-
-<hr>
-
-<p>Palitana / Songadh / Sihor / Bhavnagar ➜ Ahmedabad, Gandhinagar, Vadodara, Surat, Rajkot</p>
-
-<p style="color:#ffc107;">✔ One Way | ✔ Pickup & Drop | ✔ Round Trip Available</p>
-</div>
-
-<!-- PAYMENT -->
-<div class="box">
-<h2>💰 Online Payment</h2>
-<p>UPI: chauhanshivam2535-1@okicici</p>
-<a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels">
-<button class="btn">Pay Now</button></a>
-</div>
-
-<!-- REVIEW -->
-<div class="box">
-<h2>⭐ Customer Reviews</h2>
-<input id="custName" placeholder="Name">
-<select id="rating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-</select>
-<textarea id="reviewText"></textarea>
-<button class="btn" onclick="addReview()">Submit</button>
-<div id="reviewList"></div>
-</div>
-
-<!-- ADMIN -->
-<div id="adminPanel">
-<div class="popup-box">
-<h2>📊 Booking History</h2>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
-</div>
+<!-- EXTRA POWERFUL BUTTON -->
+<a href="https://wa.me/919898222313" class="booknow">
+🚕 Book Now
+</a>
 
 <!-- POPUP -->
 <div id="popup">
@@ -233,9 +247,6 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 © Shivam Travels
 </footer>
 
-<!-- FLOAT -->
-<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
-<a href="tel:9898222313" class="callbtn">📞</a>
-
 </body>
 </html>
+
