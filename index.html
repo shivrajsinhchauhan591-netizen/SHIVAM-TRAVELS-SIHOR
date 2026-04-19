@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Ultimate Pro</title>
+<title>Shivam Travels | Final Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
@@ -13,7 +13,8 @@ background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
 
-.logo{width:150px;}
+/* BIG LOGO */
+.logo{width:180px;}
 
 .box{
 background:#111c44;
@@ -23,102 +24,102 @@ border-radius:15px;
 border:1px solid #3b82f6;
 }
 
-input,select,textarea{
-width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
-}
-
 .btn{
-background:#3b82f6;color:#fff;padding:10px;border:none;
+background:#3b82f6;color:#fff;padding:8px;border:none;
 border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;
 }
 .btn:hover{background:#2563eb;}
 
-/* ROUTES */
-.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
-.route{background:#111;padding:15px;border-radius:10px;text-align:center;}
+.routes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+.route{
+background:#111;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
 .route:hover{background:#ffc107;color:#000;}
 
-/* CARS */
-.cars{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.car{background:#111;padding:15px;border-radius:10px;width:280px;}
-.car img{width:100%;height:200px;border-radius:10px;object-fit:cover;}
-.price{font-size:14px;color:#ccc;}
+.cars{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+.car{
+background:#111;
+padding:10px;
+border-radius:10px;
+width:220px;
+}
+.car img{
+width:100%;
+height:130px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.price{font-size:13px;color:#ccc;}
 
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 
-#popup,#adminPanel{
-display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);
-}
-.popup-box{
-background:#111c44;border:1px solid #3b82f6;width:90%;max-width:400px;
-margin:100px auto;padding:20px;border-radius:15px;text-align:center;
+.review-box{
+background:#0d1638;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
 }
 </style>
 
 <script>
-var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-function generateID(){ return "ST" + Math.floor(Math.random()*100000); }
-
-function saveBooking(data){
-bookings.push(data);
-localStorage.setItem("bookings",JSON.stringify(bookings));
-}
-
-function showTripInfo(){
-var trip=document.getElementById("trip").value;
-document.getElementById("tripInfo").innerHTML =
-trip=="Round Trip" ? 
-"🚗 300KM/Day | Driver D.A ₹300 + Toll + Parking + Border Tax Extra" : "";
-}
-
-function sendWhatsApp(){
-var id=generateID();
-
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
-
-saveBooking({id,name,phone,pickup,drop});
-
-var msg="🚕 Booking ID:"+id+"%0AName:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop;
-window.open("https://wa.me/919898222313?text="+msg);
-
-document.getElementById("popupText").innerHTML=id+"<br>"+pickup+" ➜ "+drop;
-document.getElementById("popup").style.display="block";
-}
-
-function bookRoute(pickup,drop){
-var msg="🚕 Route Booking%0A"+pickup+" ➜ "+drop;
+// ROUTE BOOKING
+function bookRoute(pickup, drop){
+var msg="🚕 Shivam Travels Booking%0A"
++"Pickup: "+pickup+"%0A"
++"Drop: "+drop;
 window.open("https://wa.me/919898222313?text="+msg);
 }
 
-function payUPI(){
-var amt=document.getElementById("amount").value;
-window.location.href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
+// PERMANENT REVIEWS
+var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+function saveReviews(){
+localStorage.setItem("reviews", JSON.stringify(reviews));
 }
 
-function openAdmin(){
-if(prompt("Password")=="1234"){
+function displayReviews(){
 var html="";
-bookings.forEach(b=>{
-html+=`<p>${b.id} | ${b.name} | ${b.pickup} ➜ ${b.drop}</p>`;
+reviews.forEach(r=>{
+html+=`<div class="review-box">
+<b>${r.name}</b> ⭐${r.rating}<br>${r.text}
+</div>`;
 });
-document.getElementById("adminData").innerHTML=html;
-document.getElementById("adminPanel").style.display="block";
-}
+document.getElementById("reviewList").innerHTML=html;
 }
 
 function addReview(){
-var n=document.getElementById("rname").value;
-var t=document.getElementById("rtext").value;
-document.getElementById("reviewList").innerHTML+=`<p><b>${n}</b><br>${t}</p>`;
+var name=document.getElementById("rname").value;
+var rating=document.getElementById("rating").value;
+var text=document.getElementById("rtext").value;
+
+if(name=="" || text==""){
+alert("Fill all fields");
+return;
 }
 
-function closePopup(){document.getElementById("popup").style.display="none";}
-function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
+reviews.push({name,rating,text});
+saveReviews();
+displayReviews();
+
+document.getElementById("rname").value="";
+document.getElementById("rtext").value="";
+}
+
+window.onload = displayReviews;
 </script>
 
 </head>
@@ -129,7 +130,6 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <img src="logo.png" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
 
 <!-- WHY -->
@@ -144,6 +144,7 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <!-- ROUTES -->
 <div class="box">
 <h2>🚖 Popular Routes</h2>
+
 <div class="routes">
 
 <div class="route">Palitana → Ahmedabad<br><button class="btn" onclick="bookRoute('Palitana','Ahmedabad')">Book Now</button></div>
@@ -151,94 +152,99 @@ function closeAdmin(){document.getElementById("adminPanel").style.display="none"
 <div class="route">Sihor → Ahmedabad<br><button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
 <div class="route">Bhavnagar → Ahmedabad<br><button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
 
+<div class="route">Palitana → Gandhinagar<br><button class="btn" onclick="bookRoute('Palitana','Gandhinagar')">Book Now</button></div>
+<div class="route">Songadh → Gandhinagar<br><button class="btn" onclick="bookRoute('Songadh','Gandhinagar')">Book Now</button></div>
+<div class="route">Sihor → Gandhinagar<br><button class="btn" onclick="bookRoute('Sihor','Gandhinagar')">Book Now</button></div>
+<div class="route">Bhavnagar → Gandhinagar<br><button class="btn" onclick="bookRoute('Bhavnagar','Gandhinagar')">Book Now</button></div>
+
+<div class="route">Palitana → Vadodara<br><button class="btn" onclick="bookRoute('Palitana','Vadodara')">Book Now</button></div>
+<div class="route">Songadh → Vadodara<br><button class="btn" onclick="bookRoute('Songadh','Vadodara')">Book Now</button></div>
+<div class="route">Sihor → Vadodara<br><button class="btn" onclick="bookRoute('Sihor','Vadodara')">Book Now</button></div>
+<div class="route">Bhavnagar → Vadodara<br><button class="btn" onclick="bookRoute('Bhavnagar','Vadodara')">Book Now</button></div>
+
 <div class="route">Palitana → Surat<br><button class="btn" onclick="bookRoute('Palitana','Surat')">Book Now</button></div>
 <div class="route">Songadh → Surat<br><button class="btn" onclick="bookRoute('Songadh','Surat')">Book Now</button></div>
+<div class="route">Sihor → Surat<br><button class="btn" onclick="bookRoute('Sihor','Surat')">Book Now</button></div>
+<div class="route">Bhavnagar → Surat<br><button class="btn" onclick="bookRoute('Bhavnagar','Surat')">Book Now</button></div>
+
+<div class="route">Palitana → Rajkot<br><button class="btn" onclick="bookRoute('Palitana','Rajkot')">Book Now</button></div>
+<div class="route">Songadh → Rajkot<br><button class="btn" onclick="bookRoute('Songadh','Rajkot')">Book Now</button></div>
+<div class="route">Sihor → Rajkot<br><button class="btn" onclick="bookRoute('Sihor','Rajkot')">Book Now</button></div>
+<div class="route">Bhavnagar → Rajkot<br><button class="btn" onclick="bookRoute('Bhavnagar','Rajkot')">Book Now</button></div>
 
 </div>
+
+<p style="margin-top:15px;">
+Palitana, Songadh, Sihor & Bhavnagar → Gujarat All Cities Taxi Available 🚗
+</p>
+
 </div>
 
 <!-- CARS -->
 <div class="box">
-<h2>🚘 Cars & Pricing</h2>
+<h2>🚘 Our Cars</h2>
+
 <div class="cars">
 
 <div class="car">
 <img src="swift.jpg">
-<p>Dzire / Aura</p>
-<p class="price">₹10/km | 4+1 Seater<br>Driver ₹300 | 300KM/day<br>Toll Extra</p>
+<p><b>Dzire</b></p>
+<p class="price">₹10/km<br>Toll + Parking Extra<br>4+1 Seater<br>Driver ₹300<br>300KM/Day</p>
+</div>
+
+<div class="car">
+<img src="aura.jpg">
+<p><b>Aura</b></p>
+<p class="price">₹10/km<br>Toll + Parking Extra<br>4+1 Seater<br>Driver ₹300<br>300KM/Day</p>
 </div>
 
 <div class="car">
 <img src="ertiga.jpg">
-<p>Ertiga</p>
-<p class="price">₹13/km | 6+1 Seater<br>Driver ₹300 | 300KM/day<br>Toll Extra</p>
+<p><b>Ertiga</b></p>
+<p class="price">₹13/km<br>Toll + Parking Extra<br>6+1 Seater<br>Driver ₹300<br>300KM/Day</p>
 </div>
 
 <div class="car">
 <img src="innova.jpg">
-<p>Innova Crysta</p>
-<p class="price">₹18/km | 6+1 Seater<br>Driver ₹300 | 300KM/day<br>Toll Extra</p>
+<p><b>Innova Crysta</b></p>
+<p class="price">₹18/km<br>Toll + Parking Extra<br>6+1 Seater<br>Driver ₹300<br>300KM/Day</p>
 </div>
 
 </div>
+
 </div>
 
-<!-- BOOK -->
+<!-- REVIEWS -->
 <div class="box">
-<h2>📋 Book Taxi</h2>
+<h2>⭐ Customer Reviews</h2>
 
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
+<input id="rname" placeholder="Name">
 
-<select id="trip" onchange="showTripInfo()">
-<option>One Way</option>
-<option>Round Trip</option>
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
 </select>
 
-<p id="tripInfo"></p>
+<textarea id="rtext" placeholder="Write your review"></textarea>
 
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+<button class="btn" onclick="addReview()">Submit Review</button>
 
-<button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
-</div>
-
-<!-- PAYMENT -->
-<div class="box">
-<h2>💰 UPI Payment</h2>
-<input id="amount" placeholder="Enter Amount">
-<button class="btn" onclick="payUPI()">Pay Now</button>
-</div>
-
-<!-- REVIEW -->
-<div class="box">
-<h2>⭐ Reviews</h2>
-<input id="rname" placeholder="Name">
-<textarea id="rtext"></textarea>
-<button class="btn" onclick="addReview()">Submit</button>
 <div id="reviewList"></div>
 </div>
 
-<!-- ADMIN -->
-<div id="adminPanel">
-<div class="popup-box">
-<h3>Bookings</h3>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
-</div>
-
-<!-- POPUP -->
-<div id="popup">
-<div class="popup-box">
-<h3>Booking Confirmed</h3>
-<p id="popupText"></p>
-<button class="btn" onclick="closePopup()">OK</button>
-</div>
+<!-- CONTACT -->
+<div class="box" style="text-align:center;">
+<h2>📞 Contact</h2>
+<p>9898222313</p>
+<a href="tel:9898222313"><button class="btn">Call Now</button></a>
+<a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
 </div>
 
 <footer style="text-align:center;padding:10px;">
-📞 9898222313 | © Shivam Travels
+© Shivam Travels
 </footer>
 
 <a href="https://wa.me/919898222313" class="whatsapp">💬</a>
