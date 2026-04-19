@@ -4,7 +4,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Final</title>
+<title>Shivam Travels | Final Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
@@ -49,7 +49,7 @@ margin-top:5px;
 }
 .btn:hover{background:#2563eb;}
 
-/* FLOAT BUTTONS */
+/* FLOAT */
 .whatsapp{
 position:fixed;
 bottom:20px;
@@ -58,7 +58,6 @@ background:#25d366;
 padding:18px;
 border-radius:50%;
 font-size:20px;
-box-shadow:0 0 10px #000;
 }
 
 .callbtn{
@@ -68,20 +67,17 @@ right:20px;
 background:#ef4444;
 padding:15px;
 border-radius:50%;
-font-size:18px;
 }
 
-/* BOOK NOW FLOAT BIG */
+/* BIG BUTTON */
 .booknow{
 position:fixed;
 bottom:20px;
 left:20px;
 background:#3b82f6;
-color:#fff;
 padding:15px 20px;
 border-radius:30px;
 font-weight:bold;
-box-shadow:0 0 10px #000;
 }
 
 /* POPUP */
@@ -162,7 +158,46 @@ document.getElementById("popupText").innerHTML=
 document.getElementById("popup").style.display="block";
 }
 
+function openAdmin(){
+var pass=prompt("Enter Admin Password");
+if(pass=="1234"){
+loadBookings();
+document.getElementById("adminPanel").style.display="block";
+}else{alert("Wrong Password");}
+}
+
+function loadBookings(){
+var html="";
+bookings.forEach((b,i)=>{
+html+=`<div style="border-bottom:1px solid #555;padding:10px">
+<b>${b.id}</b><br>
+${b.name} (${b.phone})<br>
+${b.trip}<br>
+${b.pickup} ➜ ${b.drop}<br>
+${b.date} | ${b.time}
+<br><button onclick="deleteBooking(${i})">Delete</button>
+</div>`;
+});
+document.getElementById("adminData").innerHTML=html;
+}
+
+function deleteBooking(i){
+bookings.splice(i,1);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+loadBookings();
+}
+
+function addReview(){
+var name=document.getElementById("custName").value;
+var rating=document.getElementById("rating").value;
+var text=document.getElementById("reviewText").value;
+
+document.getElementById("reviewList").innerHTML+=
+"<p><b>"+name+"</b> ⭐"+rating+"<br>"+text+"</p>";
+}
+
 function closePopup(){document.getElementById("popup").style.display="none";}
+function closeAdmin(){document.getElementById("adminPanel").style.display="none";}
 </script>
 
 </head>
@@ -172,41 +207,35 @@ function closePopup(){document.getElementById("popup").style.display="none";}
 <header>
 <h1>🚕 Shivam Travels</h1>
 <p>Safe, Reliable & Budget-Friendly Travels in Gujarat</p>
+<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
 
-<!-- WHY CHOOSE US -->
+<!-- WHY -->
 <div class="box">
 <h2>⭐ Why Choose Us</h2>
-
-<p>✔ 24/7 Service Available</p>
-<p>✔ Safe & Secure Travel</p>
-<p>✔ On Time Pickup Guarantee</p>
+<p>✔ 24/7 Service</p>
+<p>✔ Safe Travel</p>
+<p>✔ On Time Service</p>
 <p>✔ Affordable Price</p>
-
 </div>
 
 <!-- CONTACT -->
 <div class="box" style="text-align:center;">
 <h3>📞 CALL: 9898222313</h3>
-
-<a href="tel:9898222313"><button class="btn">📞 Call Now</button></a>
-<a href="https://wa.me/919898222313" target="_blank">
-<button class="btn">💬 Book on WhatsApp</button></a>
+<a href="tel:9898222313"><button class="btn">Call Now</button></a>
+<a href="https://wa.me/919898222313"><button class="btn">WhatsApp Booking</button></a>
 </div>
 
 <!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
-
 <input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone Number">
-
+<input id="phone" placeholder="Phone">
 <select id="trip" onchange="showTripInfo()">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
-
-<p id="tripInfo" style="color:#3b82f6;"></p>
+<p id="tripInfo"></p>
 
 <select id="carType">
 <option>Dzire</option>
@@ -216,23 +245,42 @@ function closePopup(){document.getElementById("popup").style.display="none";}
 <option>Innova Crysta</option>
 </select>
 
-<input id="pickup" placeholder="Pickup City">
-<input id="drop" placeholder="Drop City">
-
+<input id="pickup" placeholder="Pickup">
+<input id="drop" placeholder="Drop">
 <input type="date" id="date">
 <input type="time" id="time">
 
 <button class="btn" onclick="sendWhatsApp()">Confirm Booking</button>
 </div>
 
-<!-- FLOAT BUTTONS -->
-<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
-<a href="tel:9898222313" class="callbtn">📞</a>
+<!-- PAYMENT -->
+<div class="box">
+<h2>💰 UPI Payment</h2>
+<p>chauhanshivam2535-1@okicici</p>
+</div>
 
-<!-- EXTRA POWERFUL BUTTON -->
-<a href="https://wa.me/919898222313" class="booknow">
-🚕 Book Now
-</a>
+<!-- REVIEW -->
+<div class="box">
+<h2>⭐ Reviews</h2>
+<input id="custName" placeholder="Name">
+<select id="rating">
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+</select>
+<textarea id="reviewText"></textarea>
+<button class="btn" onclick="addReview()">Submit</button>
+<div id="reviewList"></div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPanel">
+<div class="popup-box">
+<h2>Bookings</h2>
+<div id="adminData"></div>
+<button class="btn" onclick="closeAdmin()">Close</button>
+</div>
+</div>
 
 <!-- POPUP -->
 <div id="popup">
@@ -247,6 +295,14 @@ function closePopup(){document.getElementById("popup").style.display="none";}
 © Shivam Travels
 </footer>
 
+<!-- FLOAT -->
+<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
+<a href="tel:9898222313" class="callbtn">📞</a>
+<a href="https://wa.me/919898222313" class="booknow">🚕 Book Now</a>
+
 </body>
 </html>
+
+
+
 
