@@ -4,11 +4,15 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Final</title>
+<title>Shivam Travels | Final Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
-header{background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);padding:20px;text-align:center;}
+header{
+background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
+padding:20px;text-align:center;
+}
+
 .logo{width:180px;}
 
 .box{
@@ -29,33 +33,81 @@ border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%;
 }
 .btn:hover{background:#2563eb;}
 
-.routes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;}
-.route{background:#111;padding:15px;border-radius:10px;text-align:center;}
+.routes{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:15px;
+}
+.route{
+background:#111;
+padding:15px;
+border-radius:10px;
+text-align:center;
+}
 .route:hover{background:#ffc107;color:#000;}
 
-.cars{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;}
-.car{background:#111;padding:10px;border-radius:10px;width:220px;}
-.car img{width:100%;height:130px;border-radius:10px;object-fit:cover;}
+.cars{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:20px;
+}
+.car{
+background:#111;
+padding:10px;
+border-radius:10px;
+width:220px;
+}
+.car img{
+width:100%;
+height:130px;
+border-radius:10px;
+object-fit:cover;
+}
 
 .price{font-size:13px;color:#ccc;}
 
-.review-box{background:#0d1638;padding:10px;border-radius:8px;margin-top:10px;}
+.review-box{
+background:#0d1638;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+}
 
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
+
+#adminPanel{
+display:none;
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.9);
+overflow:auto;
+}
+
+.admin-box{
+background:#111c44;
+margin:50px auto;
+padding:20px;
+width:90%;
+max-width:500px;
+border-radius:15px;
+}
 </style>
 
 <script>
 
-// ROUTE AUTO FILL
-function bookRoute(pickup, drop){
-document.getElementById("pickup").value=pickup;
-document.getElementById("drop").value=drop;
-window.scrollTo(0,document.body.scrollHeight);
+// BOOKINGS SAVE
+var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+function saveBooking(data){
+bookings.push(data);
+localStorage.setItem("bookings", JSON.stringify(bookings));
 }
 
-// BOOKING
+// BOOKING FUNCTION
 function sendBooking(){
+
 var name=document.getElementById("name").value;
 var phone=document.getElementById("phone").value;
 var pickup=document.getElementById("pickup").value;
@@ -66,33 +118,63 @@ var date=document.getElementById("date").value;
 var time=document.getElementById("time").value;
 
 if(name==""||phone==""||pickup==""||drop==""){
-alert("Fill all required fields");return;
+alert("Fill required details");
+return;
 }
 
-var msg="🚕 Shivam Travels Booking%0A"
-+"Name:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop+"%0ATrip:"+trip+"%0ACar:"+car+"%0ADate:"+date+"%0ATime:"+time;
+saveBooking({name,phone,pickup,drop,trip,car,date,time});
+
+var msg="🚕 Booking%0AName:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop;
 
 window.open("https://wa.me/919898222313?text="+msg);
 }
 
-// UPI PAYMENT
-function payNow(){
-var amt=document.getElementById("amount").value;
-if(amt==""||amt<=0){alert("Enter valid amount");return;}
-window.location.href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
+// ROUTE QUICK BOOK
+function bookRoute(pickup, drop){
+document.getElementById("pickup").value=pickup;
+document.getElementById("drop").value=drop;
+window.scrollTo(0,document.body.scrollHeight);
 }
 
-// REVIEWS (PERMANENT)
-var reviews=JSON.parse(localStorage.getItem("reviews"))||[
-{name:"CHAUHAN SHIVAM",rating:"5",text:"BEST TAXI SERVICE, VERY AFFORDABLE PRICE & CLEAN CAR"}
-];
+// ADMIN PANEL
+function openAdmin(){
+var pass=prompt("Enter Password");
+if(pass=="1234"){
+loadBookings();
+document.getElementById("adminPanel").style.display="block";
+}
+}
 
-function saveReviews(){localStorage.setItem("reviews",JSON.stringify(reviews));}
+function loadBookings(){
+var html="";
+bookings.forEach((b,i)=>{
+html+=`<div style="border-bottom:1px solid #555;padding:10px">
+<b>${b.name}</b> (${b.phone})<br>
+${b.pickup} ➜ ${b.drop}<br>
+${b.trip} | ${b.car}<br>
+${b.date} ${b.time}
+</div>`;
+});
+document.getElementById("adminData").innerHTML=html;
+}
+
+function closeAdmin(){
+document.getElementById("adminPanel").style.display="none";
+}
+
+// REVIEWS
+var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+function saveReviews(){
+localStorage.setItem("reviews", JSON.stringify(reviews));
+}
 
 function displayReviews(){
 var html="";
 reviews.forEach(r=>{
-html+=`<div class="review-box"><b>${r.name}</b> ⭐${r.rating}<br>${r.text}</div>`;
+html+=`<div class="review-box">
+<b>${r.name}</b> ⭐${r.rating}<br>${r.text}
+</div>`;
 });
 document.getElementById("reviewList").innerHTML=html;
 }
@@ -102,7 +184,7 @@ var name=document.getElementById("rname").value;
 var rating=document.getElementById("rating").value;
 var text=document.getElementById("rtext").value;
 
-if(name==""||text==""){alert("Fill all fields");return;}
+if(name==""||text==""){alert("Fill all");return;}
 
 reviews.push({name,rating,text});
 saveReviews();
@@ -110,6 +192,15 @@ displayReviews();
 
 document.getElementById("rname").value="";
 document.getElementById("rtext").value="";
+}
+
+// PAYMENT
+function payNow(){
+var amt=document.getElementById("amount").value;
+if(amt==""||amt<=0){alert("Enter valid amount");return;}
+
+var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
+window.location.href=upi;
 }
 
 window.onload=displayReviews;
@@ -124,6 +215,7 @@ window.onload=displayReviews;
 <img src="logo.png" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
+<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
 
 <!-- WHY -->
@@ -131,54 +223,50 @@ window.onload=displayReviews;
 <h2>⭐ Why Choose Us</h2>
 <p>✔ 24/7 Service</p>
 <p>✔ Safe Drivers</p>
-<p>✔ Affordable Price</p>
 <p>✔ Clean Cars</p>
+<p>✔ Affordable Price</p>
 </div>
 
 <!-- ROUTES -->
 <div class="box">
 <h2>🚖 Popular Routes</h2>
+
 <div class="routes">
+
 <div class="route">Palitana → Ahmedabad<button class="btn" onclick="bookRoute('Palitana','Ahmedabad')">Book Now</button></div>
 <div class="route">Songadh → Ahmedabad<button class="btn" onclick="bookRoute('Songadh','Ahmedabad')">Book Now</button></div>
 <div class="route">Sihor → Ahmedabad<button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
 <div class="route">Bhavnagar → Ahmedabad<button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
+
+<div class="route">Palitana → Gandhinagar<button class="btn" onclick="bookRoute('Palitana','Gandhinagar')">Book Now</button></div>
+<div class="route">Songadh → Gandhinagar<button class="btn" onclick="bookRoute('Songadh','Gandhinagar')">Book Now</button></div>
+
 </div>
+
+<p>
+Palitana → Songadh → Sihor → Bhavnagar to Ahmedabad, Gandhinagar, Vadodara, Surat, Rajkot Service Available 🚗
+</p>
+
+<p>
+Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip Available
+</p>
+
 </div>
 
 <!-- CARS -->
 <div class="box">
 <h2>🚘 Our Cars</h2>
+
 <div class="cars">
-
-<div class="car">
-<img src="swift.jpg">
-<p><b>Dzire</b></p>
-<p class="price">₹10/km | 4+1 | Driver ₹300 | 300KM/day</p>
-</div>
-
-<div class="car">
-<img src="aura.jpg">
-<p><b>Aura</b></p>
-<p class="price">₹10/km | 4+1 | Driver ₹300 | 300KM/day</p>
-</div>
-
-<div class="car">
-<img src="ertiga.jpg">
-<p><b>Ertiga</b></p>
-<p class="price">₹13/km | 6+1 | Driver ₹300 | 300KM/day</p>
-</div>
-
-<div class="car">
-<img src="innova.jpg">
-<p><b>Innova Crysta</b></p>
-<p class="price">₹18/km | 6+1 | Driver ₹300 | 300KM/day</p>
+<div class="car"><img src="swift.jpg"><p>Dzire<br>₹10/km</p></div>
+<div class="car"><img src="aura.jpg"><p>Aura<br>₹10/km</p></div>
+<div class="car"><img src="ertiga.jpg"><p>Ertiga<br>₹13/km</p></div>
+<div class="car"><img src="innova.jpg"><p>Innova<br>₹18/km</p></div>
 </div>
 
 </div>
-</div>
 
-<!-- BOOK TAXI -->
+<!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
@@ -207,7 +295,7 @@ window.onload=displayReviews;
 
 <!-- PAYMENT -->
 <div class="box">
-<h2>💰 Online Payment (UPI)</h2>
+<h2>💰 Online Payment</h2>
 <p>UPI ID: chauhanshivam2535-1@okicici</p>
 <input id="amount" placeholder="Enter Amount ₹">
 <button class="btn" onclick="payNow()">Pay Now</button>
@@ -218,6 +306,7 @@ window.onload=displayReviews;
 <h2>⭐ Customer Reviews</h2>
 
 <input id="rname" placeholder="Name">
+
 <select id="rating">
 <option value="5">⭐⭐⭐⭐⭐</option>
 <option value="4">⭐⭐⭐⭐</option>
@@ -226,8 +315,7 @@ window.onload=displayReviews;
 <option value="1">⭐</option>
 </select>
 
-<textarea id="rtext" placeholder="Write review"></textarea>
-
+<textarea id="rtext"></textarea>
 <button class="btn" onclick="addReview()">Submit Review</button>
 
 <div id="reviewList"></div>
@@ -241,6 +329,15 @@ window.onload=displayReviews;
 <a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
 </div>
 
+<!-- ADMIN PANEL -->
+<div id="adminPanel">
+<div class="admin-box">
+<h2>Bookings</h2>
+<div id="adminData"></div>
+<button class="btn" onclick="closeAdmin()">Close</button>
+</div>
+</div>
+
 <footer style="text-align:center;padding:10px;">
 © Shivam Travels
 </footer>
@@ -249,4 +346,5 @@ window.onload=displayReviews;
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
+</html>
 </html>
