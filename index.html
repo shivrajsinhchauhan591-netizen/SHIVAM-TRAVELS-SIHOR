@@ -1,350 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Final Pro</title>
+<title>Shivam Travels Sihor</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
+body{
+margin:0;font-family:Arial;
+background:#0a0f2c;color:#fff;
+}
+
+/* HEADER */
 header{
-background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
-padding:20px;text-align:center;
+background:linear-gradient(90deg,#000,#222,#ffc107);
+padding:15px;text-align:center;
+font-size:22px;font-weight:bold;
 }
 
-.logo{width:180px;}
-
-.box{
-background:#111c44;
-margin:15px;
-padding:20px;
-border-radius:15px;
-border:1px solid #3b82f6;
-}
-
-input,select,textarea{
-width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
-}
-
-.btn{
-background:#3b82f6;color:#fff;padding:10px;border:none;
-border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%;
-}
-.btn:hover{background:#2563eb;}
-
-.routes{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
-}
-.route{
-background:#111;
-padding:15px;
-border-radius:10px;
+/* HERO */
+.hero{
 text-align:center;
+padding:50px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
 }
-.route:hover{background:#ffc107;color:#000;}
 
+/* BUTTON */
+.btn{
+background:#ffc107;color:#000;
+padding:10px 20px;border:none;
+border-radius:5px;cursor:pointer;
+font-weight:bold;
+}
+
+/* CAR SECTION */
 .cars{
-display:flex;
-flex-wrap:wrap;
+display:flex;flex-wrap:wrap;
 justify-content:center;
-gap:20px;
 }
-.car{
-background:#111;
-padding:10px;
-border-radius:10px;
-width:220px;
+.card{
+background:#111;margin:10px;
+padding:15px;border-radius:10px;
+width:250px;text-align:center;
+transition:0.3s;
 }
-.car img{
-width:100%;
-height:130px;
-border-radius:10px;
-object-fit:cover;
-}
+.card:hover{transform:scale(1.05)}
 
-.price{font-size:13px;color:#ccc;}
-
-.review-box{
-background:#0d1638;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
-}
-
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
-.callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
-
-#adminPanel{
+/* FORM */
+form{
 display:none;
 position:fixed;
-top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.9);
-overflow:auto;
+top:10%;left:50%;
+transform:translateX(-50%);
+background:#111;padding:20px;
+border-radius:10px;
+z-index:1000;
+}
+input,select{
+width:100%;padding:8px;margin:5px 0;
 }
 
-.admin-box{
-background:#111c44;
-margin:50px auto;
+/* WHATSAPP */
+.whatsapp{
+position:fixed;bottom:20px;right:20px;
+background:green;padding:15px;
+border-radius:50%;cursor:pointer;
+}
+
+/* ADMIN PANEL */
+#admin{
+display:none;
 padding:20px;
-width:90%;
-max-width:500px;
-border-radius:15px;
+}
+.booking{
+background:#222;margin:5px;padding:10px;
+border-radius:5px;
 }
 </style>
-
-<script>
-
-// BOOKINGS SAVE
-var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-function saveBooking(data){
-bookings.push(data);
-localStorage.setItem("bookings", JSON.stringify(bookings));
-}
-
-// BOOKING FUNCTION
-function sendBooking(){
-
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
-var trip=document.getElementById("trip").value;
-var car=document.getElementById("car").value;
-var date=document.getElementById("date").value;
-var time=document.getElementById("time").value;
-
-if(name==""||phone==""||pickup==""||drop==""){
-alert("Fill required details");
-return;
-}
-
-saveBooking({name,phone,pickup,drop,trip,car,date,time});
-
-var msg="🚕 Booking%0AName:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop;
-
-window.open("https://wa.me/919898222313?text="+msg);
-}
-
-// ROUTE QUICK BOOK
-function bookRoute(pickup, drop){
-document.getElementById("pickup").value=pickup;
-document.getElementById("drop").value=drop;
-window.scrollTo(0,document.body.scrollHeight);
-}
-
-// ADMIN PANEL
-function openAdmin(){
-var pass=prompt("Enter Password");
-if(pass=="1234"){
-loadBookings();
-document.getElementById("adminPanel").style.display="block";
-}
-}
-
-function loadBookings(){
-var html="";
-bookings.forEach((b,i)=>{
-html+=`<div style="border-bottom:1px solid #555;padding:10px">
-<b>${b.name}</b> (${b.phone})<br>
-${b.pickup} ➜ ${b.drop}<br>
-${b.trip} | ${b.car}<br>
-${b.date} ${b.time}
-</div>`;
-});
-document.getElementById("adminData").innerHTML=html;
-}
-
-function closeAdmin(){
-document.getElementById("adminPanel").style.display="none";
-}
-
-// REVIEWS
-var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-function saveReviews(){
-localStorage.setItem("reviews", JSON.stringify(reviews));
-}
-
-function displayReviews(){
-var html="";
-reviews.forEach(r=>{
-html+=`<div class="review-box">
-<b>${r.name}</b> ⭐${r.rating}<br>${r.text}
-</div>`;
-});
-document.getElementById("reviewList").innerHTML=html;
-}
-
-function addReview(){
-var name=document.getElementById("rname").value;
-var rating=document.getElementById("rating").value;
-var text=document.getElementById("rtext").value;
-
-if(name==""||text==""){alert("Fill all");return;}
-
-reviews.push({name,rating,text});
-saveReviews();
-displayReviews();
-
-document.getElementById("rname").value="";
-document.getElementById("rtext").value="";
-}
-
-// PAYMENT
-function payNow(){
-var amt=document.getElementById("amount").value;
-if(amt==""||amt<=0){alert("Enter valid amount");return;}
-
-var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
-window.location.href=upi;
-}
-
-window.onload=displayReviews;
-
-</script>
-
 </head>
 
 <body>
 
-<header>
-<img src="logo.png" class="logo">
-<h1>🚕 Shivam Travels</h1>
-<p>Safe & Reliable Taxi Service</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
-</header>
+<header>🚖 Shivam Travels Sihor</header>
 
-<!-- WHY -->
-<div class="box">
-<h2>⭐ Why Choose Us</h2>
-<p>✔ 24/7 Service</p>
-<p>✔ Safe Drivers</p>
-<p>✔ Clean Cars</p>
-<p>✔ Affordable Price</p>
+<div class="hero">
+<h1>Best Taxi Service in Sihor</h1>
+<p>Safe • Fast • Affordable</p>
+<button class="btn" onclick="openForm()">Book Now</button>
+</div>
+
+<!-- CAR SECTION -->
+<div class="cars">
+
+<div class="card">
+<h3>Swift Dzire</h3>
+<p>₹12/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹300</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card">
+<h3>Hyundai Aura</h3>
+<p>₹13/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹300</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card">
+<h3>Ertiga</h3>
+<p>₹16/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card">
+<h3>Innova Crysta</h3>
+<p>₹20/km<br>7+1 Seats | AC<br>300KM/day<br>D.A ₹500</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
 </div>
 
 <!-- ROUTES -->
-<div class="box">
-<h2>🚖 Popular Routes</h2>
-
-<div class="routes">
-
-<div class="route">Palitana → Ahmedabad<button class="btn" onclick="bookRoute('Palitana','Ahmedabad')">Book Now</button></div>
-<div class="route">Songadh → Ahmedabad<button class="btn" onclick="bookRoute('Songadh','Ahmedabad')">Book Now</button></div>
-<div class="route">Sihor → Ahmedabad<button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
-<div class="route">Bhavnagar → Ahmedabad<button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
-
-<div class="route">Palitana → Gandhinagar<button class="btn" onclick="bookRoute('Palitana','Gandhinagar')">Book Now</button></div>
-<div class="route">Songadh → Gandhinagar<button class="btn" onclick="bookRoute('Songadh','Gandhinagar')">Book Now</button></div>
-
+<div class="hero">
+<h2>Popular Routes</h2>
+<p>Sihor → Ahmedabad | Surat | Rajkot | Bhavnagar</p>
 </div>
 
-<p>
-Palitana → Songadh → Sihor → Bhavnagar to Ahmedabad, Gandhinagar, Vadodara, Surat, Rajkot Service Available 🚗
-</p>
+<!-- BOOKING FORM -->
+<form id="bookingForm">
+<h3>Book Taxi</h3>
 
-<p>
-Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip Available
-</p>
+<input type="text" id="name" placeholder="Name" required>
+<input type="number" id="mobile" placeholder="Mobile" required>
+<input type="text" id="pickup" placeholder="Pickup Location">
+<input type="text" id="drop" placeholder="Drop Location">
 
-</div>
-
-<!-- CARS -->
-<div class="box">
-<h2>🚘 Our Cars</h2>
-
-<div class="cars">
-<div class="car"><img src="swift.jpg"><p>Dzire<br>₹10/km</p></div>
-<div class="car"><img src="aura.jpg"><p>Aura<br>₹10/km</p></div>
-<div class="car"><img src="ertiga.jpg"><p>Ertiga<br>₹13/km</p></div>
-<div class="car"><img src="innova.jpg"><p>Innova<br>₹18/km</p></div>
-</div>
-
-</div>
-
-<!-- BOOK -->
-<div class="box">
-<h2>📋 Book Taxi</h2>
-
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+<input type="date" id="date">
+<input type="time" id="time">
 
 <select id="trip">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
 
-<select id="car">
-<option>Dzire</option>
-<option>Aura</option>
-<option>Ertiga</option>
-<option>Innova</option>
-</select>
-
-<input type="date" id="date">
-<input type="time" id="time">
-
-<button class="btn" onclick="sendBooking()">Confirm Booking</button>
-</div>
+<button type="button" class="btn" onclick="submitBooking()">Submit</button>
+<button type="button" onclick="closeForm()">Close</button>
+</form>
 
 <!-- PAYMENT -->
-<div class="box">
-<h2>💰 Online Payment</h2>
+<div class="hero">
+<h2>UPI Payment</h2>
 <p>UPI ID: chauhanshivam2535-1@okicici</p>
-<input id="amount" placeholder="Enter Amount ₹">
-<button class="btn" onclick="payNow()">Pay Now</button>
+<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=chauhanshivam2535-1@okicici">
 </div>
 
 <!-- REVIEWS -->
-<div class="box">
-<h2>⭐ Customer Reviews</h2>
-
-<input id="rname" placeholder="Name">
-
-<select id="rating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
-
-<textarea id="rtext"></textarea>
-<button class="btn" onclick="addReview()">Submit Review</button>
-
-<div id="reviewList"></div>
+<div class="hero">
+<h2>Customer Reviews</h2>
+<p>⭐⭐⭐⭐⭐ Excellent Service!</p>
+<p>⭐⭐⭐⭐⭐ Very Comfortable Ride</p>
+<p>⭐⭐⭐⭐⭐ On Time Pickup</p>
 </div>
 
 <!-- CONTACT -->
-<div class="box" style="text-align:center;">
-<h2>📞 Contact</h2>
-<p>9898222313</p>
-<a href="tel:9898222313"><button class="btn">Call Now</button></a>
-<a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
+<div class="hero">
+<h2>Contact</h2>
+<p>📞 9898222313</p>
+</div>
+
+<!-- ADMIN LOGIN -->
+<div class="hero">
+<button class="btn" onclick="adminLogin()">Admin Panel</button>
 </div>
 
 <!-- ADMIN PANEL -->
-<div id="adminPanel">
-<div class="admin-box">
-<h2>Bookings</h2>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
+<div id="admin">
+<h2>All Bookings</h2>
+<div id="list"></div>
 </div>
 
-<footer style="text-align:center;padding:10px;">
-© Shivam Travels
-</footer>
+<!-- WHATSAPP -->
+<div class="whatsapp" onclick="whatsapp()">💬</div>
 
-<a href="https://wa.me/919898222313" class="whatsapp">💬</a>
-<a href="tel:9898222313" class="callbtn">📞</a>
+<script>
+function openForm(){
+document.getElementById("bookingForm").style.display="block";
+}
+
+function closeForm(){
+document.getElementById("bookingForm").style.display="none";
+}
+
+function submitBooking(){
+let name=document.getElementById("name").value;
+let mobile=document.getElementById("mobile").value;
+let pickup=document.getElementById("pickup").value;
+let drop=document.getElementById("drop").value;
+
+let booking={
+name,mobile,pickup,drop
+};
+
+let data=JSON.parse(localStorage.getItem("bookings"))||[];
+data.push(booking);
+localStorage.setItem("bookings",JSON.stringify(data));
+
+alert("Booking Confirmed ✅");
+
+let msg=`Taxi Booking:
+Name:${name}
+Mobile:${mobile}
+Pickup:${pickup}
+Drop:${drop}`;
+
+window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
+
+closeForm();
+}
+
+function whatsapp(){
+window.open("https://wa.me/919898222313");
+}
+
+/* ADMIN */
+function adminLogin(){
+let pass=prompt("Enter Password");
+if(pass=="1234"){
+document.getElementById("admin").style.display="block";
+showBookings();
+}
+}
+
+function showBookings(){
+let data=JSON.parse(localStorage.getItem("bookings"))||[];
+let list=document.getElementById("list");
+list.innerHTML="";
+
+data.forEach((b,i)=>{
+list.innerHTML+=`
+<div class="booking">
+${b.name} | ${b.mobile} | ${b.pickup} → ${b.drop}
+<button onclick="deleteBooking(${i})">Delete</button>
+</div>`;
+});
+}
+
+function deleteBooking(i){
+let data=JSON.parse(localStorage.getItem("bookings"));
+data.splice(i,1);
+localStorage.setItem("bookings",JSON.stringify(data));
+showBookings();
+}
+</script>
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivam Travels Sihor</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#0a0f2c,#000);
+color:#fff;
+overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+position:sticky;top:0;
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(10px);
+padding:15px;text-align:center;
+font-size:22px;
+}
+
+/* HERO */
+.hero{
+text-align:center;
+padding:80px 20px;
+}
+.hero h1{
+font-size:40px;
+background:linear-gradient(#fff,#ffc107);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+/* BUTTON */
+.btn{
+background:#ffc107;
+color:#000;
+padding:12px 25px;
+border:none;border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+}
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 20px #ffc107;
+}
+
+/* CAR CARDS */
+.cars{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+padding:20px;
+}
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+margin:15px;
+padding:20px;
+border-radius:15px;
+width:260px;
+text-align:center;
+transition:0.4s;
+}
+.card:hover{
+transform:translateY(-10px) scale(1.05);
+box-shadow:0 0 25px #ffc107;
+}
+
+/* FORM POPUP */
+form{
+display:none;
+position:fixed;
+top:50%;left:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,0.9);
+padding:20px;
+border-radius:15px;
+width:300px;
+z-index:999;
+}
+input,select{
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;border-radius:5px;
+}
+
+/* WHATSAPP */
+.whatsapp{
+position:fixed;
+bottom:20px;right:20px;
+background:#25D366;
+padding:15px;
+border-radius:50%;
+cursor:pointer;
+box-shadow:0 0 15px #25D366;
+}
+
+/* ANIMATION */
+.fade{
+opacity:0;
+transform:translateY(30px);
+transition:1s;
+}
+.fade.show{
+opacity:1;
+transform:translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<header>🚖 Shivam Travels Sihor</header>
+
+<div class="hero fade">
+<h1>Premium Taxi Service</h1>
+<p>Safe • Fast • Luxury</p>
+<button class="btn" onclick="openForm()">Book Now</button>
+</div>
+
+<div class="cars">
+
+<div class="card fade">
+<h3>Swift Dzire</h3>
+<p>₹12/km | 4+1 | AC</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card fade">
+<h3>Hyundai Aura</h3>
+<p>₹13/km | 4+1 | AC</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card fade">
+<h3>Ertiga</h3>
+<p>₹16/km | 6+1 | AC</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+<div class="card fade">
+<h3>Innova</h3>
+<p>₹20/km | 7+1 | AC</p>
+<button class="btn" onclick="openForm()">Book</button>
+</div>
+
+</div>
+
+<form id="form">
+<h3>Book Taxi</h3>
+<input placeholder="Name">
+<input placeholder="Mobile">
+<input placeholder="Pickup">
+<input placeholder="Drop">
+<input type="date">
+<input type="time">
+<select>
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
+<button class="btn" onclick="submit()">Submit</button>
+<button onclick="closeForm()">Close</button>
+</form>
+
+<div class="whatsapp" onclick="whatsapp()">💬</div>
+
+<script>
+function openForm(){
+document.getElementById("form").style.display="block";
+}
+function closeForm(){
+document.getElementById("form").style.display="none";
+}
+function submit(){
+alert("Booking Confirmed ✅");
+}
+function whatsapp(){
+window.open("https://wa.me/919898222313");
+}
+
+/* SCROLL ANIMATION */
+let items=document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{
+items.forEach(el=>{
+let pos=el.getBoundingClientRect().top;
+if(pos<window.innerHeight-100){
+el.classList.add('show');
+}
+});
+});
+</script>
+
+</body>
 </html>
