@@ -1,14 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shivam Travels | Final Pro</title>
+
+<!-- SEO -->
+<title>Taxi Service in Sihor | Shivam Travels</title>
+<meta name="description" content="Best taxi service in Sihor, Bhavnagar, Palitana. Book cab online Shivam Travels.">
+<meta name="keywords" content="taxi sihor, cab booking sihor, bhavnagar taxi">
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
+
 header{
 background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
@@ -17,20 +21,22 @@ padding:20px;text-align:center;
 .logo{width:180px;}
 
 .box{
-background:#111c44;
+background:rgba(17,28,68,0.7);
 margin:15px;
 padding:20px;
 border-radius:15px;
 border:1px solid #3b82f6;
+backdrop-filter:blur(10px);
 }
 
 input,select,textarea{
-width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
+width:100%;padding:12px;margin:6px 0;border:none;border-radius:6px;
 }
 
 .btn{
-background:#3b82f6;color:#fff;padding:10px;border:none;
-border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%;
+background:#3b82f6;color:#fff;padding:12px;border:none;
+border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;width:100%;
+font-size:15px;
 }
 .btn:hover{background:#2563eb;}
 
@@ -39,13 +45,15 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
 }
+
 .route{
 background:#111;
 padding:15px;
 border-radius:10px;
 text-align:center;
+transition:0.3s;
 }
-.route:hover{background:#ffc107;color:#000;}
+.route:hover{background:#ffc107;color:#000;transform:scale(1.05);}
 
 .cars{
 display:flex;
@@ -53,15 +61,17 @@ flex-wrap:wrap;
 justify-content:center;
 gap:20px;
 }
+
 .car{
 background:#111;
 padding:10px;
 border-radius:10px;
-width:220px;
+width:230px;
 }
+
 .car img{
 width:100%;
-height:130px;
+height:140px;
 border-radius:10px;
 object-fit:cover;
 }
@@ -75,7 +85,7 @@ border-radius:8px;
 margin-top:10px;
 }
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;font-size:20px;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 
 #adminPanel{
@@ -98,7 +108,6 @@ border-radius:15px;
 
 <script>
 
-// BOOKINGS SAVE
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
 function saveBooking(data){
@@ -106,49 +115,56 @@ bookings.push(data);
 localStorage.setItem("bookings", JSON.stringify(bookings));
 }
 
-// BOOKING FUNCTION
 function sendBooking(){
 
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
-var trip=document.getElementById("trip").value;
-var car=document.getElementById("car").value;
-var date=document.getElementById("date").value;
-var time=document.getElementById("time").value;
+var name=nameEl.value;
+var phone=phoneEl.value;
+var pickup=pickupEl.value;
+var drop=dropEl.value;
+var trip=tripEl.value;
+var car=carEl.value;
+var date=dateEl.value;
+var time=timeEl.value;
 
 if(name==""||phone==""||pickup==""||drop==""){
-alert("Fill required details");
+alert("Please fill all details");
 return;
 }
 
 saveBooking({name,phone,pickup,drop,trip,car,date,time});
 
-var msg="🚕 Booking%0AName:"+name+"%0APhone:"+phone+"%0APickup:"+pickup+"%0ADrop:"+drop;
+alert("✅ Booking Confirmed!");
+
+var msg=`🚕 *New Booking*%0A
+Name: ${name}%0A
+Phone: ${phone}%0A
+From: ${pickup}%0A
+To: ${drop}%0A
+Trip: ${trip}%0A
+Car: ${car}%0A
+Date: ${date}%0A
+Time: ${time}`;
 
 window.open("https://wa.me/919898222313?text="+msg);
 }
 
-// ROUTE QUICK BOOK
 function bookRoute(pickup, drop){
-document.getElementById("pickup").value=pickup;
-document.getElementById("drop").value=drop;
+pickupEl.value=pickup;
+dropEl.value=drop;
 window.scrollTo(0,document.body.scrollHeight);
 }
 
-// ADMIN PANEL
 function openAdmin(){
 var pass=prompt("Enter Password");
 if(pass=="1234"){
 loadBookings();
-document.getElementById("adminPanel").style.display="block";
+adminPanel.style.display="block";
 }
 }
 
 function loadBookings(){
 var html="";
-bookings.forEach((b,i)=>{
+bookings.forEach(b=>{
 html+=`<div style="border-bottom:1px solid #555;padding:10px">
 <b>${b.name}</b> (${b.phone})<br>
 ${b.pickup} ➜ ${b.drop}<br>
@@ -156,19 +172,15 @@ ${b.trip} | ${b.car}<br>
 ${b.date} ${b.time}
 </div>`;
 });
-document.getElementById("adminData").innerHTML=html;
+adminData.innerHTML=html;
 }
 
 function closeAdmin(){
-document.getElementById("adminPanel").style.display="none";
+adminPanel.style.display="none";
 }
 
-// REVIEWS
+/* REVIEWS */
 var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-function saveReviews(){
-localStorage.setItem("reviews", JSON.stringify(reviews));
-}
 
 function displayReviews(){
 var html="";
@@ -177,31 +189,22 @@ html+=`<div class="review-box">
 <b>${r.name}</b> ⭐${r.rating}<br>${r.text}
 </div>`;
 });
-document.getElementById("reviewList").innerHTML=html;
+reviewList.innerHTML=html;
 }
 
 function addReview(){
-var name=document.getElementById("rname").value;
-var rating=document.getElementById("rating").value;
-var text=document.getElementById("rtext").value;
-
-if(name==""||text==""){alert("Fill all");return;}
-
-reviews.push({name,rating,text});
-saveReviews();
+if(rname.value==""||rtext.value==""){alert("Fill all");return;}
+reviews.push({name:rname.value,rating:rating.value,text:rtext.value});
+localStorage.setItem("reviews", JSON.stringify(reviews));
 displayReviews();
-
-document.getElementById("rname").value="";
-document.getElementById("rtext").value="";
+rname.value=""; rtext.value="";
 }
 
-// PAYMENT
+/* PAYMENT */
 function payNow(){
-var amt=document.getElementById("amount").value;
+var amt=amount.value;
 if(amt==""||amt<=0){alert("Enter valid amount");return;}
-
-var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
-window.location.href=upi;
+window.location.href=`upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am=${amt}&cu=INR`;
 }
 
 window.onload=displayReviews;
@@ -219,77 +222,62 @@ window.onload=displayReviews;
 <button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
 
-<!-- WHY -->
-<div class="box">
-<h2>⭐ Why Choose Us</h2>
-<p>✔ 24/7 Service</p>
-<p>✔ Safe Drivers</p>
-<p>✔ Clean Cars</p>
-<p>✔ Affordable Price</p>
-</div>
-
-<!-- ROUTES -->
-<div class="box">
-<h2>🚖 Popular Routes</h2>
-
-<div class="routes">
-
-<div class="route">Palitana → Ahmedabad<button class="btn" onclick="bookRoute('Palitana','Ahmedabad')">Book Now</button></div>
-<div class="route">Songadh → Ahmedabad<button class="btn" onclick="bookRoute('Songadh','Ahmedabad')">Book Now</button></div>
-<div class="route">Sihor → Ahmedabad<button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
-<div class="route">Bhavnagar → Ahmedabad<button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
-
-<div class="route">Palitana → Gandhinagar<button class="btn" onclick="bookRoute('Palitana','Gandhinagar')">Book Now</button></div>
-<div class="route">Songadh → Gandhinagar<button class="btn" onclick="bookRoute('Songadh','Gandhinagar')">Book Now</button></div>
-
-</div>
-
-<p>
-Palitana → Songadh → Sihor → Bhavnagar to Ahmedabad, Gandhinagar, Vadodara, Surat, Rajkot Service Available 🚗
-</p>
-
-<p>
-Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip Available
-</p>
-
-</div>
-
 <!-- CARS -->
 <div class="box">
 <h2>🚘 Our Cars</h2>
 
 <div class="cars">
-<div class="car"><img src="swift.jpg"><p>Dzire<br>₹10/km</p></div>
-<div class="car"><img src="aura.jpg"><p>Aura<br>₹10/km</p></div>
-<div class="car"><img src="ertiga.jpg"><p>Ertiga<br>₹13/km</p></div>
-<div class="car"><img src="innova.jpg"><p>Innova<br>₹18/km</p></div>
+
+<div class="car">
+<img src="swift.jpg">
+<p><b>Swift Dzire</b><br>₹10/km</p>
+<p class="price">4 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
 </div>
 
+<div class="car">
+<img src="aura.jpg">
+<p><b>Hyundai Aura</b><br>₹10/km</p>
+<p class="price">4 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+</div>
+
+<div class="car">
+<img src="ertiga.jpg">
+<p><b>Ertiga</b><br>₹13/km</p>
+<p class="price">6 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+</div>
+
+<div class="car">
+<img src="innova.jpg">
+<p><b>Innova</b><br>₹18/km</p>
+<p class="price">7 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+</div>
+
+</div>
 </div>
 
 <!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+<input id="nameEl" placeholder="Name">
+<input id="phoneEl" placeholder="Phone">
+<input id="pickupEl" placeholder="Pickup">
+<input id="dropEl" placeholder="Drop">
 
-<select id="trip">
+<select id="tripEl">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
 
-<select id="car">
+<select id="carEl">
 <option>Dzire</option>
 <option>Aura</option>
 <option>Ertiga</option>
 <option>Innova</option>
 </select>
 
-<input type="date" id="date">
-<input type="time" id="time">
+<input type="date" id="dateEl">
+<input type="time" id="timeEl">
 
 <button class="btn" onclick="sendBooking()">Confirm Booking</button>
 </div>
@@ -297,7 +285,7 @@ Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip 
 <!-- PAYMENT -->
 <div class="box">
 <h2>💰 Online Payment</h2>
-<p>UPI ID: chauhanshivam2535-1@okicici</p>
+<p>UPI: chauhanshivam2535-1@okicici</p>
 <input id="amount" placeholder="Enter Amount ₹">
 <button class="btn" onclick="payNow()">Pay Now</button>
 </div>
@@ -307,7 +295,6 @@ Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip 
 <h2>⭐ Customer Reviews</h2>
 
 <input id="rname" placeholder="Name">
-
 <select id="rating">
 <option value="5">⭐⭐⭐⭐⭐</option>
 <option value="4">⭐⭐⭐⭐</option>
@@ -322,23 +309,6 @@ Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip 
 <div id="reviewList"></div>
 </div>
 
-<!-- CONTACT -->
-<div class="box" style="text-align:center;">
-<h2>📞 Contact</h2>
-<p>9898222313</p>
-<a href="tel:9898222313"><button class="btn">Call Now</button></a>
-<a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="adminPanel">
-<div class="admin-box">
-<h2>Bookings</h2>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
-</div>
-
 <footer style="text-align:center;padding:10px;">
 © Shivam Travels
 </footer>
@@ -347,5 +317,4 @@ Palitana, Songadh, Sihor & Bhavnagar to Gujarat All Cities One Way / Round Trip 
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
-</html>
 </html>
