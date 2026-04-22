@@ -8,38 +8,64 @@
 <title>Taxi Service in Sihor | Shivam Travels</title>
 
 <style>
-body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
-
-header{
-background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
-padding:20px;text-align:center;
+body{
+margin:0;
+font-family:Arial;
+background:#0a0f2c;
+color:#fff;
 }
 
+/* HEADER */
+header{
+background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
+text-align:center;
+padding:20px;
+}
+
+.logo{
+width:120px;
+border-radius:10px;
+}
+
+/* BOX DESIGN */
 .box{
-background:rgba(17,28,68,0.8);
+background:rgba(17,28,68,0.7);
 margin:15px;
 padding:20px;
 border-radius:15px;
 border:1px solid #3b82f6;
-backdrop-filter:blur(10px);
+backdrop-filter:blur(8px);
 }
 
-h2{margin-top:0;}
-
-input,select,textarea{
-width:100%;padding:12px;margin:6px 0;border:none;border-radius:6px;
-}
-
+/* BUTTON */
 .btn{
-background:#3b82f6;color:#fff;padding:12px;border:none;
-border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;width:100%;
+background:#3b82f6;
+color:#fff;
+padding:12px;
+border:none;
+border-radius:8px;
+font-weight:bold;
+width:100%;
+margin-top:10px;
+cursor:pointer;
 }
+
 .btn:hover{background:#2563eb;}
 
+/* INPUT */
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:6px 0;
+border:none;
+border-radius:6px;
+}
+
+/* ROUTES */
 .routes{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:15px;
+gap:10px;
 }
 
 .route{
@@ -49,8 +75,14 @@ border-radius:10px;
 text-align:center;
 transition:0.3s;
 }
-.route:hover{background:#ffc107;color:#000;transform:scale(1.05);}
 
+.route:hover{
+background:#ffc107;
+color:#000;
+transform:scale(1.05);
+}
+
+/* CARS */
 .cars{
 display:flex;
 flex-wrap:wrap;
@@ -72,25 +104,54 @@ border-radius:10px;
 object-fit:cover;
 }
 
-.review-box{
-background:#0d1638;
-padding:10px;
-border-radius:8px;
-margin-top:10px;
+.price{font-size:13px;color:#ccc;}
+
+/* FLOAT BUTTONS */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25d366;
+padding:18px;
+border-radius:50%;
 }
 
-/* Floating */
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
-.callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
+.callbtn{
+position:fixed;
+bottom:90px;
+right:20px;
+background:#ef4444;
+padding:15px;
+border-radius:50%;
+}
 
+/* ADMIN */
+#adminPanel{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+overflow:auto;
+}
+
+.admin-box{
+background:#111c44;
+margin:50px auto;
+padding:20px;
+width:90%;
+max-width:500px;
+border-radius:15px;
+}
 </style>
 
 <script>
 
-/* STORAGE */
+/* BOOKINGS */
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-/* SAVE */
 function saveBooking(data){
 bookings.push(data);
 localStorage.setItem("bookings", JSON.stringify(bookings));
@@ -103,6 +164,7 @@ var name=nameEl.value;
 var phone=phoneEl.value;
 var pickup=pickupEl.value;
 var drop=dropEl.value;
+var trip=tripEl.value;
 var car=carEl.value;
 var date=dateEl.value;
 var time=timeEl.value;
@@ -111,70 +173,88 @@ if(name==""||phone==""||pickup==""||drop==""){
 alert("Fill all details"); return;
 }
 
-var booking={name,phone,pickup,drop,car,date,time};
-saveBooking(booking);
+saveBooking({name,phone,pickup,drop,trip,car,date,time});
 
-/* WhatsApp */
+alert("✅ Booking Confirmed!");
+
 var msg=`🚕 Booking
 Name:${name}
 Phone:${phone}
 From:${pickup}
 To:${drop}
+Trip:${trip}
 Car:${car}
 Date:${date}
 Time:${time}`;
 
 window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
-
-alert("✅ Booking Saved!");
 }
 
-/* ROUTE AUTO */
-function bookRoute(p,d){
-pickupEl.value=p;
-dropEl.value=d;
+/* QUICK ROUTE */
+function bookRoute(pickup, drop){
+pickupEl.value=pickup;
+dropEl.value=drop;
 window.scrollTo(0,document.body.scrollHeight);
 }
 
-/* RAZORPAY PAYMENT LINK */
-function payNow(){
-var amt=amount.value;
-if(amt==""||amt<=0){alert("Enter valid amount");return;}
-
-/* 👉 Replace this link with your Razorpay Payment Link */
-window.open("https://rzp.io/l/YOUR-LINK?amount="+amt);
+/* ADMIN */
+function openAdmin(){
+var pass=prompt("Enter Password");
+if(pass=="1234"){
+loadBookings();
+adminPanel.style.display="block";
+}
 }
 
-/* EXCEL EXPORT */
-function downloadExcel(){
+function closeAdmin(){
+adminPanel.style.display="none";
+}
 
-let csv="Name,Phone,Pickup,Drop,Car,Date,Time\n";
+function loadBookings(){
+var html="";
+bookings.forEach(b=>{
+html+=`<div style="border-bottom:1px solid #555;padding:10px">
+<b>${b.name}</b> (${b.phone})<br>
+${b.pickup} ➜ ${b.drop}<br>
+${b.trip} | ${b.car}<br>
+${b.date} ${b.time}
+</div>`;
+});
+adminData.innerHTML=html;
+}
+
+/* EXPORT EXCEL */
+function exportExcel(){
+let csv="Name,Phone,Pickup,Drop,Trip,Car,Date,Time\n";
 
 bookings.forEach(b=>{
-csv+=`${b.name},${b.phone},${b.pickup},${b.drop},${b.car},${b.date},${b.time}\n`;
+csv+=`${b.name},${b.phone},${b.pickup},${b.drop},${b.trip},${b.car},${b.date},${b.time}\n`;
 });
 
-var blob=new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+var blob=new Blob([csv],{type:"text/csv"});
 var link=document.createElement("a");
 link.href=URL.createObjectURL(blob);
 link.download="bookings.csv";
 link.click();
-
 }
 
 /* REVIEWS */
 var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
 function addReview(){
+if(rname.value==""||rtext.value==""){alert("Fill all");return;}
 reviews.push({name:rname.value,text:rtext.value});
 localStorage.setItem("reviews", JSON.stringify(reviews));
 displayReviews();
+rname.value=""; rtext.value="";
 }
 
 function displayReviews(){
 var html="";
 reviews.forEach(r=>{
-html+=`<div class="review-box"><b>${r.name}</b><br>${r.text}</div>`;
+html+=`<div style="background:#0d1638;padding:10px;margin-top:10px;border-radius:8px">
+<b>${r.name}</b><br>${r.text}
+</div>`;
 });
 reviewList.innerHTML=html;
 }
@@ -188,8 +268,10 @@ window.onload=displayReviews;
 <body>
 
 <header>
+<img src="logo.png" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
+<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
 
 <!-- WHY -->
@@ -222,22 +304,26 @@ window.onload=displayReviews;
 
 <div class="car">
 <img src="swift.jpg">
-<p><b>Swift Dzire</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
+<p><b>Swift Dzire</b><br>₹10/km</p>
+<p class="price">4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="aura.jpg">
-<p><b>Aura</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
+<p><b>Aura</b><br>₹10/km</p>
+<p class="price">4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="ertiga.jpg">
-<p><b>Ertiga</b><br>₹13/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
+<p><b>Ertiga</b><br>₹13/km</p>
+<p class="price">6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="innova.jpg">
-<p><b>Innova Crysta</b><br>₹19/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
+<p><b>Innova Crysta</b><br>₹19/km</p>
+<p class="price">6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 </div>
@@ -251,6 +337,11 @@ window.onload=displayReviews;
 <input id="phoneEl" placeholder="Phone">
 <input id="pickupEl" placeholder="Pickup">
 <input id="dropEl" placeholder="Drop">
+
+<select id="tripEl">
+<option>One Way</option>
+<option>Round Trip</option>
+</select>
 
 <select id="carEl">
 <option>Dzire</option>
@@ -267,18 +358,10 @@ window.onload=displayReviews;
 
 <!-- PAYMENT -->
 <div class="box">
-<h2>💳 Online Payment</h2>
+<h2>💰 Online Payment</h2>
 <p>UPI ID: chauhanshivam2535-1@okicici</p>
-
 <input id="amount" placeholder="Enter Amount ₹">
-<button class="btn" onclick="payNow()">Pay with Razorpay</button>
-
-</div>
-
-<!-- ADMIN -->
-<div class="box">
-<h2>📊 Admin Tools</h2>
-<button class="btn" onclick="downloadExcel()">Download Excel</button>
+<button class="btn" onclick="alert('Pay using any UPI app manually')">Pay Now</button>
 </div>
 
 <!-- REVIEWS -->
@@ -298,6 +381,16 @@ window.onload=displayReviews;
 <p>9898222313</p>
 <a href="tel:9898222313"><button class="btn">Call Now</button></a>
 <a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPanel">
+<div class="admin-box">
+<h2>Bookings</h2>
+<div id="adminData"></div>
+<button class="btn" onclick="exportExcel()">Download Excel</button>
+<button class="btn" onclick="closeAdmin()">Close</button>
+</div>
 </div>
 
 <footer style="text-align:center;padding:10px;">
