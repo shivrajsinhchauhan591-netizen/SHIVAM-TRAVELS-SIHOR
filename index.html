@@ -5,10 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO -->
 <title>Taxi Service in Sihor | Shivam Travels</title>
-<meta name="description" content="Best taxi service in Sihor, Bhavnagar, Palitana. Book cab online Shivam Travels.">
-<meta name="keywords" content="taxi sihor, cab booking sihor, bhavnagar taxi">
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
@@ -18,16 +15,16 @@ background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
 
-.logo{width:180px;}
-
 .box{
-background:rgba(17,28,68,0.7);
+background:rgba(17,28,68,0.8);
 margin:15px;
 padding:20px;
 border-radius:15px;
 border:1px solid #3b82f6;
 backdrop-filter:blur(10px);
 }
+
+h2{margin-top:0;}
 
 input,select,textarea{
 width:100%;padding:12px;margin:6px 0;border:none;border-radius:6px;
@@ -36,7 +33,6 @@ width:100%;padding:12px;margin:6px 0;border:none;border-radius:6px;
 .btn{
 background:#3b82f6;color:#fff;padding:12px;border:none;
 border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px;width:100%;
-font-size:15px;
 }
 .btn:hover{background:#2563eb;}
 
@@ -76,8 +72,6 @@ border-radius:10px;
 object-fit:cover;
 }
 
-.price{font-size:13px;color:#ccc;}
-
 .review-box{
 background:#0d1638;
 padding:10px;
@@ -85,126 +79,104 @@ border-radius:8px;
 margin-top:10px;
 }
 
-.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;font-size:20px;}
+/* Floating */
+.whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 
-#adminPanel{
-display:none;
-position:fixed;
-top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.9);
-overflow:auto;
-}
-
-.admin-box{
-background:#111c44;
-margin:50px auto;
-padding:20px;
-width:90%;
-max-width:500px;
-border-radius:15px;
-}
 </style>
 
 <script>
 
+/* STORAGE */
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
+/* SAVE */
 function saveBooking(data){
 bookings.push(data);
 localStorage.setItem("bookings", JSON.stringify(bookings));
 }
 
+/* BOOK */
 function sendBooking(){
 
 var name=nameEl.value;
 var phone=phoneEl.value;
 var pickup=pickupEl.value;
 var drop=dropEl.value;
-var trip=tripEl.value;
 var car=carEl.value;
 var date=dateEl.value;
 var time=timeEl.value;
 
 if(name==""||phone==""||pickup==""||drop==""){
-alert("Please fill all details");
-return;
+alert("Fill all details"); return;
 }
 
-saveBooking({name,phone,pickup,drop,trip,car,date,time});
+var booking={name,phone,pickup,drop,car,date,time};
+saveBooking(booking);
 
-alert("✅ Booking Confirmed!");
+/* WhatsApp */
+var msg=`🚕 Booking
+Name:${name}
+Phone:${phone}
+From:${pickup}
+To:${drop}
+Car:${car}
+Date:${date}
+Time:${time}`;
 
-var msg=`🚕 *New Booking*%0A
-Name: ${name}%0A
-Phone: ${phone}%0A
-From: ${pickup}%0A
-To: ${drop}%0A
-Trip: ${trip}%0A
-Car: ${car}%0A
-Date: ${date}%0A
-Time: ${time}`;
+window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
 
-window.open("https://wa.me/919898222313?text="+msg);
+alert("✅ Booking Saved!");
 }
 
-function bookRoute(pickup, drop){
-pickupEl.value=pickup;
-dropEl.value=drop;
+/* ROUTE AUTO */
+function bookRoute(p,d){
+pickupEl.value=p;
+dropEl.value=d;
 window.scrollTo(0,document.body.scrollHeight);
 }
 
-function openAdmin(){
-var pass=prompt("Enter Password");
-if(pass=="1234"){
-loadBookings();
-adminPanel.style.display="block";
-}
+/* RAZORPAY PAYMENT LINK */
+function payNow(){
+var amt=amount.value;
+if(amt==""||amt<=0){alert("Enter valid amount");return;}
+
+/* 👉 Replace this link with your Razorpay Payment Link */
+window.open("https://rzp.io/l/YOUR-LINK?amount="+amt);
 }
 
-function loadBookings(){
-var html="";
+/* EXCEL EXPORT */
+function downloadExcel(){
+
+let csv="Name,Phone,Pickup,Drop,Car,Date,Time\n";
+
 bookings.forEach(b=>{
-html+=`<div style="border-bottom:1px solid #555;padding:10px">
-<b>${b.name}</b> (${b.phone})<br>
-${b.pickup} ➜ ${b.drop}<br>
-${b.trip} | ${b.car}<br>
-${b.date} ${b.time}
-</div>`;
+csv+=`${b.name},${b.phone},${b.pickup},${b.drop},${b.car},${b.date},${b.time}\n`;
 });
-adminData.innerHTML=html;
-}
 
-function closeAdmin(){
-adminPanel.style.display="none";
+var blob=new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+var link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="bookings.csv";
+link.click();
+
 }
 
 /* REVIEWS */
 var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
+function addReview(){
+reviews.push({name:rname.value,text:rtext.value});
+localStorage.setItem("reviews", JSON.stringify(reviews));
+displayReviews();
+}
+
 function displayReviews(){
 var html="";
 reviews.forEach(r=>{
-html+=`<div class="review-box">
-<b>${r.name}</b> ⭐${r.rating}<br>${r.text}
-</div>`;
+html+=`<div class="review-box"><b>${r.name}</b><br>${r.text}</div>`;
 });
 reviewList.innerHTML=html;
-}
-
-function addReview(){
-if(rname.value==""||rtext.value==""){alert("Fill all");return;}
-reviews.push({name:rname.value,rating:rating.value,text:rtext.value});
-localStorage.setItem("reviews", JSON.stringify(reviews));
-displayReviews();
-rname.value=""; rtext.value="";
-}
-
-/* PAYMENT */
-function payNow(){
-var amt=amount.value;
-if(amt==""||amt<=0){alert("Enter valid amount");return;}
-window.location.href=`upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am=${amt}&cu=INR`;
 }
 
 window.onload=displayReviews;
@@ -216,11 +188,31 @@ window.onload=displayReviews;
 <body>
 
 <header>
-<img src="logo.png" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
 </header>
+
+<!-- WHY -->
+<div class="box">
+<h2>⭐ Why Choose Us</h2>
+<p>✔ 24/7 Service</p>
+<p>✔ Safe Drivers</p>
+<p>✔ Clean Cars</p>
+<p>✔ Affordable Price</p>
+</div>
+
+<!-- ROUTES -->
+<div class="box">
+<h2>🚖 Popular Routes</h2>
+
+<div class="routes">
+<div class="route">Sihor → Ahmedabad<button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
+<div class="route">Bhavnagar → Ahmedabad<button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
+<div class="route">Sihor → Surat<button class="btn" onclick="bookRoute('Sihor','Surat')">Book Now</button></div>
+<div class="route">Sihor → Rajkot<button class="btn" onclick="bookRoute('Sihor','Rajkot')">Book Now</button></div>
+</div>
+
+</div>
 
 <!-- CARS -->
 <div class="box">
@@ -230,26 +222,22 @@ window.onload=displayReviews;
 
 <div class="car">
 <img src="swift.jpg">
-<p><b>Swift Dzire</b><br>₹10/km</p>
-<p class="price">4 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+<p><b>Swift Dzire</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="aura.jpg">
-<p><b>Hyundai Aura</b><br>₹10/km</p>
-<p class="price">4 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+<p><b>Aura</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="ertiga.jpg">
-<p><b>Ertiga</b><br>₹13/km</p>
-<p class="price">6 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+<p><b>Ertiga</b><br>₹13/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
 <img src="innova.jpg">
-<p><b>Innova</b><br>₹18/km</p>
-<p class="price">7 Seats | AC<br>Toll Extra<br>Driver DA ₹300/day</p>
+<p><b>Innova Crysta</b><br>₹19/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 </div>
@@ -263,11 +251,6 @@ window.onload=displayReviews;
 <input id="phoneEl" placeholder="Phone">
 <input id="pickupEl" placeholder="Pickup">
 <input id="dropEl" placeholder="Drop">
-
-<select id="tripEl">
-<option>One Way</option>
-<option>Round Trip</option>
-</select>
 
 <select id="carEl">
 <option>Dzire</option>
@@ -284,10 +267,18 @@ window.onload=displayReviews;
 
 <!-- PAYMENT -->
 <div class="box">
-<h2>💰 Online Payment</h2>
-<p>UPI: chauhanshivam2535-1@okicici</p>
+<h2>💳 Online Payment</h2>
+<p>UPI ID: chauhanshivam2535-1@okicici</p>
+
 <input id="amount" placeholder="Enter Amount ₹">
-<button class="btn" onclick="payNow()">Pay Now</button>
+<button class="btn" onclick="payNow()">Pay with Razorpay</button>
+
+</div>
+
+<!-- ADMIN -->
+<div class="box">
+<h2>📊 Admin Tools</h2>
+<button class="btn" onclick="downloadExcel()">Download Excel</button>
 </div>
 
 <!-- REVIEWS -->
@@ -295,18 +286,18 @@ window.onload=displayReviews;
 <h2>⭐ Customer Reviews</h2>
 
 <input id="rname" placeholder="Name">
-<select id="rating">
-<option value="5">⭐⭐⭐⭐⭐</option>
-<option value="4">⭐⭐⭐⭐</option>
-<option value="3">⭐⭐⭐</option>
-<option value="2">⭐⭐</option>
-<option value="1">⭐</option>
-</select>
-
 <textarea id="rtext"></textarea>
 <button class="btn" onclick="addReview()">Submit Review</button>
 
 <div id="reviewList"></div>
+</div>
+
+<!-- CONTACT -->
+<div class="box" style="text-align:center;">
+<h2>📞 Contact</h2>
+<p>9898222313</p>
+<a href="tel:9898222313"><button class="btn">Call Now</button></a>
+<a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
 </div>
 
 <footer style="text-align:center;padding:10px;">
