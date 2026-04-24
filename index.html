@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Shivam Travels | Final Pro</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
+
 header{
 background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
 
-.logo{width:150px;}
+.logo{width:120px;}
 
 .box{
 background:#111c44;
@@ -38,12 +39,14 @@ display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
 }
+
 .route{
 background:#111;
 padding:15px;
 border-radius:10px;
 text-align:center;
 }
+
 .route:hover{background:#ffc107;color:#000;}
 
 .cars{
@@ -52,14 +55,14 @@ flex-wrap:wrap;
 justify-content:center;
 gap:20px;
 }
+
 .car{
 background:#111;
 padding:10px;
 border-radius:10px;
 width:230px;
-transition:0.3s;
 }
-.car:hover{transform:scale(1.05);}
+
 .car img{
 width:100%;
 height:140px;
@@ -82,7 +85,6 @@ display:none;
 position:fixed;
 top:0;left:0;width:100%;height:100%;
 background:rgba(0,0,0,0.9);
-overflow:auto;
 }
 
 .admin-box{
@@ -97,13 +99,7 @@ border-radius:15px;
 
 <script>
 
-// BOOKINGS
 var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
-function saveBooking(data){
-bookings.push(data);
-localStorage.setItem("bookings", JSON.stringify(bookings));
-}
 
 function sendBooking(){
 
@@ -111,19 +107,11 @@ var name=document.getElementById("name").value;
 var phone=document.getElementById("phone").value;
 var pickup=document.getElementById("pickup").value;
 var drop=document.getElementById("drop").value;
-var trip=document.getElementById("trip").value;
-var car=document.getElementById("car").value;
-var date=document.getElementById("date").value;
-var time=document.getElementById("time").value;
 
 if(name==""||phone==""||pickup==""||drop==""){
 alert("Fill required details");
 return;
 }
-
-saveBooking({name,phone,pickup,drop,trip,car,date,time});
-
-alert("Booking Confirmed ✅");
 
 var msg=`🚕 Booking
 Name:${name}
@@ -132,43 +120,18 @@ Pickup:${pickup}
 Drop:${drop}`;
 
 window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
+
+alert("Booking Confirmed ✅");
 }
 
-// ROUTE
-function bookRoute(pickup, drop){
-document.getElementById("pickup").value=pickup;
-document.getElementById("drop").value=drop;
-window.scrollTo(0,document.body.scrollHeight);
+// REVIEW DEFAULT
+var reviews = JSON.parse(localStorage.getItem("reviews")) || [
+{
+name:"CHAUHAN SHIVAM",
+rating:"5",
+text:"BEST TAXI SERVICE, VERY AFFORDABLE PRICE & NEAT AND CLEAN CAR"
 }
-
-// ADMIN
-function openAdmin(){
-var pass=prompt("Enter Password");
-if(pass=="1234"){
-loadBookings();
-document.getElementById("adminPanel").style.display="block";
-}
-}
-
-function loadBookings(){
-var html="";
-bookings.forEach((b)=>{
-html+=`<div style="border-bottom:1px solid #555;padding:10px">
-<b>${b.name}</b> (${b.phone})<br>
-${b.pickup} ➜ ${b.drop}<br>
-${b.trip} | ${b.car}<br>
-${b.date} ${b.time}
-</div>`;
-});
-document.getElementById("adminData").innerHTML=html;
-}
-
-function closeAdmin(){
-document.getElementById("adminPanel").style.display="none";
-}
-
-// REVIEWS
-var reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+];
 
 function saveReviews(){
 localStorage.setItem("reviews", JSON.stringify(reviews));
@@ -194,15 +157,16 @@ if(name==""||text==""){alert("Fill all");return;}
 reviews.push({name,rating,text});
 saveReviews();
 displayReviews();
-
-document.getElementById("rname").value="";
-document.getElementById("rtext").value="";
 }
 
 // PAYMENT
 function payNow(){
 var amt=document.getElementById("amount").value;
-if(amt==""||amt<=0){alert("Enter valid amount");return;}
+
+if(amt==""||amt<=0){
+alert("Enter valid amount");
+return;
+}
 
 var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
 window.location.href=upi;
@@ -220,10 +184,9 @@ window.onload=displayReviews;
 <img src="https://source.unsplash.com/200x80/?taxi-logo" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
-<button class="btn" onclick="openAdmin()">Admin Panel</button>
+<button class="btn">Admin Panel</button>
 </header>
 
-<!-- WHY -->
 <div class="box">
 <h2>⭐ Why Choose Us</h2>
 <p>✔ 24/7 Service</p>
@@ -232,49 +195,46 @@ window.onload=displayReviews;
 <p>✔ Affordable Price</p>
 </div>
 
-<!-- ROUTES -->
 <div class="box">
 <h2>🚖 Popular Routes</h2>
 
 <div class="routes">
-<div class="route">Sihor → Ahmedabad<button class="btn" onclick="bookRoute('Sihor','Ahmedabad')">Book Now</button></div>
-<div class="route">Bhavnagar → Ahmedabad<button class="btn" onclick="bookRoute('Bhavnagar','Ahmedabad')">Book Now</button></div>
-<div class="route">Sihor → Surat<button class="btn" onclick="bookRoute('Sihor','Surat')">Book Now</button></div>
-<div class="route">Sihor → Rajkot<button class="btn" onclick="bookRoute('Sihor','Rajkot')">Book Now</button></div>
+<div class="route">Sihor → Ahmedabad<button class="btn">Book Now</button></div>
+<div class="route">Bhavnagar → Ahmedabad<button class="btn">Book Now</button></div>
+<div class="route">Sihor → Surat<button class="btn">Book Now</button></div>
+<div class="route">Sihor → Rajkot<button class="btn">Book Now</button></div>
 </div>
 
 </div>
 
-<!-- CARS -->
 <div class="box">
 <h2>🚘 Our Cars</h2>
 
 <div class="cars">
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?swift-dzire-car">
+<img src="https://source.unsplash.com/300x200/?swift-dzire">
 <p><b>Swift Dzire</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?hyundai-aura-car">
+<img src="https://source.unsplash.com/300x200/?hyundai-aura">
 <p><b>Aura</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?ertiga-car">
+<img src="https://source.unsplash.com/300x200/?ertiga">
 <p><b>Ertiga</b><br>₹13/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?innova-crysta-car">
+<img src="https://source.unsplash.com/300x200/?innova">
 <p><b>Innova Crysta</b><br>₹19/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 </div>
 </div>
 
-<!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
@@ -283,25 +243,24 @@ window.onload=displayReviews;
 <input id="pickup" placeholder="Pickup">
 <input id="drop" placeholder="Drop">
 
-<select id="trip">
+<select>
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
 
-<select id="car">
+<select>
 <option>Dzire</option>
 <option>Aura</option>
 <option>Ertiga</option>
 <option>Innova</option>
 </select>
 
-<input type="date" id="date">
-<input type="time" id="time">
+<input type="date">
+<input type="time">
 
 <button class="btn" onclick="sendBooking()">Confirm Booking</button>
 </div>
 
-<!-- PAYMENT -->
 <div class="box">
 <h2>💰 Online Payment</h2>
 <p>UPI ID: chauhanshivam2535-1@okicici</p>
@@ -309,7 +268,6 @@ window.onload=displayReviews;
 <button class="btn" onclick="payNow()">Pay Now</button>
 </div>
 
-<!-- REVIEWS -->
 <div class="box">
 <h2>⭐ Customer Reviews</h2>
 
@@ -328,21 +286,12 @@ window.onload=displayReviews;
 <div id="reviewList"></div>
 </div>
 
-<!-- CONTACT -->
 <div class="box" style="text-align:center;">
 <h2>📞 Contact</h2>
 <p>9898222313</p>
+
 <a href="tel:9898222313"><button class="btn">Call Now</button></a>
 <a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
-</div>
-
-<!-- ADMIN PANEL -->
-<div id="adminPanel">
-<div class="admin-box">
-<h2>Bookings</h2>
-<div id="adminData"></div>
-<button class="btn" onclick="closeAdmin()">Close</button>
-</div>
 </div>
 
 <footer style="text-align:center;padding:10px;">
@@ -353,4 +302,205 @@ window.onload=displayReviews;
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
+
+
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivam Travels | Pro Max</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
+
+header{
+background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
+padding:20px;text-align:center;
+}
+
+.box{
+background:#111c44;
+margin:15px;
+padding:20px;
+border-radius:15px;
+}
+
+input,select,textarea{
+width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
+}
+
+.btn{
+background:#3b82f6;color:#fff;padding:10px;border:none;
+border-radius:6px;cursor:pointer;width:100%;
+margin-top:8px;
+}
+
+/* POPUP */
+#popup{
+display:none;
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+}
+
+.popup-box{
+background:#111;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+/* ADMIN */
+#admin{
+display:none;
+position:fixed;
+top:0;left:0;width:100%;height:100%;
+background:#000;
+overflow:auto;
+}
+
+.admin-box{
+background:#111c44;
+margin:20px;
+padding:20px;
+border-radius:10px;
+}
+
+</style>
+
+<script>
+
+let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+
+// BOOKING
+function sendBooking(){
+
+let name=name1.value;
+let phone=phone1.value;
+let pickup=pickup1.value;
+let drop=drop1.value;
+
+if(name==""||phone==""||pickup==""||drop==""){
+alert("Fill all details");
+return;
+}
+
+let data={name,phone,pickup,drop};
+bookings.push(data);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+
+// POPUP
+document.getElementById("popup").style.display="flex";
+
+// WHATSAPP AUTO (SMS alternative)
+let msg=`🚕 Booking Confirmed
+Name:${name}
+Phone:${phone}
+Pickup:${pickup}
+Drop:${drop}`;
+
+window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
+
+}
+
+// CLOSE POPUP
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+// ADMIN
+function openAdmin(){
+let pass=prompt("Enter Password");
+if(pass=="1234"){
+document.getElementById("admin").style.display="block";
+loadData();
+}
+}
+
+function closeAdmin(){
+document.getElementById("admin").style.display="none";
+}
+
+function loadData(){
+let html="";
+bookings.forEach((b,i)=>{
+html+=`
+<div class="admin-box">
+<b>${b.name}</b> (${b.phone})<br>
+${b.pickup} ➜ ${b.drop}<br>
+
+<button onclick="deleteBooking(${i})">Delete</button>
+<button onclick="editBooking(${i})">Edit</button>
+</div>`;
+});
+adminData.innerHTML=html;
+}
+
+// DELETE
+function deleteBooking(i){
+bookings.splice(i,1);
+localStorage.setItem("bookings",JSON.stringify(bookings));
+loadData();
+}
+
+// EDIT
+function editBooking(i){
+let b=bookings[i];
+
+let name=prompt("Edit Name",b.name);
+let phone=prompt("Edit Phone",b.phone);
+
+bookings[i]={...b,name,phone};
+localStorage.setItem("bookings",JSON.stringify(bookings));
+loadData();
+}
+
+</script>
+
+</head>
+
+<body>
+
+<header>
+<h1>🚕 Shivam Travels</h1>
+<p>Safe & Reliable Taxi Service</p>
+<button class="btn" onclick="openAdmin()">Admin Panel</button>
+</header>
+
+<div class="box">
+<h2>📋 Book Taxi</h2>
+
+<input id="name1" placeholder="Name">
+<input id="phone1" placeholder="Phone">
+<input id="pickup1" placeholder="Pickup">
+<input id="drop1" placeholder="Drop">
+
+<button class="btn" onclick="sendBooking()">Confirm Booking</button>
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+<div class="popup-box">
+<h2>✅ Booking Confirmed</h2>
+<p>Your taxi is booked successfully!</p>
+<button class="btn" onclick="closePopup()">OK</button>
+</div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin">
+<div style="text-align:center;">
+<h2>Admin Panel</h2>
+<button onclick="closeAdmin()">Close</button>
+</div>
+
+<div id="adminData"></div>
+</div>
+
+</body>
+</html>
+
 </html>
