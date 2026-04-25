@@ -3,18 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Shivam Travels | Final Pro</title>
+<title>Shivam Travels | Premium</title>
 
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
 
+/* HEADER */
 header{
 background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
-
-.logo{width:120px;}
+.logo{width:140px;margin-bottom:10px;}
 
 .box{
 background:#111c44;
@@ -24,31 +23,35 @@ border-radius:15px;
 border:1px solid #3b82f6;
 }
 
+h2{margin-top:0}
+
+/* INPUT */
 input,select,textarea{
-width:100%;padding:10px;margin:5px 0;border:none;border-radius:5px;
+width:100%;padding:10px;margin:5px 0;border:none;border-radius:6px;
 }
 
+/* BUTTON */
 .btn{
 background:#3b82f6;color:#fff;padding:10px;border:none;
-border-radius:6px;font-weight:bold;cursor:pointer;margin-top:8px;width:100%;
+border-radius:6px;font-weight:bold;cursor:pointer;width:100%;
+margin-top:8px;
 }
 .btn:hover{background:#2563eb;}
 
+/* ROUTES */
 .routes{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:15px;
 }
-
 .route{
 background:#111;
 padding:15px;
 border-radius:10px;
-text-align:center;
 }
-
 .route:hover{background:#ffc107;color:#000;}
 
+/* CARS PREMIUM */
 .cars{
 display:flex;
 flex-wrap:wrap;
@@ -57,19 +60,21 @@ gap:20px;
 }
 
 .car{
-background:#111;
+background:linear-gradient(145deg,#0d1638,#1e3a8a);
 padding:10px;
-border-radius:10px;
-width:230px;
+border-radius:15px;
+width:240px;
+box-shadow:0 0 10px #000;
 }
 
 .car img{
 width:100%;
-height:140px;
+height:150px;
 border-radius:10px;
 object-fit:cover;
 }
 
+/* REVIEW */
 .review-box{
 background:#0d1638;
 padding:10px;
@@ -77,99 +82,63 @@ border-radius:8px;
 margin-top:10px;
 }
 
+/* FLOAT BTN */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 
-#adminPanel{
-display:none;
-position:fixed;
-top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.9);
-}
-
-.admin-box{
-background:#111c44;
-margin:50px auto;
-padding:20px;
-width:90%;
-max-width:500px;
-border-radius:15px;
-}
 </style>
 
 <script>
 
-var bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-
+// BOOKING
 function sendBooking(){
-
-var name=document.getElementById("name").value;
-var phone=document.getElementById("phone").value;
-var pickup=document.getElementById("pickup").value;
-var drop=document.getElementById("drop").value;
+let name=name1.value;
+let phone=phone1.value;
+let pickup=pickup1.value;
+let drop=drop1.value;
+let passengers=passengers.value;
+let trip=trip.value;
 
 if(name==""||phone==""||pickup==""||drop==""){
-alert("Fill required details");
+alert("Fill all details");
 return;
 }
 
-var msg=`🚕 Booking
+let msg=`🚕 Booking
 Name:${name}
 Phone:${phone}
+Passengers:${passengers}
+Trip:${trip}
 Pickup:${pickup}
 Drop:${drop}`;
 
 window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
-
 alert("Booking Confirmed ✅");
 }
 
-// REVIEW DEFAULT
-var reviews = JSON.parse(localStorage.getItem("reviews")) || [
-{
-name:"CHAUHAN SHIVAM",
-rating:"5",
-text:"BEST TAXI SERVICE, VERY AFFORDABLE PRICE & NEAT AND CLEAN CAR"
-}
+// REVIEWS
+let reviews = JSON.parse(localStorage.getItem("reviews")) || [
+{name:"CHAUHAN SHIVAM",rating:"5",text:"BEST TAXI SERVICE, VERY AFFORDABLE PRICE & NEAT AND CLEAN CAR"}
 ];
 
-function saveReviews(){
-localStorage.setItem("reviews", JSON.stringify(reviews));
-}
-
 function displayReviews(){
-var html="";
+let html="";
 reviews.forEach(r=>{
-html+=`<div class="review-box">
-<b>${r.name}</b> ⭐${r.rating}<br>${r.text}
-</div>`;
+html+=`<div class="review-box"><b>${r.name}</b> ⭐${r.rating}<br>${r.text}</div>`;
 });
-document.getElementById("reviewList").innerHTML=html;
+reviewList.innerHTML=html;
 }
 
 function addReview(){
-var name=document.getElementById("rname").value;
-var rating=document.getElementById("rating").value;
-var text=document.getElementById("rtext").value;
+let name=rname.value;
+let rating=rating.value;
+let text=rtext.value;
 
 if(name==""||text==""){alert("Fill all");return;}
 
 reviews.push({name,rating,text});
-saveReviews();
+localStorage.setItem("reviews",JSON.stringify(reviews));
 displayReviews();
-}
-
-// PAYMENT
-function payNow(){
-var amt=document.getElementById("amount").value;
-
-if(amt==""||amt<=0){
-alert("Enter valid amount");
-return;
-}
-
-var upi="upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
-window.location.href=upi;
 }
 
 window.onload=displayReviews;
@@ -184,7 +153,6 @@ window.onload=displayReviews;
 <img src="https://source.unsplash.com/200x80/?taxi-logo" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
-<button class="btn">Admin Panel</button>
 </header>
 
 <div class="box">
@@ -199,12 +167,28 @@ window.onload=displayReviews;
 <h2>🚖 Popular Routes</h2>
 
 <div class="routes">
-<div class="route">Sihor → Ahmedabad<button class="btn">Book Now</button></div>
-<div class="route">Bhavnagar → Ahmedabad<button class="btn">Book Now</button></div>
-<div class="route">Sihor → Surat<button class="btn">Book Now</button></div>
-<div class="route">Sihor → Rajkot<button class="btn">Book Now</button></div>
+
+<div class="route">
+PALITANA → Ahmedabad > Gandhinagar > Vadodara > Surat > Rajkot
+<button class="btn">Book Now</button>
 </div>
 
+<div class="route">
+SONGADH → Ahmedabad > Gandhinagar > Vadodara > Surat > Rajkot
+<button class="btn">Book Now</button>
+</div>
+
+<div class="route">
+SIHOR → Ahmedabad > Gandhinagar > Vadodara > Surat > Rajkot
+<button class="btn">Book Now</button>
+</div>
+
+<div class="route">
+BHAVNAGAR → Ahmedabad > Gandhinagar > Vadodara > Surat > Rajkot
+<button class="btn">Book Now</button>
+</div>
+
+</div>
 </div>
 
 <div class="box">
@@ -213,22 +197,22 @@ window.onload=displayReviews;
 <div class="cars">
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?swift-dzire">
+<img src="cars/dzire.jpg">
 <p><b>Swift Dzire</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?hyundai-aura">
+<img src="cars/aura.jpg">
 <p><b>Aura</b><br>₹10/km<br>4+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?ertiga">
+<img src="cars/ertiga.jpg">
 <p><b>Ertiga</b><br>₹13/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
 <div class="car">
-<img src="https://source.unsplash.com/300x200/?innova">
+<img src="cars/innova.jpg">
 <p><b>Innova Crysta</b><br>₹19/km<br>6+1 Seats | AC<br>300KM/day<br>D.A ₹400</p>
 </div>
 
@@ -238,25 +222,21 @@ window.onload=displayReviews;
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-<input id="pickup" placeholder="Pickup">
-<input id="drop" placeholder="Drop">
+<input id="name1" placeholder="Name">
+<input id="phone1" placeholder="Phone">
+<input id="passengers" placeholder="Passengers">
 
-<select>
+<input id="pickup1" placeholder="Pickup">
+<input id="drop1" placeholder="Drop">
+
+<select id="trip">
 <option>One Way</option>
 <option>Round Trip</option>
 </select>
 
-<select>
-<option>Dzire</option>
-<option>Aura</option>
-<option>Ertiga</option>
-<option>Innova</option>
-</select>
-
-<input type="date">
-<input type="time">
+<p style="font-size:12px;color:#ccc;">
+👉 Round Trip Rules: 300KM/day | Driver D.A ₹400 | Toll + Parking Extra
+</p>
 
 <button class="btn" onclick="sendBooking()">Confirm Booking</button>
 </div>
@@ -289,7 +269,6 @@ window.onload=displayReviews;
 <div class="box" style="text-align:center;">
 <h2>📞 Contact</h2>
 <p>9898222313</p>
-
 <a href="tel:9898222313"><button class="btn">Call Now</button></a>
 <a href="https://wa.me/919898222313"><button class="btn">WhatsApp</button></a>
 </div>
@@ -302,5 +281,4 @@ window.onload=displayReviews;
 <a href="tel:9898222313" class="callbtn">📞</a>
 
 </body>
-
-
+</html>
