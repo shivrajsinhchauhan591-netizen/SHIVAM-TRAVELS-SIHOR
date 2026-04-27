@@ -9,13 +9,10 @@
 <style>
 body{margin:0;font-family:Arial;background:#0a0f2c;color:#fff;}
 
-/* HEADER */
 header{
 background:linear-gradient(90deg,#0a0f2c,#1e3a8a,#3b82f6);
 padding:20px;text-align:center;
 }
-
-.logo{width:140px;margin-bottom:10px;}
 
 .box{
 background:#111c44;
@@ -37,7 +34,6 @@ transition:0.3s;
 }
 .btn:hover{background:#2563eb;}
 
-/* ROUTES */
 .routes{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -53,7 +49,6 @@ transition:0.3s;
 }
 .route:hover{background:#ffc107;color:#000;}
 
-/* CARS PREMIUM */
 .cars{
 display:flex;
 flex-wrap:wrap;
@@ -85,14 +80,12 @@ border-radius:8px;
 margin-top:10px;
 }
 
-/* FLOAT BUTTON */
 .whatsapp{position:fixed;bottom:20px;right:20px;background:#25d366;padding:18px;border-radius:50%;}
 .callbtn{position:fixed;bottom:90px;right:20px;background:#ef4444;padding:15px;border-radius:50%;}
 </style>
 
 <script>
 
-// BOOKING
 function sendBooking(){
 
 let name=name1.value;
@@ -103,6 +96,7 @@ let trip=trip1.value;
 let date=date1.value;
 let time=time1.value;
 let person=person1.value;
+let car=carType.value;
 
 if(name==""||phone==""||pickup==""||drop==""){
 alert("Fill all details");return;
@@ -112,6 +106,7 @@ let msg=`🚕 Booking
 Name:${name}
 Phone:${phone}
 Persons:${person}
+Car Type:${car}
 Pickup:${pickup}
 Drop:${drop}
 Trip:${trip}
@@ -123,7 +118,6 @@ window.open("https://wa.me/919898222313?text="+encodeURIComponent(msg));
 alert("Booking Confirmed ✅");
 }
 
-// REVIEWS
 let reviews=JSON.parse(localStorage.getItem("reviews"))||[
 {name:"CHAUHAN SHIVAM",rating:"5",text:"BEST TAXI SERVICE, VERY AFFORDABLE PRICE & NEAT AND CLEAN CAR"}
 ];
@@ -148,7 +142,6 @@ localStorage.setItem("reviews",JSON.stringify(reviews));
 showReviews();
 }
 
-// PAYMENT
 function payNow(){
 let amt=amount.value;
 if(amt==""||amt<=0){alert("Enter valid amount");return;}
@@ -166,12 +159,10 @@ window.onload=showReviews;
 <body>
 
 <header>
-<img src="images/logo.png" class="logo">
 <h1>🚕 Shivam Travels</h1>
 <p>Safe & Reliable Taxi Service</p>
 </header>
 
-<!-- WHY -->
 <div class="box">
 <h2>⭐ Why Choose Us</h2>
 <p>✔ 24/7 Service</p>
@@ -180,7 +171,6 @@ window.onload=showReviews;
 <p>✔ Affordable Price</p>
 </div>
 
-<!-- ROUTES -->
 <div class="box">
 <h2>🚖 Popular Routes</h2>
 
@@ -193,7 +183,6 @@ window.onload=showReviews;
 
 </div>
 
-<!-- CARS -->
 <div class="box">
 <h2>🚘 Our Cars</h2>
 
@@ -222,13 +211,19 @@ window.onload=showReviews;
 </div>
 </div>
 
-<!-- BOOK -->
 <div class="box">
 <h2>📋 Book Taxi</h2>
 
 <input id="name1" placeholder="Name">
 <input id="phone1" placeholder="Phone">
 <input id="person1" placeholder="No. of Persons">
+
+<select id="carType">
+<option>Sedan</option>
+<option>Hatchback</option>
+<option>SUV</option>
+<option>Premium</option>
+</select>
 
 <input id="pickup1" placeholder="Pickup">
 <input id="drop1" placeholder="Drop">
@@ -246,7 +241,6 @@ window.onload=showReviews;
 <button class="btn" onclick="sendBooking()">Confirm Booking</button>
 </div>
 
-<!-- PAYMENT -->
 <div class="box">
 <h2>💰 Online Payment</h2>
 <p>UPI ID: chauhanshivam2535-1@okicici</p>
@@ -254,7 +248,6 @@ window.onload=showReviews;
 <button class="btn" onclick="payNow()">Pay Now</button>
 </div>
 
-<!-- REVIEW -->
 <div class="box">
 <h2>⭐ Customer Reviews</h2>
 
@@ -273,7 +266,6 @@ window.onload=showReviews;
 <div id="reviewList"></div>
 </div>
 
-<!-- CONTACT -->
 <div class="box" style="text-align:center;">
 <h2>📞 Contact</h2>
 <p>9898222313</p>
@@ -291,4 +283,5 @@ window.onload=showReviews;
 
 </body>
 </html>
+
 
