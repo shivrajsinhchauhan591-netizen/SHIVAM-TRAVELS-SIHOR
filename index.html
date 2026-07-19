@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>🚖 Shivam Travels | Premium Taxi Service</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -25,355 +19,259 @@ scroll-behavior:smooth;
 }
 
 body{
-
 background:#081229;
-color:white;
-overflow-x:hidden;
-
+color:#fff;
 }
 
 /* Scrollbar */
 
 ::-webkit-scrollbar{
-
-width:10px;
-
+width:8px;
 }
 
 ::-webkit-scrollbar-thumb{
-
-background:#FFD700;
-border-radius:30px;
-
+background:#3b82f6;
+border-radius:20px;
 }
 
 /* Header */
 
 header{
-
-position:fixed;
+background:linear-gradient(135deg,#07112b,#1d4ed8,#2563eb);
+padding:18px;
+position:sticky;
 top:0;
-left:0;
-width:100%;
-padding:18px 8%;
+z-index:1000;
+box-shadow:0 5px 15px rgba(0,0,0,.4);
+}
+
+nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-
-background:rgba(0,0,0,.40);
-
-backdrop-filter:blur(12px);
-
-z-index:9999;
-
-transition:.4s;
-
+max-width:1200px;
+margin:auto;
 }
 
-/* Logo */
-
 .logo{
-
-font-size:32px;
-font-weight:800;
-color:#FFD700;
-
+font-size:30px;
+font-weight:bold;
+color:#fff;
 }
 
 .logo span{
-
-color:white;
-
+color:#ffd700;
 }
 
-/* Menu */
-
-nav{
-
+.menu{
 display:flex;
-gap:28px;
-
+gap:25px;
 }
 
-nav a{
-
-color:white;
+.menu a{
 text-decoration:none;
-font-size:17px;
+color:white;
 font-weight:500;
 transition:.3s;
-
 }
 
-nav a:hover{
-
-color:#FFD700;
-
+.menu a:hover{
+color:#ffd700;
 }
 
 /* Hero */
 
 .hero{
-
-width:100%;
-height:100vh;
-
+height:85vh;
 background:
-
-linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.60)),
-
-url("images/hero.jpg");
-
+linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+url("https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1400&q=80");
 background-size:cover;
 background-position:center;
-background-repeat:no-repeat;
-
 display:flex;
-justify-content:center;
 align-items:center;
-text-align:center;
-
-padding:20px;
-
-}
-
-/* Hero Content */
-
-.hero-content{
-
-max-width:850px;
-
-}
-
-.hero-content h1{
-
-font-size:70px;
-
-font-weight:800;
-
-color:#FFD700;
-
-margin-bottom:20px;
-
-}
-
-.hero-content p{
-
-font-size:22px;
-
-line-height:40px;
-
-margin-bottom:35px;
-
-}
-
-.hero-btn{
-
-display:inline-block;
-
-padding:16px 45px;
-
-background:#FFD700;
-
-color:#000;
-
-font-size:19px;
-
-font-weight:bold;
-
-text-decoration:none;
-
-border-radius:50px;
-
-transition:.35s;
-
-}
-
-.hero-btn:hover{
-
-background:white;
-
-transform:translateY(-5px);
-
-}
-
-/* Social Info */
-
-.hero-info{
-
-margin-top:40px;
-
-display:flex;
-
 justify-content:center;
-
-gap:20px;
-
-flex-wrap:wrap;
-
+text-align:center;
+padding:20px;
 }
 
-.info{
-
-background:rgba(255,255,255,.08);
-
-padding:15px 22px;
-
-border-radius:12px;
-
-backdrop-filter:blur(8px);
-
-font-size:16px;
-
+.hero h1{
+font-size:55px;
+margin-bottom:15px;
 }
 
-/* Common Section */
+.hero p{
+font-size:20px;
+margin-bottom:25px;
+}
+
+.hero button{
+padding:15px 35px;
+border:none;
+border-radius:50px;
+background:#ffd700;
+color:#000;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:.4s;
+}
+
+.hero button:hover{
+background:#fff;
+transform:scale(1.05);
+}
+
+/* Section */
 
 section{
-
-padding:90px 8%;
-
+padding:70px 8%;
 }
 
 .title{
-
+font-size:35px;
 text-align:center;
+margin-bottom:45px;
+color:#ffd700;
+}
 
-font-size:42px;
+/* Cards */
 
-color:#FFD700;
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
+}
 
-margin-bottom:50px;
+.card{
+background:#101b44;
+padding:25px;
+border-radius:15px;
+text-align:center;
+transition:.4s;
+border:1px solid #2b4ba8;
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+}
 
+.card:hover{
+transform:translateY(-8px);
+background:#18306f;
+}
+
+.card h3{
+margin-bottom:12px;
+font-size:22px;
+color:#ffd700;
+}
+
+.card p{
+font-size:15px;
+line-height:26px;
+}
+
+/* Route Cards */
+
+.route{
+background:#111;
+padding:20px;
+border-radius:15px;
+transition:.4s;
+text-align:center;
+}
+
+.route:hover{
+background:#ffd700;
+color:#000;
+transform:scale(1.04);
+}
+
+.route h3{
+margin-bottom:15px;
+}
+
+.route button{
+margin-top:18px;
+width:100%;
+padding:12px;
+border:none;
+border-radius:8px;
+background:#2563eb;
+color:white;
+font-weight:bold;
+cursor:pointer;
+}
+
+.route button:hover{
+background:#1d4ed8;
 }
 
 /* Responsive */
 
-@media(max-width:900px){
+@media(max-width:768px){
 
-nav{
+.hero h1{
+font-size:34px;
+}
 
+.hero p{
+font-size:16px;
+}
+
+.menu{
 display:none;
-
-}
-
-.hero-content h1{
-
-font-size:42px;
-
-}
-
-.hero-content p{
-
-font-size:18px;
-
-line-height:30px;
-
-}
-
-.hero-info{
-
-flex-direction:column;
-
 }
 
 }
 
 </style>
-
 </head>
 
 <body>
 
 <header>
 
-<div class="logo">
-
-🚖 Shivam <span>Travels</span>
-
-</div>
-
 <nav>
 
+<div class="logo">
+🚖 Shivam <span>Travels</span>
+</div>
+
+<div class="menu">
+
 <a href="#">Home</a>
-
 <a href="#about">About</a>
-
+<a href="#routes">Routes</a>
 <a href="#cars">Cars</a>
-
-<a href="#booking">Booking</a>
-
-<a href="#payment">Payment</a>
-
+<a href="#booking">Book Taxi</a>
 <a href="#contact">Contact</a>
+
+</div>
 
 </nav>
 
 </header>
 
-<!-- HERO SECTION -->
+<!-- HERO -->
 
 <section class="hero">
 
-<div class="hero-content">
+<div>
 
-<h1>
-
-SHIVAM TRAVELS
-
-</h1>
+<h1>Premium Taxi Service</h1>
 
 <p>
-
-Safe • Reliable • Comfortable Taxi Service
-
-<br>
-
-Available 24×7 Across Gujarat
-
+Safe • Comfortable • Affordable • 24×7 Available
 </p>
 
-<a href="#booking" class="hero-btn">
-
+<button onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
 🚖 Book Taxi Now
-
-</a>
-
-<div class="hero-info">
-
-<div class="info">
-
-📞 9898222313
-
-</div>
-
-<div class="info">
-
-🚘 Clean AC Cars
-
-</div>
-
-<div class="info">
-
-⭐ 24×7 Service
-
-</div>
-
-<div class="info">
-
-💰 Affordable Price
-
-</div>
-
-</div>
+</button>
 
 </div>
 
 </section>
 
-<!-- =========================================
-           WHY CHOOSE US
-========================================= -->
+<!-- WHY CHOOSE US -->
 
 <section id="about">
 
@@ -381,52 +279,44 @@ Available 24×7 Across Gujarat
 ⭐ Why Choose Shivam Travels
 </h2>
 
-<div class="features">
+<div class="grid">
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">🛡️</div>
-
-<h3>100% Safe Journey</h3>
+<h3>🛡 Safe Journey</h3>
 
 <p>
-Professional Drivers with safe and secure travelling experience.
+Professional drivers with complete safety and comfortable travelling experience.
 </p>
 
 </div>
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">🚘</div>
-
-<h3>Clean AC Cars</h3>
+<h3>🚖 Clean Cars</h3>
 
 <p>
-Daily cleaned and sanitized vehicles for your comfort.
+Daily cleaned AC vehicles with proper maintenance and hygiene.
 </p>
 
 </div>
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">💰</div>
-
-<h3>Affordable Fare</h3>
+<h3>💰 Best Price</h3>
 
 <p>
-Best taxi price without any hidden charges.
+Affordable rates without hidden charges.
 </p>
 
 </div>
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">⏰</div>
-
-<h3>24 × 7 Service</h3>
+<h3>⏰ 24×7 Service</h3>
 
 <p>
-Available anytime for local and outstation taxi booking.
+Book anytime. We are available day and night.
 </p>
 
 </div>
@@ -435,364 +325,84 @@ Available anytime for local and outstation taxi booking.
 
 </section>
 
-<!-- =========================================
-             OUR ACHIEVEMENTS
-========================================= -->
-
-<section>
-
-<h2 class="title">
-🏆 Our Achievements
-</h2>
-
-<div class="counter-box">
-
-<div class="counter">
-
-<h1>5000+</h1>
-
-<p>Happy Customers</p>
-
-</div>
-
-<div class="counter">
-
-<h1>15000+</h1>
-
-<p>Successful Trips</p>
-
-</div>
-
-<div class="counter">
-
-<h1>10+</h1>
-
-<p>Premium Cars</p>
-
-</div>
-
-<div class="counter">
-
-<h1>24×7</h1>
-
-<p>Customer Support</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- =========================================
-             ABOUT SHIVAM TRAVELS
-========================================= -->
-
-<section>
-
-<div class="about-box">
-
-<div class="about-text">
-
-<h2>
-🚖 About Shivam Travels
-</h2>
-
-<p>
-
-Shivam Travels provides safe,
-comfortable and affordable taxi
-service across Gujarat.
-
-We provide One Way,
-Round Trip,
-Airport Transfer,
-Railway Pickup,
-Corporate Taxi and Family Tour Packages.
-
-</p>
-
-<p>
-
-✔ Professional Drivers
-
-<br>
-
-✔ Clean AC Cars
-
-<br>
-
-✔ Affordable Fare
-
-<br>
-
-✔ On Time Pickup
-
-<br>
-
-✔ 24×7 Customer Support
-
-</p>
-
-<a href="#booking" class="hero-btn">
-
-Book Your Taxi
-
-</a>
-
-</div>
-
-<div class="about-image">
-
-<img src="images/hero.jpg">
-
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-/* FEATURES */
-
-.features{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
-}
-
-.feature-card{
-
-background:#12214f;
-
-padding:30px;
-
-border-radius:18px;
-
-text-align:center;
-
-transition:.4s;
-
-box-shadow:0 15px 30px rgba(0,0,0,.35);
-
-}
-
-.feature-card:hover{
-
-transform:translateY(-10px);
-
-background:#18347f;
-
-}
-
-.icon{
-
-font-size:50px;
-
-margin-bottom:15px;
-
-}
-
-.feature-card h3{
-
-color:#FFD700;
-
-margin-bottom:15px;
-
-}
-
-/* COUNTER */
-
-.counter-box{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-
-gap:25px;
-
-}
-
-.counter{
-
-background:#12214f;
-
-padding:35px;
-
-border-radius:18px;
-
-text-align:center;
-
-}
-
-.counter h1{
-
-font-size:45px;
-
-color:#FFD700;
-
-margin-bottom:10px;
-
-}
-
-/* ABOUT */
-
-.about-box{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:40px;
-
-align-items:center;
-
-}
-
-.about-text h2{
-
-font-size:40px;
-
-color:#FFD700;
-
-margin-bottom:20px;
-
-}
-
-.about-text p{
-
-line-height:32px;
-
-margin-bottom:25px;
-
-}
-
-.about-image img{
-
-width:100%;
-
-border-radius:20px;
-
-box-shadow:0 20px 40px rgba(0,0,0,.4);
-
-}
-
-@media(max-width:900px){
-
-.about-box{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-</style>
-
-<!-- =========================================
-            POPULAR ROUTES
-========================================= -->
+<!-- POPULAR ROUTES -->
 
 <section id="routes">
 
 <h2 class="title">
-🛣️ Popular Routes
+🛣 Popular Routes
 </h2>
 
-<div class="routes-grid">
+<div class="grid">
 
-<div class="route-card">
+<div class="route">
 
-<h3>📍 SIHOR</h3>
+<h3>📍 Palitana</h3>
 
 <p>
-
 Ahmedabad<br>
 Gandhinagar<br>
 Vadodara<br>
 Surat<br>
 Rajkot
-
 </p>
 
-<button class="route-btn"
-onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
-
+<button>
 Book Now
-
 </button>
 
 </div>
 
-<div class="route-card">
+<div class="route">
 
-<h3>📍 PALITANA</h3>
+<h3>📍 Songadh</h3>
 
 <p>
-
 Ahmedabad<br>
 Gandhinagar<br>
 Vadodara<br>
 Surat<br>
 Rajkot
-
 </p>
 
-<button class="route-btn"
-onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
-
+<button>
 Book Now
-
 </button>
 
 </div>
 
-<div class="route-card">
+<div class="route">
 
-<h3>📍 BHAVNAGAR</h3>
+<h3>📍 Sihor</h3>
 
 <p>
-
 Ahmedabad<br>
 Gandhinagar<br>
 Vadodara<br>
 Surat<br>
 Rajkot
-
 </p>
 
-<button class="route-btn"
-onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
-
+<button>
 Book Now
-
 </button>
 
 </div>
 
-<div class="route-card">
+<div class="route">
 
-<h3>📍 SONGADH</h3>
+<h3>📍 Bhavnagar</h3>
 
 <p>
-
 Ahmedabad<br>
 Gandhinagar<br>
 Vadodara<br>
 Surat<br>
 Rajkot
-
 </p>
 
-<button class="route-btn"
-onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
-
+<button>
 Book Now
-
 </button>
 
 </div>
@@ -800,135 +410,9 @@ Book Now
 </div>
 
 </section>
-
-<!-- =========================================
-            QUICK BOOKING
-========================================= -->
-
-<section>
-
-<div class="quick-book">
-
-<h2>
-🚖 Need a Taxi Right Now?
-</h2>
-
-<p>
-
-Book your taxi in just one click through WhatsApp.
-
-Safe • Comfortable • Affordable
-
-</p>
-
-<a href="#booking" class="hero-btn">
-
-📋 Book Taxi
-
-</a>
-
-</div>
-
-</section>
-
-<style>
-
-/* ROUTES */
-
-.routes-grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-
-}
-
-.route-card{
-
-background:#12214f;
-padding:30px;
-border-radius:20px;
-text-align:center;
-transition:.35s;
-box-shadow:0 15px 30px rgba(0,0,0,.35);
-
-}
-
-.route-card:hover{
-
-background:#18347f;
-transform:translateY(-8px);
-
-}
-
-.route-card h3{
-
-color:#FFD700;
-margin-bottom:15px;
-
-}
-
-.route-card p{
-
-line-height:30px;
-margin-bottom:20px;
-
-}
-
-.route-btn{
-
-width:100%;
-padding:14px;
-border:none;
-border-radius:50px;
-background:#FFD700;
-color:#000;
-font-size:17px;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-
-}
-
-.route-btn:hover{
-
-background:#ffffff;
-transform:scale(1.03);
-
-}
-
-/* QUICK BOOK */
-
-.quick-book{
-
-background:linear-gradient(135deg,#1d4ed8,#2563eb,#3b82f6);
-padding:60px 30px;
-border-radius:25px;
-text-align:center;
-box-shadow:0 20px 40px rgba(0,0,0,.35);
-
-}
-
-.quick-book h2{
-
-font-size:42px;
-margin-bottom:20px;
-
-}
-
-.quick-book p{
-
-font-size:18px;
-line-height:32px;
-margin-bottom:30px;
-
-}
-
-</style>
-
-<!-- =========================================
-          OUR PREMIUM FLEET
-========================================= -->
+<!-- ===========================
+        OUR CARS SECTION
+============================ -->
 
 <section id="cars">
 
@@ -936,161 +420,157 @@ margin-bottom:30px;
 🚘 Our Premium Fleet
 </h2>
 
-<div class="car-grid">
+<div class="grid">
 
-<!-- =========================
-        DZIRE
-========================== -->
+<!-- Dzire -->
 
-<div class="car-card">
+<div class="card car-card">
 
-<img src="images/dzire.jpg" alt="Swift Dzire">
-
-<div class="car-content">
+<img src="cars/dzire.jpg" alt="Swift Dzire">
 
 <h3>🚖 Maruti Swift Dzire</h3>
 
-<p>💰 <b>₹10 / KM</b></p>
+<p>
+💰 ₹10 / KM
+</p>
 
-<p>👥 4 + 1 Seats</p>
+<p>
+👥 4 + 1 Seats
+</p>
 
-<p>❄️ Air Conditioned</p>
+<p>
+❄️ Air Conditioned
+</p>
 
-<p>🛣️ 300 KM / Day</p>
+<p>
+🛣️ 300 KM / Day
+</p>
 
-<p>👨‍✈️ Driver Allowance : ₹400</p>
+<p>
+👨‍✈️ Driver Allowance : ₹400
+</p>
 
-<button class="book-btn"
+<button class="car-btn"
+onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+document.getElementById('carType').value='Dzire';">
 
-onclick="
-document.getElementById('booking').scrollIntoView({
-behavior:'smooth'
-});
-document.getElementById('carType').value='Swift Dzire';
-">
-
-🚖 Book Dzire
+Book Dzire
 
 </button>
 
 </div>
 
-</div>
+<!-- Aura -->
 
-<!-- =========================
-          AURA
-========================== -->
+<div class="card car-card">
 
-<div class="car-card">
-
-<img src="images/aura.jpg" alt="Hyundai Aura">
-
-<div class="car-content">
+<img src="cars/aura.jpg" alt="Hyundai Aura">
 
 <h3>🚖 Hyundai Aura</h3>
 
-<p>💰 <b>₹10 / KM</b></p>
+<p>
+💰 ₹10 / KM
+</p>
 
-<p>👥 4 + 1 Seats</p>
+<p>
+👥 4 + 1 Seats
+</p>
 
-<p>❄️ Air Conditioned</p>
+<p>
+❄️ Air Conditioned
+</p>
 
-<p>🛣️ 300 KM / Day</p>
+<p>
+🛣️ 300 KM / Day
+</p>
 
-<p>👨‍✈️ Driver Allowance : ₹400</p>
+<p>
+👨‍✈️ Driver Allowance : ₹400
+</p>
 
-<button class="book-btn"
+<button class="car-btn"
+onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+document.getElementById('carType').value='Aura';">
 
-onclick="
-document.getElementById('booking').scrollIntoView({
-behavior:'smooth'
-});
-document.getElementById('carType').value='Hyundai Aura';
-">
-
-🚖 Book Aura
-
-</button>
-
-</div>
-
-</div>
-
-<!-- =========================
-          ERTIGA
-========================== -->
-
-<div class="car-card">
-
-<img src="images/ertiga.jpg" alt="Maruti Ertiga">
-
-<div class="car-content">
-
-<h3>🚐 Maruti Ertiga</h3>
-
-<p>💰 <b>₹13 / KM</b></p>
-
-<p>👥 6 + 1 Seats</p>
-
-<p>❄️ Air Conditioned</p>
-
-<p>🛣️ 300 KM / Day</p>
-
-<p>👨‍✈️ Driver Allowance : ₹400</p>
-
-<button class="book-btn"
-
-onclick="
-document.getElementById('booking').scrollIntoView({
-behavior:'smooth'
-});
-document.getElementById('carType').value='Maruti Ertiga';
-">
-
-🚖 Book Ertiga
+Book Aura
 
 </button>
 
 </div>
 
-</div>
+<!-- Ertiga -->
 
-<!-- =========================
-      INNOVA CRYSTA
-========================== -->
+<div class="card car-card">
 
-<div class="car-card">
+<img src="cars/ertiga.jpg" alt="Ertiga">
 
-<img src="images/innova.jpg" alt="Innova Crysta">
+<h3>🚖 Maruti Ertiga</h3>
 
-<div class="car-content">
+<p>
+💰 ₹13 / KM
+</p>
 
-<h3>🚙 Innova Crysta</h3>
+<p>
+👥 6 + 1 Seats
+</p>
 
-<p>💰 <b>₹19 / KM</b></p>
+<p>
+❄️ Air Conditioned
+</p>
 
-<p>👥 6 + 1 Seats</p>
+<p>
+🛣️ 300 KM / Day
+</p>
 
-<p>❄️ Air Conditioned</p>
+<p>
+👨‍✈️ Driver Allowance : ₹400
+</p>
 
-<p>🛣️ 300 KM / Day</p>
+<button class="car-btn"
+onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+document.getElementById('carType').value='Ertiga';">
 
-<p>👨‍✈️ Driver Allowance : ₹400</p>
-
-<button class="book-btn"
-
-onclick="
-document.getElementById('booking').scrollIntoView({
-behavior:'smooth'
-});
-document.getElementById('carType').value='Innova Crysta';
-">
-
-🚖 Book Innova
+Book Ertiga
 
 </button>
 
 </div>
+
+<!-- Innova -->
+
+<div class="card car-card">
+
+<img src="cars/innova.jpg" alt="Innova Crysta">
+
+<h3>🚖 Toyota Innova Crysta</h3>
+
+<p>
+💰 ₹19 / KM
+</p>
+
+<p>
+👥 6 + 1 Seats
+</p>
+
+<p>
+❄️ Air Conditioned
+</p>
+
+<p>
+🛣️ 300 KM / Day
+</p>
+
+<p>
+👨‍✈️ Driver Allowance : ₹400
+</p>
+
+<button class="car-btn"
+onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'});
+document.getElementById('carType').value='Innova Crysta';">
+
+Book Innova
+
+</button>
 
 </div>
 
@@ -1098,246 +578,69 @@ document.getElementById('carType').value='Innova Crysta';
 
 </section>
 
-<!-- =========================================
-          FARE INFORMATION
-========================================= -->
-
-<section id="fare">
-
-<h2 class="title">
-💰 Taxi Fare Information
-</h2>
-
-<div class="features">
-
-<div class="feature-card">
-
-<div class="icon">🛣️</div>
-
-<h3>One Way Trip</h3>
-
-<p>
-✔ Best Price Available<br>
-✔ Toll / Parking Extra<br>
-✔ Comfortable Journey
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div class="icon">🔁</div>
-
-<h3>Round Trip</h3>
-
-<p>
-✔ Minimum 300 KM / Day<br>
-✔ Driver Allowance ₹400<br>
-✔ Toll, Parking & State Tax Extra
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div class="icon">🚖</div>
-
-<h3>Available Cars</h3>
-
-<p>
-Swift Dzire<br>
-Hyundai Aura<br>
-Maruti Ertiga<br>
-Innova Crysta
-</p>
-
-</div>
-
-</div>
-
-</section>
+<!-- ===========================
+      EXTRA CSS
+============================ -->
 
 <style>
 
-/* =========================================
-            CAR SECTION CSS
-========================================= */
+.car-card img{
 
-.car-grid{
-
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
+width:100%;
+height:180px;
+object-fit:cover;
+border-radius:12px;
+margin-bottom:15px;
 
 }
 
 .car-card{
 
-background:#12214f;
-border-radius:20px;
-overflow:hidden;
 transition:.4s;
-box-shadow:0 15px 30px rgba(0,0,0,.35);
 
 }
 
 .car-card:hover{
 
 transform:translateY(-10px);
-box-shadow:0 25px 40px rgba(0,0,0,.50);
+box-shadow:0 20px 40px rgba(0,0,0,.45);
 
 }
 
-.car-card img{
+.car-card p{
 
+margin:8px 0;
+font-size:15px;
+
+}
+
+.car-btn{
+
+margin-top:15px;
 width:100%;
-height:230px;
-object-fit:cover;
-transition:.4s;
-
-}
-
-.car-card:hover img{
-
-transform:scale(1.08);
-
-}
-
-.car-content{
-
-padding:25px;
-text-align:center;
-
-}
-
-.car-content h3{
-
-font-size:24px;
-color:#FFD700;
-margin-bottom:15px;
-
-}
-
-.car-content p{
-
-font-size:16px;
-line-height:30px;
-
-}
-
-.book-btn{
-
-margin-top:20px;
-width:100%;
-padding:15px;
+padding:13px;
 border:none;
-border-radius:50px;
-background:#FFD700;
-color:#000;
-font-size:18px;
-font-weight:700;
+border-radius:8px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:bold;
 cursor:pointer;
 transition:.3s;
 
 }
 
-.book-btn:hover{
+.car-btn:hover{
 
-background:#fff;
-transform:scale(1.05);
-
-}
-
-/* =========================================
-            FARE SECTION
-========================================= */
-
-#fare{
-
-padding-top:30px;
-
-}
-
-#fare .feature-card{
-
-background:#12214f;
-padding:30px;
-border-radius:20px;
-text-align:center;
-transition:.4s;
-
-}
-
-#fare .feature-card:hover{
-
-background:#1d3b85;
-transform:translateY(-8px);
-
-}
-
-#fare .icon{
-
-font-size:50px;
-margin-bottom:15px;
-
-}
-
-#fare h3{
-
-color:#FFD700;
-margin-bottom:15px;
-
-}
-
-/* =========================================
-          RESPONSIVE
-========================================= */
-
-@media(max-width:768px){
-
-.car-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.car-card img{
-
-height:220px;
-
-}
-
-.book-btn{
-
-font-size:17px;
-
-}
-
-}
-
-/* =========================================
-        GOLD GLOW EFFECT
-========================================= */
-
-.car-card,
-.feature-card{
-
-border:1px solid rgba(255,215,0,.20);
-
-}
-
-.car-card:hover,
-.feature-card:hover{
-
-border-color:#FFD700;
+background:#ffd700;
+color:#000;
 
 }
 
 </style>
-
-        <!-- =========================================
-            BOOK YOUR TAXI
-========================================= -->
+<!-- =======================================
+            BOOKING SECTION
+======================================= -->
 
 <section id="booking">
 
@@ -1345,38 +648,39 @@ border-color:#FFD700;
 🚖 Book Your Taxi
 </h2>
 
-<div class="booking-grid">
+<div class="booking-box">
 
-<!-- Booking Form -->
+<div class="booking-left">
 
-<div class="booking-card">
-
-<h3>📋 Booking Details</h3>
+<h3>📋 Customer Details</h3>
 
 <input
 type="text"
 id="name1"
-placeholder="👤 Full Name">
+placeholder="👤 Full Name"
+required>
 
 <input
 type="tel"
 id="phone1"
-placeholder="📞 Mobile Number">
+placeholder="📞 Mobile Number"
+required>
 
 <input
 type="number"
 id="person1"
-placeholder="👥 Number of Persons">
+placeholder="👥 Number of Persons"
+required>
 
 <select id="carType">
 
 <option value="">🚘 Select Car</option>
 
-<option>Swift Dzire</option>
+<option>Dzire</option>
 
-<option>Hyundai Aura</option>
+<option>Aura</option>
 
-<option>Maruti Ertiga</option>
+<option>Ertiga</option>
 
 <option>Innova Crysta</option>
 
@@ -1385,12 +689,14 @@ placeholder="👥 Number of Persons">
 <input
 type="text"
 id="pickup1"
-placeholder="📍 Pickup Location">
+placeholder="📍 Pickup Location"
+required>
 
 <input
 type="text"
 id="drop1"
-placeholder="🏁 Drop Location">
+placeholder="🏁 Drop Location"
+required>
 
 <select id="trip1">
 
@@ -1408,43 +714,54 @@ id="date1">
 type="time"
 id="time1">
 
+<div class="booking-note">
+
+<p>
+📌 Round Trip Minimum :
+<b>300 KM / Day</b>
+</p>
+
+<p>
+👨‍✈️ Driver Allowance :
+<b>₹400 / Day</b>
+</p>
+
+<p>
+🚧 Toll Tax, Parking &
+State Border Charges Extra.
+</p>
+
+</div>
+
 <button
 class="confirm-btn"
 onclick="sendBooking()">
 
-🚖 Confirm Booking
+✅ Confirm Booking
 
 </button>
 
 </div>
 
-<!-- Booking Information -->
+<div class="booking-right">
 
-<div class="booking-card">
+<h3>⭐ Booking Information</h3>
 
-<h3>ℹ️ Booking Information</h3>
+<div class="info-card">
 
-<div class="booking-info">
+<p>🚖 Safe & Comfortable Ride</p>
 
-<p>✅ Instant WhatsApp Booking</p>
+<p>👨‍✈️ Verified Drivers</p>
+
+<p>❄️ Clean AC Cars</p>
+
+<p>💰 Affordable Fare</p>
+
+<p>🕐 24×7 Service</p>
+
+<p>📱 Instant WhatsApp Confirmation</p>
 
 <p>🆔 Automatic Booking ID</p>
-
-<p>👨‍✈️ Professional Drivers</p>
-
-<p>🚘 Clean & Sanitized Cars</p>
-
-<p>❄️ Fully Air Conditioned</p>
-
-<p>📞 24×7 Customer Support</p>
-
-<p>🛣️ Round Trip : Minimum 300 KM / Day</p>
-
-<p>💰 Driver Allowance : ₹400 / Day</p>
-
-<p>🚧 Toll Tax, Parking & State Tax Extra</p>
-
-<p>📲 Confirmation via WhatsApp</p>
 
 </div>
 
@@ -1454,13 +771,13 @@ onclick="sendBooking()">
 
 </section>
 
+<!-- ===========================
+         BOOKING CSS
+=========================== -->
+
 <style>
 
-/* =========================================
-           BOOKING SECTION
-========================================= */
-
-.booking-grid{
+.booking-box{
 
 display:grid;
 grid-template-columns:2fr 1fr;
@@ -1468,78 +785,88 @@ gap:30px;
 
 }
 
-.booking-card{
+.booking-left,
+.booking-right{
 
-background:#12214f;
-padding:30px;
-border-radius:20px;
-box-shadow:0 15px 30px rgba(0,0,0,.35);
-
-}
-
-.booking-card h3{
-
-color:#FFD700;
-font-size:28px;
-margin-bottom:25px;
+background:#101b44;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,.35);
 
 }
 
-.booking-card input,
-.booking-card select{
+.booking-left h3,
+.booking-right h3{
+
+margin-bottom:20px;
+color:#ffd700;
+
+}
+
+.booking-left input,
+.booking-left select{
 
 width:100%;
-padding:15px;
+padding:14px;
 margin-bottom:15px;
 border:none;
-border-radius:10px;
-font-size:16px;
 outline:none;
+border-radius:8px;
+font-size:15px;
 
 }
 
-.booking-card input:focus,
-.booking-card select:focus{
+.booking-left input:focus,
+.booking-left select:focus{
 
-box-shadow:0 0 12px #FFD700;
+box-shadow:0 0 8px #2563eb;
+
+}
+
+.booking-note{
+
+background:#081229;
+padding:15px;
+border-radius:10px;
+margin-top:15px;
+line-height:28px;
 
 }
 
 .confirm-btn{
 
+margin-top:20px;
 width:100%;
-padding:16px;
+padding:15px;
+background:#22c55e;
 border:none;
-border-radius:50px;
-background:#FFD700;
-color:#000;
+border-radius:10px;
 font-size:18px;
 font-weight:bold;
 cursor:pointer;
 transition:.3s;
+color:white;
 
 }
 
 .confirm-btn:hover{
 
-background:#ffffff;
-transform:scale(1.03);
+background:#16a34a;
 
 }
 
-.booking-info{
+.info-card{
 
 background:#081229;
 padding:20px;
-border-radius:15px;
-line-height:34px;
-font-size:16px;
+border-radius:10px;
+line-height:35px;
 
 }
 
-@media(max-width:900px){
+@media(max-width:768px){
 
-.booking-grid{
+.booking-box{
 
 grid-template-columns:1fr;
 
@@ -1548,139 +875,98 @@ grid-template-columns:1fr;
 }
 
 </style>
-
 <script>
 
-/* ==========================================
-          SHIVAM TRAVELS BOOKING
-========================================== */
+/* ===============================
+   SHIVAM TRAVELS BOOKING SYSTEM
+================================= */
 
 function sendBooking(){
 
-let name=document.getElementById("name1").value.trim();
-let phone=document.getElementById("phone1").value.trim();
-let person=document.getElementById("person1").value.trim();
-let car=document.getElementById("carType").value;
-let pickup=document.getElementById("pickup1").value.trim();
-let drop=document.getElementById("drop1").value.trim();
-let trip=document.getElementById("trip1").value;
-let date=document.getElementById("date1").value;
-let time=document.getElementById("time1").value;
+let name = document.getElementById("name1").value.trim();
+let phone = document.getElementById("phone1").value.trim();
+let person = document.getElementById("person1").value.trim();
+let car = document.getElementById("carType").value;
+let pickup = document.getElementById("pickup1").value.trim();
+let drop = document.getElementById("drop1").value.trim();
+let trip = document.getElementById("trip1").value;
+let date = document.getElementById("date1").value;
+let time = document.getElementById("time1").value;
 
 /* Validation */
 
-if(name==""){
-alert("👤 Please Enter Your Name");
+if(
+name=="" ||
+phone=="" ||
+person=="" ||
+car=="" ||
+pickup=="" ||
+drop=="" ||
+date=="" ||
+time==""
+){
+alert("⚠ Please fill all booking details.");
 return;
 }
 
 if(phone.length!=10 || isNaN(phone)){
-alert("📞 Please Enter Valid Mobile Number");
-return;
-}
-
-if(person==""){
-alert("👥 Enter Number Of Persons");
-return;
-}
-
-if(car==""){
-alert("🚘 Please Select Car");
-return;
-}
-
-if(pickup==""){
-alert("📍 Enter Pickup Location");
-return;
-}
-
-if(drop==""){
-alert("🏁 Enter Drop Location");
-return;
-}
-
-if(date==""){
-alert("📅 Select Journey Date");
-return;
-}
-
-if(time==""){
-alert("⏰ Select Journey Time");
+alert("📞 Please enter a valid 10 digit mobile number.");
 return;
 }
 
 /* Booking ID */
 
-let bookingId="ST"+Math.floor(10000+Math.random()*90000);
-
-/* Current Time */
-
-let now=new Date();
-
-let bookingTime=now.toLocaleString();
+let bookingId =
+"ST" +
+Math.floor(
+10000 + Math.random()*90000
+);
 
 /* WhatsApp Message */
 
-let message=
+let message =
 `🚖 *Shivam Travels Booking*
 
-━━━━━━━━━━━━━━━━━━
+🆔 ID: ${bookingId}
 
-🆔 ID : ${bookingId}
+👤 Name: ${name}
 
-👤 Name : ${name}
+📞 Phone: ${phone}
 
-📞 Phone : ${phone}
+👥 Persons: ${person}
 
-👥 Persons : ${person}
+🚘 Car: ${car}
 
-🚘 Car : ${car}
+🛣️ Trip: ${trip}
 
-🛣️ Trip : ${trip}
+📍 Pickup: ${pickup}
 
-📍 Pickup : ${pickup}
+🏁 Drop: ${drop}
 
-🏁 Drop : ${drop}
+📅 Date: ${date}
 
-📅 Date : ${date}
+⏰ Time: ${time}
 
-⏰ Time : ${time}
+━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━
-
-✅ Booking Confirmed
-
-🕒 Booking Time :
-${bookingTime}
-
-━━━━━━━━━━━━━━━━━━
+✅ Booking Status : Confirmed
 
 🙏 Thank You For Choosing
+*Shivam Travels*
 
-*🚖 Shivam Travels*
+📞 9898222313`;
 
-📞 9898222313
+let whatsapp =
+"https://wa.me/919898222313?text=" +
+encodeURIComponent(message);
 
-💬 WhatsApp Booking
-
-Safe • Reliable • Affordable`;
-
-/* Open WhatsApp */
-
-window.open(
-
-"https://wa.me/919898222313?text="+encodeURIComponent(message),
-
-"_blank"
-
-);
+window.open(whatsapp,"_blank");
 
 /* Success Message */
 
 alert(
-
-"✅ Booking Confirmed Successfully\n\nBooking ID : "+bookingId
-
+"✅ Booking Confirmed\n\n" +
+"Booking ID : " + bookingId
 );
 
 /* Reset Form */
@@ -1698,30 +984,31 @@ document.getElementById("time1").value="";
 }
 
 </script>
-
 <!-- =========================================
-              ONLINE PAYMENT
-========================================= -->
+            ONLINE PAYMENT
+========================================== -->
 
 <section id="payment">
 
-<h2 class="title">💳 Online Payment</h2>
+<h2 class="title">
+💰 Online Payment
+</h2>
 
-<div class="booking-grid">
+<div class="booking-box">
 
-<div class="booking-card">
+<div class="booking-left">
 
-<h3>💰 Pay Online</h3>
+<h3>UPI Payment</h3>
 
-<p style="margin-bottom:20px;">
-<b>UPI ID :</b><br>
-chauhanshivam2535-1@okicici
+<p style="margin-bottom:15px;">
+UPI ID :
+<b>chauhanshivam2535-1@okicici</b>
 </p>
 
 <input
 type="number"
 id="amount"
-placeholder="💵 Enter Amount">
+placeholder="💰 Enter Amount">
 
 <button
 class="confirm-btn"
@@ -1733,23 +1020,19 @@ onclick="payNow()">
 
 </div>
 
-<div class="booking-card">
+<div class="booking-right">
 
-<h3>Payment Information</h3>
+<h3>Payment Instructions</h3>
 
-<div class="booking-info">
+<div class="info-card">
 
-<p>✅ Google Pay</p>
+<p>✅ Enter Amount</p>
 
-<p>✅ PhonePe</p>
+<p>📱 Click Pay Now</p>
 
-<p>✅ Paytm</p>
+<p>💳 Complete Payment</p>
 
-<p>✅ BHIM UPI</p>
-
-<p>📱 All UPI Apps Supported</p>
-
-<p>📸 Send Payment Screenshot on WhatsApp</p>
+<p>📞 Share Screenshot on WhatsApp</p>
 
 </div>
 
@@ -1760,8 +1043,8 @@ onclick="payNow()">
 </section>
 
 <!-- =========================================
-            CUSTOMER REVIEWS
-========================================= -->
+          CUSTOMER REVIEWS
+========================================== -->
 
 <section id="reviews">
 
@@ -1769,9 +1052,9 @@ onclick="payNow()">
 ⭐ Customer Reviews
 </h2>
 
-<div class="booking-grid">
+<div class="booking-box">
 
-<div class="booking-card">
+<div class="booking-left">
 
 <input
 id="rname"
@@ -1779,44 +1062,43 @@ placeholder="👤 Your Name">
 
 <select id="rating">
 
-<option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-<option value="4">⭐⭐⭐⭐ Very Good</option>
-<option value="3">⭐⭐⭐ Good</option>
-<option value="2">⭐⭐ Average</option>
-<option value="1">⭐ Poor</option>
+<option value="5">⭐⭐⭐⭐⭐</option>
+<option value="4">⭐⭐⭐⭐</option>
+<option value="3">⭐⭐⭐</option>
+<option value="2">⭐⭐</option>
+<option value="1">⭐</option>
 
 </select>
 
 <textarea
 id="rtext"
-placeholder="Write Your Review..."
+placeholder="Write your review..."
 style="
 width:100%;
 height:120px;
 padding:15px;
 border:none;
-border-radius:10px;
-margin-bottom:15px;
+border-radius:8px;
 resize:none;
-font-size:16px;"></textarea>
+margin-bottom:15px;"></textarea>
 
 <button
 class="confirm-btn"
 onclick="addReview()">
 
-⭐ Submit Review
+Submit Review
 
 </button>
 
 </div>
 
-<div class="booking-card">
+<div class="booking-right">
 
 <h3>Customer Feedback</h3>
 
 <div
 id="reviewList"
-class="booking-info">
+class="info-card">
 
 </div>
 
@@ -1827,8 +1109,8 @@ class="booking-info">
 </section>
 
 <!-- =========================================
-               CONTACT
-========================================= -->
+            CONTACT
+========================================== -->
 
 <section id="contact">
 
@@ -1836,19 +1118,17 @@ class="booking-info">
 📞 Contact Us
 </h2>
 
-<div class="features">
+<div class="grid">
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">📞</div>
-
-<h3>Call Us</h3>
+<h3>📞 Call</h3>
 
 <p>9898222313</p>
 
 <a href="tel:9898222313">
 
-<button class="book-btn">
+<button class="car-btn">
 
 Call Now
 
@@ -1858,19 +1138,17 @@ Call Now
 
 </div>
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">💬</div>
-
-<h3>WhatsApp</h3>
+<h3>💬 WhatsApp</h3>
 
 <p>Instant Booking</p>
 
 <a href="https://wa.me/919898222313">
 
-<button class="book-btn">
+<button class="car-btn">
 
-Chat Now
+WhatsApp
 
 </button>
 
@@ -1878,21 +1156,11 @@ Chat Now
 
 </div>
 
-<div class="feature-card">
+<div class="card">
 
-<div class="icon">📍</div>
+<h3>📧 Service</h3>
 
-<h3>Service Area</h3>
-
-<p>
-
-Sihor<br>
-Bhavnagar<br>
-Palitana<br>
-Songadh<br>
-All Gujarat
-
-</p>
+<p>24 × 7 Available</p>
 
 </div>
 
@@ -1902,75 +1170,46 @@ All Gujarat
 
 <!-- =========================================
               FOOTER
-========================================= -->
+========================================== -->
 
-<footer style="
+<footer
+style="
 background:#061022;
-padding:40px;
+padding:30px;
 text-align:center;
-">
+margin-top:40px;">
 
-<h2 style="color:#FFD700;">
+<h2 style="color:#ffd700;">
 🚖 Shivam Travels
 </h2>
 
+<p style="margin-top:10px;">
+Safe • Reliable • Affordable
+</p>
+
 <p style="margin-top:15px;">
-Safe • Reliable • Comfortable
-</p>
-
-<p style="margin-top:10px;">
-📞 9898222313
-</p>
-
-<p style="margin-top:10px;">
 © 2026 Shivam Travels
+All Rights Reserved.
 </p>
 
 </footer>
 
-<!-- Floating Call -->
-
-<a
-href="tel:9898222313"
-
-style="
-position:fixed;
-bottom:95px;
-right:20px;
-width:60px;
-height:60px;
-background:#ef4444;
-color:white;
-border-radius:50%;
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:30px;
-text-decoration:none;
-z-index:9999;">
-
-📞
-
-</a>
-
-<!-- Floating WhatsApp -->
+<!-- Floating Buttons -->
 
 <a
 href="https://wa.me/919898222313"
-
 style="
 position:fixed;
-bottom:20px;
 right:20px;
+bottom:20px;
 width:60px;
 height:60px;
 background:#25D366;
-color:white;
 border-radius:50%;
 display:flex;
 justify-content:center;
 align-items:center;
-font-size:30px;
+font-size:28px;
 text-decoration:none;
 z-index:9999;">
 
@@ -1978,39 +1217,65 @@ z-index:9999;">
 
 </a>
 
+<a
+href="tel:9898222313"
+style="
+position:fixed;
+right:20px;
+bottom:95px;
+width:60px;
+height:60px;
+background:#ef4444;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+text-decoration:none;
+z-index:9999;">
+
+📞
+
+</a>
+
 <script>
 
-/* ==========================
-      PAYMENT
-========================== */
+/* ---------- PAYMENT ---------- */
 
 function payNow(){
 
 let amt=document.getElementById("amount").value;
 
-if(amt=="" || amt<=0){
+if(amt==""||amt<=0){
 
-alert("Enter Valid Amount");
+alert("Enter valid amount");
 
 return;
 
 }
 
-window.location.href=
+let upi=
 "upi://pay?pa=chauhanshivam2535-1@okicici&pn=ShivamTravels&am="+amt+"&cu=INR";
 
+window.location.href=upi;
+
 }
 
-/* ==========================
-      REVIEWS
-========================== */
+/* ---------- REVIEWS ---------- */
 
-let reviews=JSON.parse(localStorage.getItem("reviews"))||[
+let reviews=
+JSON.parse(localStorage.getItem("reviews"))||[
+
 {
-name:"Chauhan Shivam",
+
+name:"CHAUHAN SHIVAM",
+
 rating:"5",
-text:"Best Taxi Service, Clean Cars & Affordable Fare."
+
+text:"⭐⭐⭐⭐⭐ Best Taxi Service, Affordable Price & Clean Car."
+
 }
+
 ];
 
 function showReviews(){
@@ -2020,11 +1285,22 @@ let html="";
 reviews.forEach(function(r){
 
 html+=`
-<div style="background:#081229;padding:15px;border-radius:10px;margin-bottom:15px;">
-<b>${r.name}</b><br>
+<div style="
+background:#081229;
+padding:15px;
+margin-bottom:15px;
+border-radius:10px;">
+
+<b>${r.name}</b>
+
+<br>
+
 ⭐ ${r.rating}/5
+
 <br><br>
+
 ${r.text}
+
 </div>
 `;
 
@@ -2044,7 +1320,7 @@ let tx=document.getElementById("rtext").value.trim();
 
 if(n==""||tx==""){
 
-alert("Please Fill All Details");
+alert("Fill all details.");
 
 return;
 
@@ -2053,23 +1329,30 @@ return;
 reviews.push({
 
 name:n,
+
 rating:rt,
+
 text:tx
 
 });
 
 localStorage.setItem(
+
 "reviews",
+
 JSON.stringify(reviews)
+
 );
 
 showReviews();
 
 document.getElementById("rname").value="";
+
 document.getElementById("rating").selectedIndex=0;
+
 document.getElementById("rtext").value="";
 
-alert("✅ Review Submitted Successfully");
+alert("✅ Review Submitted");
 
 }
 
@@ -2078,6 +1361,4 @@ showReviews();
 </script>
 
 </body>
-
 </html>
-
