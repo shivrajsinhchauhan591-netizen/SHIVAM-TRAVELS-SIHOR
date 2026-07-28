@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Shivam Travels Sihor | Taxi Service in Sihor & Bhavnagar</title>
+<title>Shivam Travels Sihor | Taxi Service in Gujarat</title>
 
-<meta name="description" content="Shivam Travels Sihor provides 24/7 taxi service, local trips, outstation taxi, airport pickup and drop, one way taxi and holiday tours.">
+<meta name="description" content="Shivam Travels Sihor provides 24/7 taxi service from Sihor, Bhavnagar, Palitana and Songadh to Ahmedabad, Gandhinagar, Vadodara and Gujarat.">
 
-<meta name="keywords" content="Taxi Service in Sihor, Taxi Service in Bhavnagar, Cab in Sihor, Ahmedabad Airport Taxi, Shivam Travels Sihor">
+<meta name="keywords" content="Taxi Service Sihor, Cab in Sihor, Bhavnagar Taxi, Airport Taxi Gujarat">
 
 <style>
 
@@ -16,907 +18,569 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    scroll-behavior:smooth;
+    font-family:Arial, sans-serif;
 }
 
 body{
-    font-family:Arial, sans-serif;
-    color:#172033;
-    background:#f7faff;
-    line-height:1.6;
+    background:#f5f5f5;
+    color:#222;
 }
 
-:root{
-    --blue:#0755b5;
-    --darkblue:#063b7a;
-    --yellow:#ffc400;
-    --white:#ffffff;
-    --light:#f1f7ff;
-}
 
-.container{
-    width:92%;
-    max-width:1200px;
-    margin:auto;
-}
-
-/* HEADER */
+/* Header */
 
 header{
-    background:var(--white);
-    box-shadow:0 3px 15px rgba(0,0,0,0.1);
-    position:sticky;
-    top:0;
-    z-index:1000;
-}
-
-.navbar{
-    height:75px;
+    background:#003b73;
+    color:white;
+    padding:15px 5%;
     display:flex;
     justify-content:space-between;
     align-items:center;
 }
 
 .logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:22px;
+    font-size:25px;
     font-weight:bold;
-    color:var(--blue);
-}
-
-.logo img{
-    width:48px;
-    height:48px;
-    object-fit:contain;
-}
-
-.logo span{
-    color:#111;
-}
-
-nav{
-    display:flex;
-    gap:24px;
+    color:#ffd700;
 }
 
 nav a{
-    text-decoration:none;
-    color:#111;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-nav a:hover{
-    color:var(--blue);
-}
-
-.menu-btn{
-    display:none;
-    font-size:28px;
-    cursor:pointer;
-    color:var(--blue);
-}
-
-/* HERO */
-
-.hero{
-    min-height:620px;
-    display:flex;
-    align-items:center;
-    background:
-    linear-gradient(rgba(0,47,105,0.75),rgba(0,47,105,0.75)),
-    url("images/hero.jpg") center/cover;
     color:white;
-}
-
-.hero-content{
-    max-width:650px;
-}
-
-.hero h1{
-    font-size:52px;
-    line-height:1.2;
-    margin-bottom:20px;
-}
-
-.hero h1 span{
-    color:var(--yellow);
-}
-
-.hero p{
-    font-size:20px;
-    margin-bottom:30px;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 25px;
-    border-radius:8px;
     text-decoration:none;
-    font-weight:bold;
-    margin:5px;
-    border:none;
-    cursor:pointer;
+    margin:0 10px;
     font-size:16px;
 }
 
-.btn-yellow{
-    background:var(--yellow);
-    color:#111;
+nav a:hover{
+    color:#ffd700;
 }
+
+
+/* Hero */
+
+.hero{
+
+    background:
+    linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+    url("images/taxi-banner.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    height:500px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+    color:white;
+
+}
+
+
+.hero h1{
+
+    font-size:45px;
+    margin-bottom:20px;
+
+}
+
+
+.hero p{
+
+    font-size:20px;
+    margin-bottom:30px;
+
+}
+
+
+.btn{
+
+    display:inline-block;
+    padding:12px 25px;
+    border-radius:5px;
+    text-decoration:none;
+    margin:10px;
+    font-weight:bold;
+
+}
+
+
+.btn-yellow{
+
+    background:#ffd700;
+    color:#000;
+
+}
+
 
 .btn-blue{
-    background:var(--blue);
+
+    background:#003b73;
     color:white;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-/* SECTION */
-
-section{
-    padding:70px 0;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:40px;
-}
-
-.section-title h2{
-    color:var(--blue);
-    font-size:36px;
-}
-
-.section-title p{
-    color:#666;
-}
-
-/* SERVICES */
-
-.services-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.service-card{
-    background:white;
-    padding:30px 20px;
-    text-align:center;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-    transition:0.3s;
-}
-
-.service-card:hover{
-    transform:translateY(-8px);
-}
-
-.service-card .icon{
-    font-size:45px;
-    margin-bottom:15px;
-}
-
-.service-card h3{
-    color:var(--blue);
-    margin-bottom:10px;
-}
-
-/* VEHICLES */
-
-.vehicle-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.vehicle-card{
-    background:white;
-    border-radius:15px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-.vehicle-card img{
-    width:100%;
-    height:190px;
-    object-fit:cover;
-}
-
-.vehicle-info{
-    padding:18px;
-    text-align:center;
-}
-
-.vehicle-info h3{
-    color:var(--blue);
-}
-
-.vehicle-info p{
-    color:#666;
-}
-
-/* ROUTES */
-
-.routes{
-    background:var(--light);
-}
-
-.route-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.route-card{
-    background:white;
-    padding:22px;
-    border-left:5px solid var(--yellow);
-    border-radius:10px;
-    box-shadow:0 3px 12px rgba(0,0,0,0.08);
-}
-
-.route-card h3{
-    color:var(--blue);
-}
-
-/* BOOKING */
-
-.booking-box{
-    max-width:850px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 25px rgba(0,0,0,0.1);
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-}
-
-input,select,textarea{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    font-size:15px;
-}
-
-textarea{
-    resize:none;
-    height:100px;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-.booking-result{
-    display:none;
-    margin-top:20px;
-    padding:20px;
-    background:#eaffef;
-    border-left:5px solid green;
-    border-radius:8px;
-}
-
-/* FARE */
-
-.fare-section{
-    background:var(--blue);
-    color:white;
-}
-
-.fare-section .section-title h2{
-    color:white;
-}
-
-.fare-form{
-    max-width:700px;
-    margin:auto;
-    background:white;
-    padding:25px;
-    border-radius:15px;
-}
-
-/* PAYMENT */
-
-.payment-box{
-    max-width:600px;
-    margin:auto;
-    text-align:center;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.1);
-}
-
-.upi-id{
-    background:#fff8d6;
-    padding:15px;
-    margin:20px 0;
-    border-radius:8px;
-    font-weight:bold;
-    color:#333;
-    word-break:break-all;
-}
-
-/* GALLERY */
-
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-}
-
-.gallery-grid img{
-    width:100%;
-    height:210px;
-    object-fit:cover;
-    border-radius:12px;
-    transition:0.3s;
-}
-
-.gallery-grid img:hover{
-    transform:scale(1.04);
-}
-
-/* ABOUT */
-
-.about{
-    background:var(--light);
-}
-
-.about-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:40px;
-    align-items:center;
-}
-
-.about-img img{
-    width:100%;
-    border-radius:15px;
-}
-
-/* REVIEWS */
-
-.review-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:20px;
-}
-
-.review-card{
-    background:white;
-    padding:25px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-.stars{
-    color:#ffb400;
-    font-size:22px;
-}
-
-/* FAQ */
-
-.faq{
-    max-width:850px;
-    margin:auto;
-}
-
-details{
-    background:white;
-    margin:12px 0;
-    padding:18px;
-    border-radius:8px;
-    box-shadow:0 3px 10px rgba(0,0,0,0.06);
-}
-
-summary{
-    cursor:pointer;
-    font-weight:bold;
-    color:var(--blue);
-}
-
-/* CONTACT */
-
-.contact-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:30px;
-}
-
-.contact-card{
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-.contact-card h3{
-    color:var(--blue);
-    margin-bottom:15px;
-}
-
-.contact-item{
-    margin:15px 0;
-    font-size:17px;
-}
-
-/* FOOTER */
-
-footer{
-    background:#062d5e;
-    color:white;
-    text-align:center;
-    padding:30px 15px;
-}
-
-footer h2{
-    color:var(--yellow);
-    margin-bottom:10px;
-}
-
-.social-links a{
-    color:white;
-    font-size:25px;
-    margin:10px;
-    text-decoration:none;
-}
-
-/* MOBILE BOTTOM BUTTONS */
-
-.mobile-buttons{
-    display:none;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:900px){
-
-    nav{
-        position:absolute;
-        top:75px;
-        left:0;
-        width:100%;
-        background:white;
-        display:none;
-        flex-direction:column;
-        padding:20px;
-        text-align:center;
-        box-shadow:0 5px 10px rgba(0,0,0,0.1);
-    }
-
-    nav.active{
-        display:flex;
-    }
-
-    .menu-btn{
-        display:block;
-    }
-
-    .hero h1{
-        font-size:40px;
-    }
-
-    .vehicle-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .services-grid,
-    .route-grid,
-    .review-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .gallery-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px){
-
-    body{
-        padding-bottom:65px;
-    }
-
-    section{
-        padding:50px 0;
-    }
-
-    .hero{
-        min-height:580px;
-        text-align:center;
-    }
-
-    .hero h1{
-        font-size:34px;
-    }
-
-    .hero p{
-        font-size:17px;
-    }
-
-    .services-grid,
-    .vehicle-grid,
-    .route-grid,
-    .review-grid,
-    .about-grid,
-    .contact-grid{
-        grid-template-columns:1fr;
-    }
-
-    .form-grid{
-        grid-template-columns:1fr;
-    }
-
-    .gallery-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .gallery-grid img{
-        height:150px;
-    }
-
-    .full{
-        grid-column:auto;
-    }
-
-    .section-title h2{
-        font-size:30px;
-    }
-
-    .mobile-buttons{
-        position:fixed;
-        bottom:0;
-        left:0;
-        width:100%;
-        display:flex;
-        z-index:9999;
-    }
-
-    .mobile-buttons a{
-        width:50%;
-        text-align:center;
-        padding:16px 5px;
-        color:white;
-        text-decoration:none;
-        font-weight:bold;
-    }
-
-    .call-btn{
-        background:#0755b5;
-    }
-
-    .whatsapp-btn{
-        background:#20b858;
-    }
 
 }
 
-/* FLOATING WHATSAPP */
 
-.floating-whatsapp{
-    position:fixed;
-    right:20px;
-    bottom:25px;
-    width:55px;
-    height:55px;
-    background:#20b858;
-    color:white;
-    border-radius:50%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:28px;
-    text-decoration:none;
-    z-index:999;
+/* Mobile */
+
+@media(max-width:768px){
+
+header{
+
+    flex-direction:column;
+
 }
 
-@media(max-width:600px){
-    .floating-whatsapp{
-        bottom:75px;
-    }
+
+nav{
+
+    margin-top:15px;
+
 }
+
+
+.hero h1{
+
+    font-size:32px;
+
+}
+
+}
+
 
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
+
+<!-- Header -->
 
 <header>
 
-<div class="container navbar">
 
 <div class="logo">
-<img src="images/logo.png" alt="Shivam Travels Sihor Logo">
-<span>🚕 SHIVAM TRAVELS SIHOR</span>
+
+🚕 SHIVAM TRAVELS SIHOR
+
 </div>
 
-<div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<nav id="navMenu">
+<nav>
+
 <a href="#home">🏠 Home</a>
+
 <a href="#about">ℹ️ About</a>
+
 <a href="#services">🚕 Services</a>
+
 <a href="#vehicles">🚗 Vehicles</a>
+
 <a href="#booking">📅 Booking</a>
+
 <a href="#gallery">🖼️ Gallery</a>
+
 <a href="#reviews">⭐ Reviews</a>
+
 <a href="#contact">📞 Contact</a>
+
+
 </nav>
 
-</div>
 
 </header>
 
-<!-- HERO -->
+
+
+<!-- Hero Section -->
+
 
 <section class="hero" id="home">
 
-<div class="container hero-content">
 
-<h1>Comfortable & Reliable <span>Taxi Service</span></h1>
+<div>
+
+
+<h1>
+
+Comfortable & Reliable Taxi Service
+
+</h1>
+
 
 <p>
+
 24/7 Door-to-Door Pickup & Drop Taxi Service from Sihor, Bhavnagar and Gujarat.
+
 </p>
 
-<a href="#booking" class="btn btn-yellow">📅 Book Your Taxi</a>
 
-<a href="tel:9898222313" class="btn btn-blue">📞 Call Now</a>
+<a href="#booking" class="btn btn-yellow">
+
+📅 Book Your Taxi
+
+</a>
+
+
+<a href="tel:9898222313" class="btn btn-blue">
+
+📞 Call Now
+
+</a>
+
+
+</div>
+
+
+</section>
+<!-- Taxi Services Section -->
+
+<section id="services" style="padding:50px 5%;">
+
+<h2 style="text-align:center;color:#003b73;">
+Our Taxi Services
+</h2>
+
+<p style="text-align:center;margin:15px;">
+Safe, Comfortable and Reliable Travel Service
+</p>
+
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+
+
+<div class="service-box">
+
+<h3>🚕 Local Trip</h3>
+
+<p>
+Comfortable taxi service for local travel.
+</p>
+
+</div>
+
+
+<div class="service-box">
+
+<h3>➡️ One Way Trip</h3>
+
+<p>
+Affordable one-way pickup and drop service.
+</p>
+
+</div>
+
+
+<div class="service-box">
+
+<h3>🔄 Round Trip</h3>
+
+<p>
+Convenient round trip taxi service.
+</p>
+
+</div>
+
+
+<div class="service-box">
+
+<h3>🛣️ Outstation</h3>
+
+<p>
+Travel anywhere in Gujarat and India.
+</p>
+
+</div>
+
+
+<div class="service-box">
+
+<h3>✈️ Airport Pickup & Drop</h3>
+
+<p>
+Reliable airport taxi service.
+</p>
+
+</div>
+
+
+<div class="service-box">
+
+<h3>🌴 Holiday Tours</h3>
+
+<p>
+Enjoy comfortable holiday trips with us.
+</p>
+
+</div>
+
 
 </div>
 
 </section>
 
-<!-- SERVICES -->
 
-<section id="services">
 
-<div class="container">
+<!-- Vehicles Section -->
 
-<div class="section-title">
+<section id="vehicles" style="padding:50px 5%;background:white;">
 
-<h2>Our Taxi Services</h2>
 
-<p>Safe, Comfortable and Reliable Travel Service</p>
+<h2 style="text-align:center;color:#003b73;">
+Our Vehicles
+</h2>
 
-</div>
+<p style="text-align:center;">
+Choose the perfect car for your journey
+</p>
 
-<div class="services-grid">
 
-<div class="service-card">
-<div class="icon">🚕</div>
-<h3>Local Trip</h3>
-<p>Comfortable taxi service for local travel.</p>
-</div>
 
-<div class="service-card">
-<div class="icon">➡️</div>
-<h3>One Way Trip</h3>
-<p>Affordable one-way pickup and drop service.</p>
-</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:30px;">
 
-<div class="service-card">
-<div class="icon">🔄</div>
-<h3>Round Trip</h3>
-<p>Convenient round trip taxi service.</p>
-</div>
 
-<div class="service-card">
-<div class="icon">🛣️</div>
-<h3>Outstation</h3>
-<p>Travel anywhere in Gujarat and India.</p>
-</div>
 
-<div class="service-card">
-<div class="icon">✈️</div>
-<h3>Airport Pickup & Drop</h3>
-<p>Reliable airport taxi service.</p>
-</div>
+<div class="vehicle-box">
 
-<div class="service-card">
-<div class="icon">🌴</div>
-<h3>Holiday Tours</h3>
-<p>Enjoy comfortable holiday trips with us.</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- VEHICLES -->
-
-<section id="vehicles">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Our Vehicles</h2>
-
-<p>Choose the perfect car for your journey</p>
-
-</div>
-
-<div class="vehicle-grid">
-
-<div class="vehicle-card">
-
-<img src="images/dzire.jpg" alt="Maruti Suzuki Dzire Taxi">
-
-<div class="vehicle-info">
+<img src="images/dzire.jpg" width="100%">
 
 <h3>Maruti Suzuki Dzire</h3>
 
-<p>Comfortable Sedan</p>
-
-<p>Perfect for Small Family Trips</p>
+<p>
+🚗 Comfortable 5 Seater Sedan
+<br>
+❄️ AC Available
+<br>
+👨‍👩‍👧 Best for Small Family Trips
+<br>
+🧳 Spacious Boot Space
+<br>
+✅ Perfect for Local & One Way Trips
+</p>
 
 </div>
 
-</div>
 
-<div class="vehicle-card">
 
-<img src="images/aura.jpg" alt="Hyundai Aura Taxi">
 
-<div class="vehicle-info">
+<div class="vehicle-box">
+
+<img src="images/aura.jpg" width="100%">
 
 <h3>Hyundai Aura</h3>
 
-<p>Premium Sedan</p>
-
-<p>Comfortable & Economical</p>
+<p>
+🚗 Premium 5 Seater Sedan
+<br>
+❄️ Comfortable AC Cabin
+<br>
+⛽ Economical Ride
+<br>
+👔 Best for Business Travel
+<br>
+✅ Smooth & Comfortable Journey
+</p>
 
 </div>
 
-</div>
 
-<div class="vehicle-card">
 
-<img src="images/ertiga.jpg" alt="Maruti Suzuki Ertiga Taxi">
 
-<div class="vehicle-info">
+<div class="vehicle-box">
+
+<img src="images/ertiga.jpg" width="100%">
 
 <h3>Maruti Suzuki Ertiga</h3>
 
-<p>7 Seater</p>
-
-<p>Perfect for Family Trips</p>
-
-</div>
-
-</div>
-
-<div class="vehicle-card">
-
-<img src="images/innova-crysta.jpg" alt="Toyota Innova Crysta Taxi">
-
-<div class="vehicle-info">
-
-<h3>Innova Crysta</h3>
-
-<p>Premium 7 Seater</p>
-
-<p>Luxury & Comfortable Journey</p>
+<p>
+🚗 7 Seater MPV
+<br>
+❄️ Dual AC Available
+<br>
+🧳 Large Luggage Space
+<br>
+👨‍👩‍👧‍👦 Perfect for Family Trips
+<br>
+✅ Best for Long Distance Travel
+</p>
 
 </div>
 
-</div>
+
+
+
+<div class="vehicle-box">
+
+<img src="images/innova-crysta.jpg" width="100%">
+
+<h3>Toyota Innova Crysta</h3>
+
+<p>
+🚗 Premium 7 Seater
+<br>
+✨ Luxury Interior
+<br>
+❄️ Powerful AC
+<br>
+🧳 Extra Luggage Space
+<br>
+✅ Best for Outstation & Airport Travel
+</p>
 
 </div>
+
+
+
+</div>
+
+
+</section>
+<!-- Popular Routes Section -->
+
+<section id="routes" style="padding:50px 5%;background:#f5f5f5;">
+
+
+<h2 style="text-align:center;color:#003b73;">
+Popular Routes
+</h2>
+
+<p style="text-align:center;">
+Book your taxi for popular destinations
+</p>
+
+
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px;">
+
+
+
+<div class="route-box">
+
+<h3>📍 Palitana Routes</h3>
+
+<p>
+Palitana → Ahmedabad
+<br>
+Palitana → Gandhinagar
+<br>
+Palitana → Vadodara
+<br>
+Palitana → Rajkot
+</p>
+
+</div>
+
+
+
+<div class="route-box">
+
+<h3>📍 Songadh Routes</h3>
+
+<p>
+Songadh → Ahmedabad
+<br>
+Songadh → Gandhinagar
+<br>
+Songadh → Vadodara
+<br>
+Songadh → Rajkot
+</p>
+
+</div>
+
+
+
+
+<div class="route-box">
+
+<h3>📍 Sihor Routes</h3>
+
+<p>
+Sihor → Ahmedabad
+<br>
+Sihor → Gandhinagar
+<br>
+Sihor → Vadodara
+<br>
+Sihor → Rajkot
+</p>
+
+</div>
+
+
+
+
+<div class="route-box">
+
+<h3>📍 Bhavnagar Routes</h3>
+
+<p>
+Bhavnagar → Ahmedabad
+<br>
+Bhavnagar → Gandhinagar
+<br>
+Bhavnagar → Vadodara
+<br>
+Bhavnagar → Rajkot
+</p>
+
+</div>
+
+
 
 </div>
 
 </section>
 
-<!-- POPULAR ROUTES -->
 
-<section class="routes">
 
-<div class="container">
 
-<div class="section-title">
+<!-- Online Booking Section -->
 
-<h2>Popular Routes</h2>
 
-<p>Book your taxi for popular destinations</p>
+<section id="booking" style="padding:50px 5%;background:white;">
 
-</div>
 
-<div class="route-grid">
+<h2 style="text-align:center;color:#003b73;">
+Online Taxi Booking
+</h2>
 
-<div class="route-card">
-<h3>📍 Sihor → Ahmedabad</h3>
-<p>One Way / Round Trip Taxi</p>
-</div>
 
-<div class="route-card">
-<h3>📍 Sihor → Bhavnagar</h3>
-<p>Local & One Way Taxi</p>
-</div>
+<p style="text-align:center;">
+Fill the form and book your taxi easily
+</p>
 
-<div class="route-card">
-<h3>📍 Sihor → Rajkot</h3>
-<p>Comfortable Outstation Trip</p>
-</div>
 
-<div class="route-card">
-<h3>📍 Sihor → Vadodara</h3>
-<p>Reliable Taxi Service</p>
-</div>
 
-<div class="route-card">
-<h3>📍 Sihor → Gandhinagar</h3>
-<p>Door-to-Door Pickup & Drop</p>
-</div>
+<div style="max-width:600px;margin:auto;">
 
-<div class="route-card">
-<h3>📍 Sihor → Airport</h3>
-<p>Airport Pickup & Drop Service</p>
-</div>
 
-</div>
+<form>
 
-</div>
 
-</section>
+<label>Name</label>
 
-<!-- ONLINE BOOKING -->
+<input type="text" placeholder="Enter Your Name" style="width:100%;padding:12px;margin:8px 0;">
 
-<section id="booking">
 
-<div class="container">
 
-<div class="section-title">
+<label>Mobile Number</label>
 
-<h2>Online Taxi Booking</h2>
+<input type="tel" placeholder="Enter Mobile Number" style="width:100%;padding:12px;margin:8px 0;">
 
-<p>Fill the form and book your taxi easily</p>
 
-</div>
 
-<div class="booking-box">
+<label>Select Vehicle</label>
 
-<form id="bookingForm">
-
-<div class="form-grid">
-
-<input type="text" id="name" placeholder="Your Name" required>
-
-<input type="tel" id="phone" placeholder="Mobile Number" required>
-
-<input type="text" id="pickup" placeholder="Pickup Location" required>
-
-<input type="text" id="drop" placeholder="Drop Location" required>
-
-<input type="date" id="date" required>
-
-<input type="time" id="time" required>
-
-<select id="vehicle" required>
-
-<option value="">Select Vehicle</option>
+<select style="width:100%;padding:12px;margin:8px 0;">
 
 <option>Dzire</option>
 
-<option>Aura</option>
+<option>Hyundai Aura</option>
 
 <option>Ertiga</option>
 
@@ -924,9 +588,12 @@ footer h2{
 
 </select>
 
-<select id="trip" required>
 
-<option value="">Select Trip Type</option>
+
+
+<label>Select Trip Type</label>
+
+<select style="width:100%;padding:12px;margin:8px 0;">
 
 <option>Local Trip</option>
 
@@ -940,165 +607,418 @@ footer h2{
 
 </select>
 
-<textarea id="message" class="full" placeholder="Extra Message"></textarea>
 
-<button type="submit" class="btn btn-blue full">
+
+<label>Pickup Location</label>
+
+<input type="text" placeholder="Pickup Location" style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+<label>Drop Location</label>
+
+<input type="text" placeholder="Drop Location" style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+<button class="btn btn-yellow" type="button">
 
 📲 Generate Booking ID & Book on WhatsApp
 
 </button>
 
-</div>
+
 
 </form>
 
-<div class="booking-result" id="bookingResult"></div>
 
 </div>
 
-</div>
 
-</section>
+</section><!-- Get Best Fare Section -->
 
-<!-- BEST FARE -->
+<section id="fare" style="padding:50px 5%;background:#f5f5f5;">
 
-<section class="fare-section">
 
-<div class="container">
+<h2 style="text-align:center;color:#003b73;">
+Get Best Fare
+</h2>
 
-<div class="section-title">
 
-<h2>Get Best Fare</h2>
+<p style="text-align:center;">
+Send your trip details and get the best possible fare
+</p>
 
-<p>Send your trip details and get the best possible fare</p>
 
-</div>
 
-<div class="fare-form">
+<div style="max-width:650px;margin:auto;background:white;padding:25px;border-radius:10px;">
 
-<form id="fareForm">
 
-<input type="text" id="fareName" placeholder="Your Name" required>
+<form>
 
-<br><br>
 
-<input type="tel" id="farePhone" placeholder="Mobile Number" required>
 
-<br><br>
+<label>Name</label>
 
-<input type="text" id="farePickup" placeholder="Pickup Location" required>
+<input type="text" id="fareName" placeholder="Enter Your Name"
+style="width:100%;padding:12px;margin:8px 0;">
 
-<br><br>
 
-<input type="text" id="fareDrop" placeholder="Drop Location" required>
 
-<br><br>
+<label>Mobile Number</label>
 
-<button class="btn btn-yellow" type="submit">
+<input type="tel" id="fareMobile" placeholder="Enter Mobile Number"
+style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+<label>Select Car Type</label>
+
+<select id="fareCar"
+style="width:100%;padding:12px;margin:8px 0;">
+
+<option>Maruti Suzuki Dzire</option>
+
+<option>Hyundai Aura</option>
+
+<option>Maruti Suzuki Ertiga</option>
+
+<option>Toyota Innova Crysta</option>
+
+</select>
+
+
+
+
+<label>Select Trip Type</label>
+
+<select id="fareTrip"
+style="width:100%;padding:12px;margin:8px 0;">
+
+<option>Local Trip</option>
+
+<option>One Way Trip</option>
+
+<option>Round Trip</option>
+
+<option>Outstation</option>
+
+<option>Airport Pickup & Drop</option>
+
+</select>
+
+
+
+
+<label>Journey Date</label>
+
+<input type="date" id="fareDate"
+style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+
+<label>Journey Time</label>
+
+<input type="time" id="fareTime"
+style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+
+<label>Luggage</label>
+
+<select id="fareLuggage"
+style="width:100%;padding:12px;margin:8px 0;">
+
+<option>No Luggage</option>
+
+<option>1 Bag</option>
+
+<option>2 Bags</option>
+
+<option>3+ Bags</option>
+
+</select>
+
+
+
+
+<label>Pickup Location</label>
+
+<input type="text" id="farePickup"
+placeholder="Enter Pickup Location"
+style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+
+<label>Drop Location</label>
+
+<input type="text" id="fareDrop"
+placeholder="Enter Drop Location"
+style="width:100%;padding:12px;margin:8px 0;">
+
+
+
+
+<label>Additional Message</label>
+
+<textarea id="fareMessage"
+placeholder="Your Message"
+style="width:100%;padding:12px;margin:8px 0;height:100px;"></textarea>
+
+
+
+
+<button type="button" onclick="sendFareWhatsApp()" 
+class="btn btn-yellow">
 
 💰 Get Best Fare on WhatsApp
 
 </button>
 
+
+
 </form>
 
-</div>
 
 </div>
+
 
 </section>
 
-<!-- UPI PAYMENT -->
 
-<section>
 
-<div class="container">
 
-<div class="section-title">
+<!-- WhatsApp Fare Script -->
 
-<h2>Online UPI Payment</h2>
 
-<p>Pay your taxi fare easily through UPI</p>
+<script>
 
-</div>
+function sendFareWhatsApp(){
 
-<div class="payment-box">
 
-<h3>💳 Shivam Travels UPI</h3>
+let name = document.getElementById("fareName").value;
 
-<div class="upi-id">
+let mobile = document.getElementById("fareMobile").value;
 
-UPI ID:<br>
+let car = document.getElementById("fareCar").value;
 
-chauhanshivam2535-1@okicici
+let trip = document.getElementById("fareTrip").value;
 
-</div>
+let date = document.getElementById("fareDate").value;
+
+let time = document.getElementById("fareTime").value;
+
+let luggage = document.getElementById("fareLuggage").value;
+
+let pickup = document.getElementById("farePickup").value;
+
+let drop = document.getElementById("fareDrop").value;
+
+let message = document.getElementById("fareMessage").value;
+
+
+
+let whatsappMessage =
+
+`🚕 Shivam Travels Sihor
+
+Name: ${name}
+
+Mobile: ${mobile}
+
+Car Type: ${car}
+
+Trip Type: ${trip}
+
+Date: ${date}
+
+Time: ${time}
+
+Luggage: ${luggage}
+
+Pickup: ${pickup}
+
+Drop: ${drop}
+
+Message: ${message}
+
+Please send me best fare.`;
+
+
+let url =
+
+"https://wa.me/919898222313?text="
+
++ encodeURIComponent(whatsappMessage);
+
+
+
+window.open(url,"_blank");
+
+
+}
+
+
+</script>
+<!-- Online UPI Payment Section -->
+
+<section id="payment" style="padding:50px 5%;background:white;">
+
+
+<h2 style="text-align:center;color:#003b73;">
+Online UPI Payment
+</h2>
+
+
+<p style="text-align:center;">
+Pay your taxi fare easily through UPI
+</p>
+
+
+
+<div style="text-align:center;margin-top:30px;">
+
+
+<h3>
+💳 Shivam Travels UPI
+</h3>
+
+
+<p style="font-size:18px;margin:15px;">
+
+UPI ID:
+<br>
+<b>chauhanshivam2535-1@okicici</b>
+
+</p>
+
+
 
 <a href="upi://pay?pa=chauhanshivam2535-1@okicici&pn=Shivam%20Travels%20Sihor&cu=INR"
-
 class="btn btn-blue">
 
 💳 Pay Now with UPI
 
 </a>
 
-<p style="margin-top:15px;color:#666;">
+
+
+<p style="margin-top:20px;">
 
 You can pay using Google Pay, PhonePe, Paytm or any UPI App.
 
 </p>
 
-</div>
 
 </div>
+
 
 </section>
 
-<!-- GALLERY -->
 
-<section id="gallery">
 
-<div class="container">
 
-<div class="section-title">
 
-<h2>Our Gallery</h2>
 
-<p>Our cars and travel moments</p>
+<!-- Gallery Section -->
 
-</div>
 
-<div class="gallery-grid">
+<section id="gallery" style="padding:50px 5%;background:#f5f5f5;">
 
-<img src="images/gallery1.jpg" alt="Shivam Travels Car">
 
-<img src="images/gallery2.jpg" alt="Shivam Travels Taxi">
+<h2 style="text-align:center;color:#003b73;">
+Our Gallery
+</h2>
 
-<img src="images/gallery3.jpg" alt="Shivam Travels Travel">
 
-<img src="images/gallery4.jpg" alt="Shivam Travels Vehicle">
+<p style="text-align:center;">
+Our cars and travel moments
+</p>
 
-</div>
 
-</div>
 
-</section>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:30px;">
 
-<!-- ABOUT -->
 
-<section class="about" id="about">
-
-<div class="container">
-
-<div class="about-grid">
 
 <div>
 
-<div class="section-title" style="text-align:left;">
+<img src="images/gallery1.jpg" width="100%" style="border-radius:10px;">
 
-<h2>About Shivam Travels Sihor</h2>
+<h3 style="text-align:center;">
+Shivam Travels Car
+</h3>
 
 </div>
+
+
+
+
+<div>
+
+<img src="images/gallery2.jpg" width="100%" style="border-radius:10px;">
+
+<h3 style="text-align:center;">
+Shivam Travels Taxi
+</h3>
+
+</div>
+
+
+
+
+<div>
+
+<img src="images/gallery3.jpg" width="100%" style="border-radius:10px;">
+
+<h3 style="text-align:center;">
+Shivam Travels Travel
+</h3>
+
+</div>
+
+
+
+
+<div>
+
+<img src="images/gallery4.jpg" width="100%" style="border-radius:10px;">
+
+<h3 style="text-align:center;">
+Shivam Travels Vehicle
+</h3>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- About Section -->
+
+
+<section id="about" style="padding:50px 5%;background:white;">
+
+
+<h2 style="text-align:center;color:#003b73;">
+About Shivam Travels Sihor
+</h2>
+
+
+
+<div style="max-width:800px;margin:auto;text-align:center;margin-top:25px;">
+
 
 <p>
 
@@ -1106,7 +1026,9 @@ Shivam Travels Sihor is a trusted taxi service provider offering comfortable, sa
 
 </p>
 
+
 <br>
+
 
 <p>
 
@@ -1114,7 +1036,9 @@ We provide Local Trips, One Way Trips, Round Trips, Outstation Taxi, Airport Pic
 
 </p>
 
+
 <br>
+
 
 <p>
 
@@ -1122,215 +1046,269 @@ Our goal is to provide every customer with a comfortable and safe journey at the
 
 </p>
 
+
 <br>
 
-<h3>🚕 Available 24/7</h3>
 
-<h3>📞 Call: 9898222313</h3>
+<h3>
+🚕 Available 24/7
+</h3>
 
-</div>
 
-<div class="about-img">
+<h3>
+📞 Call: 9898222313
+</h3>
 
-<img src="images/hero.jpg" alt="Shivam Travels Sihor">
-
-</div>
-
-</div>
 
 </div>
+
 
 </section>
+<!-- Customer Reviews Section -->
 
-<!-- REVIEWS -->
+<section id="reviews" style="padding:50px 5%;background:#f5f5f5;">
 
-<section id="reviews">
 
-<div class="container">
+<h2 style="text-align:center;color:#003b73;">
+Customer Reviews
+</h2>
 
-<div class="section-title">
 
-<h2>Customer Reviews</h2>
+<p style="text-align:center;">
+What our customers say about us
+</p>
 
-<p>What our customers say about us</p>
 
-</div>
 
-<div class="review-grid">
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:30px;">
 
-<div class="review-card">
 
-<div class="stars">★★★★★</div>
+
+<div style="background:white;padding:20px;border-radius:10px;">
+
+<h3>★★★★★</h3>
 
 <p>
-
 "Very comfortable and safe journey. Driver was polite and professional."
-
 </p>
 
-<h4>- Happy Customer</h4>
+<h4>
+- Happy Customer
+</h4>
 
 </div>
 
-<div class="review-card">
 
-<div class="stars">★★★★★</div>
+
+
+<div style="background:white;padding:20px;border-radius:10px;">
+
+<h3>★★★★★</h3>
 
 <p>
-
 "Best taxi service from Sihor. Clean car and affordable fare."
-
 </p>
 
-<h4>- Happy Customer</h4>
+<h4>
+- Happy Customer
+</h4>
 
 </div>
 
-<div class="review-card">
 
-<div class="stars">★★★★★</div>
+
+
+<div style="background:white;padding:20px;border-radius:10px;">
+
+<h3>★★★★★</h3>
+
+<p>
+"Booked airport pickup. Excellent service and on-time pickup."
+</p>
+
+<h4>
+- Happy Customer
+</h4>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- FAQ Section -->
+
+
+<section id="faq" style="padding:50px 5%;background:white;">
+
+
+<h2 style="text-align:center;color:#003b73;">
+Frequently Asked Questions
+</h2>
+
+
+
+<div style="max-width:800px;margin:auto;margin-top:30px;">
+
+
+
+<h3>
+Do you provide 24/7 taxi service?
+</h3>
+
+<p>
+Yes, Shivam Travels Sihor provides 24/7 taxi booking service.
+</p>
+
+
+
+<br>
+
+
+<h3>
+Do you provide airport pickup and drop?
+</h3>
+
+<p>
+Yes, we provide airport pickup and drop service from Sihor and nearby areas.
+</p>
+
+
+
+<br>
+
+
+<h3>
+Which vehicles are available?
+</h3>
+
+<p>
+Dzire, Hyundai Aura, Ertiga and Innova Crysta are available.
+</p>
+
+
+
+<br>
+
+
+<h3>
+Can I book a one-way taxi?
+</h3>
+
+<p>
+Yes, one-way pickup and drop taxi service is available.
+</p>
+
+
+
+<br>
+
+
+<h3>
+How can I book a taxi?
+</h3>
+
+<p>
+You can call us, WhatsApp us or use our online booking form.
+</p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- Contact Section -->
+
+
+<section id="contact" style="padding:50px 5%;background:#f5f5f5;">
+
+
+<h2 style="text-align:center;color:#003b73;">
+Contact Us
+</h2>
+
+
+<p style="text-align:center;">
+Book your taxi today
+</p>
+
+
+
+<div style="text-align:center;margin-top:30px;">
+
+
+<h3>
+📞 Contact Information
+</h3>
+
+
+<p>
+📱 Phone:
+<br>
+<b>9898222313</b>
+</p>
+
+
 
 <p>
 
-"Booked airport pickup. Excellent service and on-time pickup."
+📲 WhatsApp:
+<br>
 
-</p>
-
-<h4>- Happy Customer</h4>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FAQ -->
-
-<section>
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Frequently Asked Questions</h2>
-
-</div>
-
-<div class="faq">
-
-<details>
-
-<summary>Do you provide 24/7 taxi service?</summary>
-
-<p>Yes, Shivam Travels Sihor provides 24/7 taxi booking service.</p>
-
-</details>
-
-<details>
-
-<summary>Do you provide airport pickup and drop?</summary>
-
-<p>Yes, we provide airport pickup and drop service from Sihor and nearby areas.</p>
-
-</details>
-
-<details>
-
-<summary>Which vehicles are available?</summary>
-
-<p>Dzire, Hyundai Aura, Ertiga and Innova Crysta are available.</p>
-
-</details>
-
-<details>
-
-<summary>Can I book a one-way taxi?</summary>
-
-<p>Yes, one-way pickup and drop taxi service is available.</p>
-
-</details>
-
-<details>
-
-<summary>How can I book a taxi?</summary>
-
-<p>You can call us, WhatsApp us or use our online booking form.</p>
-
-</details>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- CONTACT -->
-
-<section id="contact">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>Contact Us</h2>
-
-<p>Book your taxi today</p>
-
-</div>
-
-<div class="contact-grid">
-
-<div class="contact-card">
-
-<h3>📞 Contact Information</h3>
-
-<div class="contact-item">
-
-📱 <b>Phone:</b>
-
-<a href="tel:9898222313">
-
-9898222313
-
-</a>
-
-</div>
-
-<div class="contact-item">
-
-📲 <b>WhatsApp:</b>
-
-<a href="https://wa.me/919898222313">
+<a href="https://wa.me/919898222313" target="_blank">
 
 Chat With Us
 
 </a>
 
-</div>
+</p>
 
-<div class="contact-item">
 
-📍 <b>Location:</b>
+
+<p>
+
+📍 Location:
+<br>
 
 Sihor, Bhavnagar, Gujarat
 
-</div>
+</p>
 
-<div class="contact-item">
 
-🕒 <b>Available:</b>
+
+<p>
+
+🕒 Available:
+<br>
 
 24/7
 
-</div>
+</p>
 
-</div>
 
-<div class="contact-card">
 
-<h3>🚕 Book Your Taxi</h3>
+<br>
+
+
+<h3>
+🚕 Book Your Taxi
+</h3>
+
 
 <p>
 
@@ -1338,212 +1316,94 @@ Need a taxi? Contact Shivam Travels Sihor today for comfortable and reliable tra
 
 </p>
 
-<br>
 
-<a href="tel:9898222313" class="btn btn-blue">
+
+<a href="tel:9898222313" class="btn btn-yellow">
 
 📞 Call Now
 
 </a>
 
-<a href="https://wa.me/919898222313" class="btn btn-yellow">
+
+<a href="https://wa.me/919898222313" 
+class="btn btn-blue"
+target="_blank">
 
 💬 WhatsApp
 
 </a>
 
-</div>
+
 
 </div>
 
-</div>
 
 </section>
 
-<!-- FOOTER -->
 
-<footer>
 
-<h2>🚕 SHIVAM TRAVELS SIHOR</h2>
+
+
+
+
+<!-- Footer -->
+
+
+<footer style="background:#003b73;color:white;text-align:center;padding:25px;">
+
+
+<h3>
+🚕 SHIVAM TRAVELS SIHOR
+</h3>
+
 
 <p>
-
 24/7 Door-to-Door Pickup & Drop Taxi Service
-
 </p>
 
-<br>
 
 <p>
-
 📞 9898222313
-
 </p>
 
-<br>
 
 <p>
-
 © 2026 Shivam Travels Sihor. All Rights Reserved.
-
 </p>
+
 
 </footer>
 
-<!-- FLOATING WHATSAPP -->
 
-<a class="floating-whatsapp"
 
-href="https://wa.me/919898222313"
 
-target="_blank">
+
+
+
+<!-- Floating WhatsApp Button -->
+
+
+<a href="https://wa.me/919898222313"
+target="_blank"
+style="
+position:fixed;
+right:20px;
+bottom:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:25px;
+text-decoration:none;
+">
 
 💬
 
 </a>
 
-<!-- MOBILE BOTTOM BUTTONS -->
 
-<div class="mobile-buttons">
-
-<a href="tel:9898222313" class="call-btn">
-
-📞 Call Now
-
-</a>
-
-<a href="https://wa.me/919898222313" class="whatsapp-btn">
-
-💬 WhatsApp
-
-</a>
-
-</div>
-
-<script>
-
-/* MOBILE MENU */
-
-function toggleMenu(){
-
-document.getElementById("navMenu").classList.toggle("active");
-
-}
-
-/* AUTO BOOKING ID + WHATSAPP BOOKING */
-
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-
-e.preventDefault();
-
-let bookingID = "STS" + Math.floor(100000 + Math.random() * 900000);
-
-let name = document.getElementById("name").value;
-
-let phone = document.getElementById("phone").value;
-
-let pickup = document.getElementById("pickup").value;
-
-let drop = document.getElementById("drop").value;
-
-let date = document.getElementById("date").value;
-
-let time = document.getElementById("time").value;
-
-let vehicle = document.getElementById("vehicle").value;
-
-let trip = document.getElementById("trip").value;
-
-let message = document.getElementById("message").value;
-
-let whatsappMessage =
-
-`🚕 *SHIVAM TRAVELS SIHOR - TAXI BOOKING*
-
-🆔 Booking ID: ${bookingID}
-
-👤 Name: ${name}
-
-📱 Phone: ${phone}
-
-📍 Pickup: ${pickup}
-
-🏁 Drop: ${drop}
-
-📅 Date: ${date}
-
-⏰ Time: ${time}
-
-🚗 Vehicle: ${vehicle}
-
-🔄 Trip Type: ${trip}
-
-📝 Message: ${message}
-
-Please confirm my taxi booking.`;
-
-let whatsappURL =
-
-"https://wa.me/919898222313?text=" +
-
-encodeURIComponent(whatsappMessage);
-
-document.getElementById("bookingResult").style.display = "block";
-
-document.getElementById("bookingResult").innerHTML =
-
-`<h3>✅ Booking ID Generated: ${bookingID}</h3>
-
-<p>Your booking details are ready.</p>
-
-<a href="${whatsappURL}" target="_blank" class="btn btn-blue">
-
-💬 Send Booking on WhatsApp
-
-</a>`;
-
-});
-
-/* BEST FARE FORM */
-
-document.getElementById("fareForm").addEventListener("submit", function(e){
-
-e.preventDefault();
-
-let name = document.getElementById("fareName").value;
-
-let phone = document.getElementById("farePhone").value;
-
-let pickup = document.getElementById("farePickup").value;
-
-let drop = document.getElementById("fareDrop").value;
-
-let message =
-
-`💰 *BEST FARE REQUEST*
-
-👤 Name: ${name}
-
-📱 Phone: ${phone}
-
-📍 Pickup: ${pickup}
-
-🏁 Drop: ${drop}
-
-Please provide me the best taxi fare.`;
-
-let whatsappURL =
-
-"https://wa.me/919898222313?text=" +
-
-encodeURIComponent(message);
-
-window.open(whatsappURL, "_blank");
-
-});
-
-</script>
 
 </body>
+</html>
 
 </html>
